@@ -1,0 +1,59 @@
+{
+  "name": "agents-datum-net",
+  "version": "0.1.0",
+  "private": true,
+  "sideEffects": false,
+  "type": "module",
+  "engines": {
+    "node": ">=24.0.0"
+  },
+  "scripts": {
+    "dev": "react-router dev",
+    "build": "react-router build",
+    "start": "bun ./build/server/index.js",
+    "typecheck": "react-router typegen && tsc",
+    "lint": "eslint \"app/**/*.{ts,tsx}\" --fix",
+    "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,css,md}\"",
+    "format:check": "prettier --check \"**/*.{js,jsx,ts,tsx,json,css,md}\"",
+    "clean": "rm -rf node_modules .react-router build"
+  },
+  "dependencies": {
+    "@datum-cloud/datum-ui": "^0.8.1",
+    "@hono/node-server": "^2.0.0",
+    "@react-router/fs-routes": "^7.14.2",
+    "@react-router/node": "^7.14.2",
+    "hono": "^4.12.15",
+    "isbot": "^5",
+    "lucide-react": "^0.468.0",
+    "react": "^19.2.5",
+    "react-dom": "^19.2.5",
+    "react-router": "^7.14.2",
+    "react-router-hono-server": "^2.26.0",
+    "zod": "^4.0.0"
+  },
+  "devDependencies": {
+    "@eslint/compat": "^2.0.5",
+    "@react-router/dev": "^7.14.2",
+    "@tailwindcss/vite": "^4.2.2",
+    "@trivago/prettier-plugin-sort-imports": "^6.0.2",
+    "@types/node": "^25.6.0",
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3",
+    "@typescript-eslint/eslint-plugin": "^8.59.1",
+    "@typescript-eslint/parser": "^8.59.1",
+    "eslint": "^9.0.0",
+    "eslint-plugin-jsx-a11y": "^6.10.2",
+    "eslint-plugin-prettier": "^5.5.5",
+    "eslint-plugin-react": "^7.37.5",
+    "eslint-plugin-react-hooks": "^5.0.0",
+    "eslint-plugin-unused-imports": "^4.4.1",
+    "lefthook": "^2.1.6",
+    "prettier": "^3.8.3",
+    "prettier-plugin-tailwindcss": "^0.8.0",
+    "tailwindcss": "^4.2.2",
+    "typescript": "^5.6.0",
+    "typescript-eslint": "^8.59.1",
+    "vite": "^6.0.0",
+    "vite-tsconfig-paths": "^6.1.1"
+  }
+}
