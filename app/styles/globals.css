@@ -1,0 +1,69 @@
+@import 'tailwindcss';
+
+/* Datum design system — fonts, design tokens, shadcn primitives, theme overrides.
+   Defines `:root` (light) and `.dark` color tokens, plus the `dark` custom
+   variant: @custom-variant dark (&:is(.dark *)). Mode is toggled by adding
+   `.dark` to <html>; ThemeProvider does that based on OS preference. */
+@import '@datum-cloud/datum-ui/styles';
+
+/* Project-local aliases. We expose `--bg`, `--fg`, `--accent` etc. as the
+   tokens the brief (§5.2) refers to, but they resolve to datum-ui's canonical
+   variables so light/dark switching is driven by datum-ui via the `.dark`
+   class on <html>. Tailwind v4 picks them up via @theme inline so utilities
+   like `bg-bg`, `text-fg`, `border-border` follow the theme automatically. */
+@theme inline {
+  --color-bg: var(--background);
+  --color-fg: var(--foreground);
+  --color-fg-muted: var(--muted-foreground);
+  --color-border: var(--border);
+  --color-accent: var(--primary);
+}
+
+:root {
+  /* Brief design-spec tokens (§5.2), kept as plain CSS variables outside the
+     Tailwind scale so they don't override the default spacing/typography. */
+  --leading-body: 1.6;
+  --leading-heading: 1.2;
+
+  --space-1: 0.5rem;
+  --space-2: 1rem;
+  --space-3: 1.5rem;
+  --space-4: 2rem;
+  --space-5: 3rem;
+  --space-6: 4rem;
+  --space-7: 6rem;
+
+  --container-content: 720px;
+  --page-padding-x: clamp(1.25rem, 5vw, 3rem);
+}
+
+html {
+  /* Tells the UA chrome (scrollbars, autofill, native form controls) that
+     light is the default and dark is also supported. ThemeProvider's
+     enableColorScheme additionally syncs this with the active theme. */
+  color-scheme: light dark;
+}
+
+body {
+  font-family: var(--font-sans);
+  line-height: var(--leading-body);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+  border-radius: 2px;
+}

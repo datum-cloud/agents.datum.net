@@ -1,0 +1,15 @@
+pre-commit:
+  parallel: true
+  commands:
+    eslint:
+      glob: '*.{js,jsx,ts,tsx}'
+      run: bunx eslint {staged_files} --fix
+      stage_fixed: true
+    prettier:
+      glob: '*.{js,jsx,ts,tsx,json,css,md}'
+      run: bunx prettier --write {staged_files}
+      stage_fixed: true
+    typecheck:
+      glob: '*.{ts,tsx}'
+      run: bunx tsc --noEmit
+      stage_fixed: false
