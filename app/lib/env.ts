@@ -14,6 +14,9 @@ const PublicEnvSchema = z.object({
   VITE_PORTAL_URL: z.string().url().default('https://cloud.datum.net'),
   VITE_DOCS_URL: z.string().url().default('https://docs.datum.net'),
   VITE_GITHUB_ORG_URL: z.string().url().default('https://github.com/datum-cloud'),
+  VITE_DISCORD_URL: z.string().url().default('https://link.datum.net/discord'),
+  VITE_YOUTUBE_URL: z.string().url().default('https://www.youtube.com/@datum-cloud'),
+  VITE_LINKEDIN_URL: z.string().url().default('https://www.linkedin.com/company/datum-cloud'),
 });
 
 export type ServerEnv = z.infer<typeof ServerEnvSchema>;

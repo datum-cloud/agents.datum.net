@@ -1,40 +1,30 @@
+@import './fonts.css';
+@import './variables.css';
 @import 'tailwindcss';
+@plugin '@tailwindcss/typography';
+@import 'tailwind-scrollbar-hide/v4';
 
-/* Datum design system — fonts, design tokens, shadcn primitives, theme overrides.
-   Defines `:root` (light) and `.dark` color tokens, plus the `dark` custom
-   variant: @custom-variant dark (&:is(.dark *)). Mode is toggled by adding
-   `.dark` to <html>; ThemeProvider does that based on OS preference. */
+/* Datum cloud design system — fonts, design tokens, shadcn primitives, theme overrides. */
 @import '@datum-cloud/datum-ui/styles';
 
-/* Project-local aliases. We expose `--bg`, `--fg`, `--accent` etc. as the
-   tokens the brief (§5.2) refers to, but they resolve to datum-ui's canonical
-   variables so light/dark switching is driven by datum-ui via the `.dark`
-   class on <html>. Tailwind v4 picks them up via @theme inline so utilities
-   like `bg-bg`, `text-fg`, `border-border` follow the theme automatically. */
 @theme inline {
   --color-bg: var(--background);
   --color-fg: var(--foreground);
   --color-fg-muted: var(--muted-foreground);
   --color-border: var(--border);
   --color-accent: var(--primary);
-}
 
-:root {
-  /* Brief design-spec tokens (§5.2), kept as plain CSS variables outside the
-     Tailwind scale so they don't override the default spacing/typography. */
-  --leading-body: 1.6;
-  --leading-heading: 1.2;
+  --color-glacier-mist-700: var(--glacier-mist-700);
+  --color-glacier-mist-800: var(--glacier-mist-800);
+  --color-glacier-mist-900: var(--glacier-mist-900);
+  --color-midnight-fjord: var(--midnight-fjord);
+  --color-pine-forge: var(--pine-forge);
+  --color-app-dark-utility-5: var(--app-dark-utility-5);
+  --color-app-dark-utility-3: var(--app-dark-utility-3);
 
-  --space-1: 0.5rem;
-  --space-2: 1rem;
-  --space-3: 1.5rem;
-  --space-4: 2rem;
-  --space-5: 3rem;
-  --space-6: 4rem;
-  --space-7: 6rem;
-
-  --container-content: 720px;
-  --page-padding-x: clamp(1.25rem, 5vw, 3rem);
+  --font-display: 'Canela Text', ui-serif, Georgia, serif;
+  --font-mono:
+    'DejaVu Sans Mono', Menlo, ui-monospace, 'SF Mono', Consolas, 'Liberation Mono', monospace;
 }
 
 html {
@@ -66,4 +56,18 @@ body {
   outline: 2px solid var(--ring);
   outline-offset: 2px;
   border-radius: 2px;
+}
+
+@layer components {
+  .btn {
+    @apply inline-flex items-center justify-center rounded-md border px-5 py-3.5 text-[14px] leading-[21px] font-semibold transition-colors;
+  }
+
+  .btn-ghost {
+    @apply border-app-dark-utility-5 text-midnight-fjord hover:bg-glacier-mist-800 focus-visible:bg-glacier-mist-800;
+  }
+
+  .btn-primary {
+    @apply border-midnight-fjord text-midnight-fjord hover:bg-midnight-fjord focus-visible:bg-midnight-fjord hover:text-white focus-visible:text-white;
+  }
 }
