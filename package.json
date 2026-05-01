@@ -8,7 +8,7 @@
     "node": ">=24.0.0"
   },
   "scripts": {
-    "dev": "react-router dev",
+    "dev": "bun --bun react-router dev",
     "build": "react-router build",
     "start": "bun ./build/server/index.js",
     "typecheck": "react-router typegen && tsc",
