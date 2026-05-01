@@ -8,20 +8,21 @@
     "node": ">=24.0.0"
   },
   "scripts": {
-    "dev": "bun --bun react-router dev",
+    "dev": "rm -rf node_modules/.vite && bun --bun react-router dev",
     "build": "react-router build",
     "start": "bun ./build/server/index.js",
     "typecheck": "react-router typegen && tsc",
     "lint": "eslint \"app/**/*.{ts,tsx}\" --fix",
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,css,md}\"",
     "format:check": "prettier --check \"**/*.{js,jsx,ts,tsx,json,css,md}\"",
-    "clean": "rm -rf node_modules .react-router build"
+    "clean": "rm -rf node_modules/.vite node_modules/.react-router .react-router build"
   },
   "dependencies": {
     "@datum-cloud/datum-ui": "^0.8.1",
     "@hono/node-server": "^2.0.0",
     "@react-router/fs-routes": "^7.14.2",
     "@react-router/node": "^7.14.2",
+    "@tailwindcss/typography": "^0.5.19",
     "hono": "^4.12.15",
     "isbot": "^5",
     "lucide-react": "^0.468.0",
@@ -29,6 +30,7 @@
     "react-dom": "^19.2.5",
     "react-router": "^7.14.2",
     "react-router-hono-server": "^2.26.0",
+    "tailwind-scrollbar-hide": "^4.0.0",
     "zod": "^4.0.0"
   },
   "devDependencies": {
@@ -41,6 +43,8 @@
     "@types/react-dom": "^19.2.3",
     "@typescript-eslint/eslint-plugin": "^8.59.1",
     "@typescript-eslint/parser": "^8.59.1",
+    "date-fns": "^4.1.0",
+    "date-fns-tz": "^3.2.0",
     "eslint": "^9.0.0",
     "eslint-plugin-jsx-a11y": "^6.10.2",
     "eslint-plugin-prettier": "^5.5.5",
