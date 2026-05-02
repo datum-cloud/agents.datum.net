@@ -11,7 +11,7 @@
     url('/fonts/datum/allianceno1-regular-webfont.woff') format('woff');
 }
 
-/* @font-face {
+@font-face {
   font-family: 'Alliance No.1';
   font-style: semibold;
   font-weight: 500;
@@ -19,7 +19,7 @@
   src:
     url('/fonts/datum/allianceno1-medium-webfont.woff2') format('woff2'),
     url('/fonts/datum/allianceno1-medium-webfont.woff') format('woff');
-} */
+}
 
 @font-face {
   font-family: 'Alliance No.1';
@@ -31,7 +31,7 @@
     url('/fonts/datum/allianceno1-semibold-webfont.woff') format('woff');
 }
 
-/* @font-face {
+@font-face {
   font-family: 'Alliance No.1';
   font-style: italic;
   font-weight: 500;
@@ -39,7 +39,7 @@
   src:
     url('/fonts/datum/allianceno1-medium-italic-webfont.woff2') format('woff2'),
     url('/fonts/datum/allianceno1-medium-italic-webfont.woff') format('woff');
-} */
+}
 
 @font-face {
   font-family: 'Alliance No.1';

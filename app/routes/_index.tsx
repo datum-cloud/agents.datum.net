@@ -39,7 +39,7 @@ export default function Home() {
         dangerouslySetInnerHTML={{ __html: organizationJsonLd() }}
       />
       <Header />
-      <main id="main" className="bg-glacier-mist-700 text-midnight-fjord min-h-dvh">
+      <main id="main" className="bg-background text-foreground min-h-dvh">
         <Hero />
         <PageContainer>
           <CompanySection />

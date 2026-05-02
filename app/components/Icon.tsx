@@ -31,7 +31,7 @@ type IconProps = {
   name: IconName | (string & {});
   /** Tailwind size class shorthand. Defaults to `md` (h-5 w-5). */
   size?: IconSize;
-  /** Extra utilities, e.g. `text-midnight-fjord` to recolor the currentColor fill. */
+  /** Extra utilities, e.g. `text-foreground` to recolor the currentColor fill. */
   className?: string;
 };
 
