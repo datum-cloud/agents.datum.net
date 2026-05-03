@@ -19,7 +19,7 @@ export function PricingSection() {
             A high-touch offering designed to help modern service providers win. Price: Custom.
           </SectionRow>
         </SectionRowList>
-        <p className="text-midnight-fjord/60 text-[14px] leading-[21px]">
+        <p className="text-foreground/60 text-[14px] leading-[21px]">
           For full details use{' '}
           <a
             href="https://www.datum.net/pricing/"

@@ -12,18 +12,18 @@ export function Header() {
   const env = getPublicEnv();
 
   return (
-    <header className="bg-glacier-mist-700">
+    <header className="bg-background">
       <PageContainer>
-        <div className="border-midnight-fjord flex h-20 items-center gap-10 border-b">
+        <div className="border-foreground dark:border-border flex h-20 items-center gap-10 border-b">
           <a href={env.VITE_MAIN_SITE_URL} className="flex items-center gap-8" aria-label="Datum">
-            <img
-              src="/datum-mark.svg"
-              alt=""
-              width={32}
-              height={32}
-              className="block size-8 shrink-0"
-            />
-            <span className="text-midnight-fjord hidden text-[14px] leading-[21px] whitespace-nowrap md:inline">
+            <div className="bg-midnight-fjord flex size-8 shrink-0 items-center justify-center">
+              <Icon
+                name="datum-logo"
+                size="md"
+                className="text-glacier-mist-700 dark:text-primary"
+              />
+            </div>
+            <span className="text-foreground hidden text-[14px] leading-[21px] whitespace-nowrap md:inline">
               Built to help AI agents work better with Datum
             </span>
           </a>
@@ -35,11 +35,11 @@ export function Header() {
               href={env.VITE_MAIN_SITE_URL}
               target="_blank"
               rel="noreferrer"
-              className="text-midnight-fjord hover:bg-glacier-mist-800 focus-visible:bg-glacier-mist-800 hidden items-center gap-3 rounded-md px-5 py-3.5 text-[14px] leading-[21px] transition-colors md:inline-flex">
+              className="text-foreground hover:bg-muted focus-visible:bg-muted hidden items-center gap-3 rounded-md px-5 py-3.5 text-[14px] leading-[21px] transition-colors md:inline-flex">
               <span>
                 Are you human? Head to <span className="underline">Datum.net</span>
               </span>
-              <Icon name="external-link" size="sm" className="shrink-0" />
+              <Icon name="external-link" size="sm" className="dark:text-primary shrink-0" />
             </a>
             <ButtonLink href={`${env.VITE_PORTAL_URL}/login`} variant="ghost">
               Sign in

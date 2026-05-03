@@ -15,13 +15,11 @@ type SectionRowProps = {
  */
 export function SectionRow({ label, children }: SectionRowProps) {
   return (
-    <div className="border-glacier-mist-900 flex flex-col gap-4 border-b py-5 first:pt-0 last:border-b-0 lg:flex-row lg:gap-10">
-      <p className="text-midnight-fjord w-full text-[14px] leading-[21px] font-semibold lg:w-[var(--section-row-label)] lg:shrink-0">
+    <div className="border-border flex flex-col gap-4 border-b py-5 first:pt-0 last:border-b-0 lg:flex-row lg:gap-10">
+      <p className="text-foreground w-full text-[14px] leading-[21px] font-semibold lg:w-[var(--section-row-label)] lg:shrink-0">
         {label}
       </p>
-      <div className="text-midnight-fjord w-full text-[14px] leading-[21px] lg:flex-1">
-        {children}
-      </div>
+      <div className="text-foreground w-full text-[14px] leading-[21px] lg:flex-1">{children}</div>
     </div>
   );
 }

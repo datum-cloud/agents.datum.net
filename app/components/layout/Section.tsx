@@ -25,7 +25,7 @@ export function Section({ id, n, title, children, className }: SectionProps) {
     <section
       id={id}
       className={cn(
-        'border-midnight-fjord bg-glacier-mist-700 border-t py-16',
+        'border-foreground dark:border-border bg-background border-t py-16',
         'flex flex-col gap-16',
         className
       )}>

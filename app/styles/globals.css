@@ -19,8 +19,10 @@
   --color-glacier-mist-900: var(--glacier-mist-900);
   --color-midnight-fjord: var(--midnight-fjord);
   --color-pine-forge: var(--pine-forge);
-  --color-app-dark-utility-5: var(--app-dark-utility-5);
+  --color-app-dark-utility-1: var(--app-dark-utility-1);
+  --color-app-dark-utility-2: var(--app-dark-utility-2);
   --color-app-dark-utility-3: var(--app-dark-utility-3);
+  --color-app-dark-utility-5: var(--app-dark-utility-5);
 
   --font-display: 'Canela Text', ui-serif, Georgia, serif;
   --font-mono:
@@ -64,10 +66,10 @@ body {
   }
 
   .btn-ghost {
-    @apply border-app-dark-utility-5 text-midnight-fjord hover:bg-glacier-mist-800 focus-visible:bg-glacier-mist-800;
+    @apply border-border text-foreground hover:bg-muted focus-visible:bg-muted;
   }
 
   .btn-primary {
-    @apply border-midnight-fjord text-midnight-fjord hover:bg-midnight-fjord focus-visible:bg-midnight-fjord hover:text-white focus-visible:text-white;
+    @apply border-foreground dark:border-border text-foreground hover:bg-foreground focus-visible:bg-foreground hover:text-background focus-visible:text-background;
   }
 }
