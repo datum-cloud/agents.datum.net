@@ -35,11 +35,15 @@ export function Header() {
               href={env.VITE_MAIN_SITE_URL}
               target="_blank"
               rel="noreferrer"
-              className="text-foreground hover:bg-muted focus-visible:bg-muted hidden items-center gap-3 rounded-md px-5 py-3.5 text-[14px] leading-[21px] transition-colors md:inline-flex">
+              className="text-foreground hover:bg-muted focus-visible:bg-muted group hidden items-center gap-3 rounded-md px-5 py-3.5 text-[14px] leading-[21px] transition-colors md:inline-flex">
               <span>
                 Are you human? Head to <span className="underline">Datum.net</span>
               </span>
-              <Icon name="external-link" size="sm" className="dark:text-primary shrink-0" />
+              <Icon
+                name="external-link"
+                size="sm"
+                className="dark:text-primary shrink-0 transition-transform duration-200 group-hover:translate-x-0.5"
+              />
             </a>
             <ButtonLink href={`${env.VITE_PORTAL_URL}/login`} variant="ghost">
               Sign in

@@ -26,6 +26,7 @@
     "hono": "^4.12.15",
     "isbot": "^5",
     "lucide-react": "^0.468.0",
+    "motion": "^12.38.0",
     "react": "^19.2.5",
     "react-dom": "^19.2.5",
     "react-router": "^7.14.2",
