@@ -19,11 +19,15 @@ export function Footer() {
             href={env.VITE_MAIN_SITE_URL}
             target="_blank"
             rel="noreferrer"
-            className="text-foreground hover:bg-muted focus-visible:bg-muted inline-flex items-center gap-3 rounded-md px-5 py-3.5 text-[14px] leading-[21px] transition-colors">
+            className="text-foreground hover:bg-muted focus-visible:bg-muted group inline-flex items-center gap-3 rounded-md px-5 py-3.5 text-[14px] leading-[21px] transition-colors">
             <span>
               Are you human? Head to <span className="underline">Datum.net</span>
             </span>
-            <Icon name="external-link" size="sm" className="dark:text-primary shrink-0" />
+            <Icon
+              name="external-link"
+              size="sm"
+              className="dark:text-primary shrink-0 transition-transform duration-200 group-hover:translate-x-0.5"
+            />
           </a>
 
           <div className="flex w-full items-center justify-between gap-10 md:w-auto">
@@ -34,7 +38,7 @@ export function Footer() {
                   target="_blank"
                   rel="noreferrer"
                   aria-label="Datum on Discord"
-                  className="text-muted-foreground hover:text-foreground focus-visible:text-foreground inline-flex items-center justify-center transition-colors">
+                  className="text-muted-foreground hover:text-foreground focus-visible:text-foreground inline-flex items-center justify-center transition-all duration-200 hover:scale-110">
                   <Icon name="discord" size="md" className="dark:text-primary" />
                 </a>
               </li>
@@ -44,7 +48,7 @@ export function Footer() {
                   target="_blank"
                   rel="noreferrer"
                   aria-label="Datum on YouTube"
-                  className="text-muted-foreground hover:text-foreground focus-visible:text-foreground inline-flex items-center justify-center transition-colors">
+                  className="text-muted-foreground hover:text-foreground focus-visible:text-foreground inline-flex items-center justify-center transition-all duration-200 hover:scale-110">
                   <Icon name="youtube" size="md" className="dark:text-primary" />
                 </a>
               </li>
@@ -54,7 +58,7 @@ export function Footer() {
                   target="_blank"
                   rel="noreferrer"
                   aria-label="Datum on LinkedIn"
-                  className="text-muted-foreground hover:text-foreground focus-visible:text-foreground inline-flex items-center justify-center transition-colors">
+                  className="text-muted-foreground hover:text-foreground focus-visible:text-foreground inline-flex items-center justify-center transition-all duration-200 hover:scale-110">
                   <Icon name="linkedin" size="md" className="dark:text-primary" />
                 </a>
               </li>

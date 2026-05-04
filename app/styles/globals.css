@@ -60,16 +60,29 @@ body {
   border-radius: 2px;
 }
 
+a .underline,
+a.underline {
+  text-underline-offset: 3px;
+  transition: opacity 0.2s ease;
+}
+
+a:hover .underline,
+a:hover.underline,
+a:focus-visible .underline,
+a:focus-visible.underline {
+  opacity: 0.65;
+}
+
 @layer components {
   .btn {
-    @apply inline-flex items-center justify-center rounded-md border px-5 py-3.5 text-[14px] leading-[21px] font-semibold transition-colors;
+    @apply inline-flex items-center justify-center rounded-md border px-5 py-3.5 text-[14px] leading-[21px] font-semibold transition-all duration-200;
   }
 
   .btn-ghost {
-    @apply border-border text-foreground hover:bg-muted focus-visible:bg-muted;
+    @apply border-border text-foreground hover:bg-muted focus-visible:bg-muted hover:scale-[1.02] active:scale-[0.98];
   }
 
   .btn-primary {
-    @apply border-foreground dark:border-border text-foreground hover:bg-foreground focus-visible:bg-foreground hover:text-background focus-visible:text-background;
+    @apply border-foreground dark:border-border text-foreground hover:bg-foreground focus-visible:bg-foreground hover:text-background focus-visible:text-background hover:scale-[1.02] active:scale-[0.98];
   }
 }
