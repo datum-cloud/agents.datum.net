@@ -7,7 +7,7 @@ export function CompanySection() {
       <SectionBody>
         <p>
           Datum is a venture-backed startup founded in late 2024 by Zac and Jacob Smith. It provides
-          an open network cloud targeted at AI and alt cloud providers.
+          an open network cloud targeted at AI and [alt cloud](https://www.alt-cloud.org/) providers.
         </p>
       </SectionBody>
     </Section>
