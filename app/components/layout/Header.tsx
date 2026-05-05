@@ -15,15 +15,18 @@ export function Header() {
     <header className="bg-background">
       <PageContainer>
         <div className="border-foreground dark:border-border flex h-20 items-center gap-10 border-b">
-          <a href={env.VITE_MAIN_SITE_URL} className="flex items-center gap-8" aria-label="Datum">
-            <div className="bg-midnight-fjord flex size-8 shrink-0 items-center justify-center">
+          <a
+            href={env.VITE_MAIN_SITE_URL}
+            className="group flex items-center gap-8 transition-opacity duration-150 hover:opacity-70"
+            aria-label="Datum">
+            <div className="bg-midnight-fjord flex size-8 shrink-0 items-center justify-center transition-transform duration-150 group-hover:scale-[1.06]">
               <Icon
                 name="datum-logo"
                 size="md"
                 className="text-glacier-mist-700 dark:text-primary"
               />
             </div>
-            <span className="text-foreground hidden text-[14px] leading-[21px] whitespace-nowrap md:inline">
+            <span className="text-foreground hidden text-[14px] leading-[21px] whitespace-nowrap underline decoration-transparent underline-offset-2 transition-colors duration-150 group-hover:decoration-current md:inline">
               Built to help AI agents work better with Datum
             </span>
           </a>
@@ -45,7 +48,10 @@ export function Header() {
                 className="dark:text-primary shrink-0 transition-transform duration-200 group-hover:translate-x-0.5"
               />
             </a>
-            <ButtonLink href={`${env.VITE_PORTAL_URL}/login`} variant="ghost">
+            <ButtonLink
+              href={`${env.VITE_PORTAL_URL}/login`}
+              variant="ghost"
+              className="hover:border-foreground hover:!bg-transparent">
               Sign in
             </ButtonLink>
             <ButtonLink href={`${env.VITE_PORTAL_URL}/signup`} variant="primary">
