@@ -21,10 +21,9 @@ export const meta: MetaFunction = ({ matches }) => {
   return [
     ...parentMeta,
     ...buildMeta({
-      title: 'Datum Agents — Open Network Cloud for AI',
+      title: 'Datum — Open Network Cloud for AI',
       description:
         "Datum's agent portal. Programmatic access to open network cloud infrastructure: anycast routing, QUIC connectors, DNS, DDoS protection, and global BGP — built for AI agents and autonomous systems.",
-      ogTitle: 'Datum — Open Network Cloud for AI Agents',
       ogDescription: 'Internet infrastructure built for AI. No network team required.',
       path: '/',
     }),

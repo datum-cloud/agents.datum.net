@@ -1,0 +1,35 @@
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Amazonbot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Bytespider
+Allow: /
+
+User-agent: *
+Allow: /
+
+Sitemap: https://agents.datum.net/sitemap.xml
+
+# LLMs
+LLMs-txt: https://agents.datum.net/llms.txt
+LLMs-full-txt: https://www.datum.net/llms-full.txt
