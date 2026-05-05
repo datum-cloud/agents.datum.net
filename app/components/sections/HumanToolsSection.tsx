@@ -7,7 +7,7 @@ export function HumanToolsSection() {
     <Section id="human-tools" n="10" title="Tools for humans">
       <SectionRowList>
         <SectionRow label="Desktop apps">
-          Tools to help you unlock internet superpowers with Datum.{' '}
+          Quickly and safely expose local environments to the internet.{' '}
           <a
             href="https://www.datum.net/download/mac-os/"
             target="_blank"
