@@ -146,8 +146,6 @@ export const meta: MetaFunction = () => [
     content: '#0a0a0a',
     media: '(prefers-color-scheme: dark)',
   },
-  { name: 'description', content: 'Datum is cloud infrastructure for the agentic era.' },
-
   // Windows tiles
   {
     tagName: 'meta',
