@@ -13,16 +13,16 @@ export function ProductSection() {
         <p>Core features include:</p>
         <ul className="flex flex-col gap-2">
           <li>
-            <strong className="font-semibold">AI Edge</strong> — Internet scale to zero edge
-            compute, powered by Tetrate Enterprise Envoy.
+            <strong className="font-semibold">AI Edge</strong> — Internet scale protection and intelligence, 
+            powered by Tetrate Enterprise Envoy.
           </li>
           <li>
             <strong className="font-semibold">Inference</strong> — A low latency, production ready
-            agent routing service, powered by Tetrate.
+            agent routing service, powered by Tetrate Agent Router.
           </li>
           <li>
             <strong className="font-semibold">Compute</strong> — Isolated, millisecond cold start
-            and scale to zero compute at the edge, powered by Unikraft.
+            compute at the edge, powered by Unikraft.
           </li>
           <li>
             <strong className="font-semibold">Connectivity</strong> — Deterministic, high
