@@ -288,3 +288,9 @@ datumctl login
 ```bash
 datumctl get httpproxies
 datumctl create -f
+
+---
+
+## Skills
+
+- [Datum Cloud Skills](https://github.com/datum-cloud/skills): Agent skills for working with Datum Cloud APIs and infrastructure primitives. Install via `/plugin marketplace add datum-cloud/skills` (Claude Code), `npx skills add https://github.com/datum-cloud/skills` (npx), or remote rule settings (Cursor). Available: ai-edge, client-traffic, dns, domains, httproute, metrics-export.
