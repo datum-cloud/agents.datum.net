@@ -1,0 +1,49 @@
+{
+  "$schema": "https://agentskills.io/schemas/v0.2.0/index.json",
+  "name": "Datum Cloud Agent Skills",
+  "description": "Agent skills for working with Datum Cloud APIs and infrastructure primitives",
+  "repository": "https://github.com/datum-cloud/skills",
+  "installation": {
+    "claude-code": "/plugin marketplace add datum-cloud/skills",
+    "npm": "npx skills add https://github.com/datum-cloud/skills",
+    "cursor": "Add via remote rule settings"
+  },
+  "skills": [
+    {
+      "name": "ai-edge",
+      "type": "claude-code",
+      "description": "Manage Datum Cloud AI Edge resources — Envoy-based intelligent HTTP proxy with WAF",
+      "url": "https://raw.githubusercontent.com/datum-cloud/skills/main/ai-edge/SKILL.md"
+    },
+    {
+      "name": "client-traffic",
+      "type": "claude-code",
+      "description": "Configure client traffic policies and routing for AI Edge",
+      "url": "https://raw.githubusercontent.com/datum-cloud/skills/main/client-traffic/SKILL.md"
+    },
+    {
+      "name": "dns",
+      "type": "claude-code",
+      "description": "Manage DNS zones and records via Datum Cloud",
+      "url": "https://raw.githubusercontent.com/datum-cloud/skills/main/dns/SKILL.md"
+    },
+    {
+      "name": "domains",
+      "type": "claude-code",
+      "description": "Manage domain registration and configuration on Datum Cloud",
+      "url": "https://raw.githubusercontent.com/datum-cloud/skills/main/domains/SKILL.md"
+    },
+    {
+      "name": "httproute",
+      "type": "claude-code",
+      "description": "Configure HTTP routing rules and filters for AI Edge",
+      "url": "https://raw.githubusercontent.com/datum-cloud/skills/main/httproute/SKILL.md"
+    },
+    {
+      "name": "metrics-export",
+      "type": "claude-code",
+      "description": "Configure OpenTelemetry metrics export from Datum Cloud resources",
+      "url": "https://raw.githubusercontent.com/datum-cloud/skills/main/metrics-export/SKILL.md"
+    }
+  ]
+}
