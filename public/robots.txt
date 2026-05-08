@@ -33,3 +33,6 @@ Sitemap: https://agents.datum.net/sitemap.xml
 # LLMs
 LLMs-txt: https://agents.datum.net/llms.txt
 LLMs-full-txt: https://www.datum.net/llms-full.txt
+
+# Content Signals (https://contentsignals.org/)
+Content-Signal: search=yes, ai-input=yes, ai-train=no

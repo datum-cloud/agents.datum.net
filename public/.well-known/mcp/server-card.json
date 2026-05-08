@@ -1,0 +1,19 @@
+{
+  "schemaVersion": "1",
+  "serverInfo": {
+    "name": "datum-mcp",
+    "description": "Datum Cloud MCP server — manage AI Edge, Connectors, DNS, Domains, Secrets, and infrastructure resources programmatically"
+  },
+  "transport": {
+    "type": "stdio"
+  },
+  "capabilities": {
+    "tools": true
+  },
+  "homepage": "https://www.datum.net/docs/datum-mcp",
+  "repository": "https://github.com/datum-cloud/datum-mcp",
+  "installation": {
+    "npm": "npx datum-mcp",
+    "brew": "brew install datum-cloud/tap/desktop"
+  }
+}

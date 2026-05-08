@@ -16,6 +16,18 @@ import { WhySection } from '@/components/sections/WhySection';
 import { buildMeta, organizationJsonLd } from '@/lib/seo';
 import type { MetaFunction } from 'react-router';
 
+export function headers() {
+  return {
+    Link: [
+      '</llms.txt>; rel="describedby"; type="text/plain"',
+      '</sitemap.xml>; rel="sitemap"',
+      '</.well-known/api-catalog>; rel="api-catalog"',
+      '</.well-known/mcp/server-card.json>; rel="https://modelcontextprotocol.io/ns/server-card"',
+      '</.well-known/agent-skills/index.json>; rel="https://agentskills.io/ns/index"',
+    ].join(', '),
+  };
+}
+
 export const meta: MetaFunction = ({ matches }) => {
   const parentMeta = matches.flatMap((match) => match.meta ?? []);
   return [
