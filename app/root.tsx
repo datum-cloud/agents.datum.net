@@ -1,7 +1,19 @@
 import './styles/globals.css';
 import { ThemeProvider, ThemeScript } from '@datum-cloud/datum-ui/theme';
+import { useEffect } from 'react';
 import { Links, Meta, Outlet, Scripts, ScrollRestoration } from 'react-router';
 import type { LinksFunction, MetaFunction } from 'react-router';
+
+type WebMCPTool = {
+  name: string;
+  description: string;
+  inputSchema: Record<string, unknown>;
+  execute: (args: Record<string, unknown>) => Promise<unknown>;
+};
+
+type WebMCPNavigator = Navigator & {
+  modelContext: { provideContext: (ctx: { tools: WebMCPTool[] }) => void };
+};
 
 export const links: LinksFunction = () => [
   // SVG — handles all modern browsers natively, colour via CSS
@@ -198,6 +210,93 @@ function Document({ children }: { children: React.ReactNode }) {
 }
 
 export default function App() {
+  useEffect(() => {
+    if (typeof navigator === 'undefined' || !('modelContext' in navigator)) return;
+    const nav = navigator as WebMCPNavigator;
+    nav.modelContext.provideContext({
+      tools: [
+        {
+          name: 'get_platform_overview',
+          description:
+            'Get an overview of Datum Cloud: what it is, key products, pricing, and why it was built for AI agents',
+          inputSchema: { type: 'object', properties: {} },
+          execute: async () => ({
+            name: 'Datum Cloud',
+            tagline: 'Open network cloud for AI',
+            description:
+              'Programmatic access to enterprise-grade internet infrastructure — anycast routing, QUIC tunnels, DNS, DDoS protection, and global BGP — built for AI agents and autonomous systems.',
+            products: [
+              'AI Edge (Envoy proxy + Coraza WAF)',
+              'Connectors (QUIC tunnels)',
+              'DNS & Domains',
+              'Secrets & Machine Accounts',
+              'Galactic VPC (coming H1 2026)',
+            ],
+            pricing: { builder: '$0/month (forever free)', scaler: '$20/month + usage' },
+            signup: 'https://cloud.datum.net',
+            docs: 'https://www.datum.net/docs',
+          }),
+        },
+        {
+          name: 'get_mcp_server_info',
+          description:
+            'Get information about the Datum Cloud MCP server for managing infrastructure programmatically from an AI agent',
+          inputSchema: { type: 'object', properties: {} },
+          execute: async () => ({
+            name: 'datum-mcp',
+            description:
+              'MCP server for Datum Cloud — manage AI Edge, Connectors, DNS, Domains, Secrets, and other infrastructure resources',
+            repository: 'https://github.com/datum-cloud/datum-mcp',
+            docs: 'https://www.datum.net/docs/datum-mcp',
+            skills: 'https://github.com/datum-cloud/skills',
+            agentSkillsIndex: 'https://agents.datum.net/.well-known/agent-skills/index.json',
+          }),
+        },
+        {
+          name: 'get_quickstart',
+          description: 'Get step-by-step instructions for getting started with Datum Cloud',
+          inputSchema: {
+            type: 'object',
+            properties: {
+              method: {
+                type: 'string',
+                enum: ['web', 'cli', 'mcp'],
+                description: 'How to get started: via web portal, CLI (datumctl), or MCP server',
+              },
+            },
+          },
+          execute: async ({ method }: Record<string, unknown>) => {
+            if (method === 'cli') {
+              return {
+                install: 'brew install datum-cloud/tap/desktop',
+                auth: 'datumctl login',
+                example: 'datumctl get httpproxies',
+                docs: 'https://www.datum.net/docs/datumctl/overview',
+              };
+            }
+            if (method === 'mcp') {
+              return {
+                install: 'See https://www.datum.net/docs/datum-mcp',
+                claudeCode: '/plugin marketplace add datum-cloud/skills',
+                npm: 'npx skills add https://github.com/datum-cloud/skills',
+              };
+            }
+            return {
+              url: 'https://cloud.datum.net',
+              auth: 'Google or GitHub OAuth (no email/password)',
+              steps: [
+                'Sign up at cloud.datum.net',
+                'A Personal Org is created automatically',
+                'Create a project inside your org',
+                'Add infrastructure resources (AI Edge, DNS, etc.)',
+              ],
+            };
+          },
+        },
+      ],
+    });
+  }, []);
+
   return (
     <ThemeProvider attribute="class" defaultTheme="system" enableSystem enableColorScheme>
       <Document>
