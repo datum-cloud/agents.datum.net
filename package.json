@@ -25,7 +25,7 @@
     "@tailwindcss/typography": "^0.5.19",
     "hono": "^4.12.15",
     "isbot": "^5",
-    "lucide-react": "^0.468.0",
+    "lucide-react": "^0.577.0",
     "motion": "^12.38.0",
     "react": "^19.2.5",
     "react-dom": "^19.2.5",
