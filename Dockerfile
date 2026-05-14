@@ -3,7 +3,7 @@
 # ==========================================
 # BASE STAGE - Common dependencies and setup
 # ==========================================
-FROM oven/bun:1.3.13 AS base
+FROM oven/bun:1.3.14 AS base
 
 RUN apt-get update && \
     apt-get install -y --no-install-recommends unzip ca-certificates wget && \
