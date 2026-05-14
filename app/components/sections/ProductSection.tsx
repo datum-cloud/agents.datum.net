@@ -13,8 +13,8 @@ export function ProductSection() {
         <p>Core features include:</p>
         <ul className="flex flex-col gap-2">
           <li>
-            <strong className="font-semibold">AI Edge</strong> — Internet scale protection and intelligence, 
-            powered by Tetrate Enterprise Envoy.
+            <strong className="font-semibold">AI Edge</strong> — Internet scale protection and
+            intelligence, powered by Tetrate Enterprise Envoy.
           </li>
           <li>
             <strong className="font-semibold">Inference</strong> — A low latency, production ready
