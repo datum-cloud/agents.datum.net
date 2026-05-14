@@ -28,6 +28,17 @@ export function ProgrammaticToolsSection() {
             https://github.com/datum-cloud/datum-mcp
           </a>
         </SectionRow>
+        <SectionRow label="Skills">
+          Pre-built, task-specific instructions that teach coding agents how to use Datum features.
+          Drop a skill into your project context to help your agent know exactly what to do.{' '}
+          <a
+            href="https://github.com/datum-cloud/skills"
+            target="_blank"
+            rel="noreferrer"
+            className="underline">
+            https://github.com/datum-cloud/skills
+          </a>
+        </SectionRow>
         <SectionRow label="CLI">
           A powerful command-line interface that lets developers integrate Datum into any stack,
           script, or automated pipeline without touching a UI.{' '}
