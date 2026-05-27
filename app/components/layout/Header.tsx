@@ -1,4 +1,5 @@
 import { PageContainer } from './PageContainer';
+import { ThemeToggle } from './ThemeToggle';
 import { Icon } from '@/components/Icon';
 import { ButtonLink } from '@/components/ui/ButtonLink';
 import { getPublicEnv } from '@/lib/env';
@@ -57,6 +58,11 @@ export function Header() {
             <ButtonLink href={`${env.VITE_PORTAL_URL}/signup`} variant="primary">
               Start for free
             </ButtonLink>
+            <span
+              aria-hidden="true"
+              className="bg-foreground/15 mx-1 hidden h-6 w-px sm:inline-block"
+            />
+            <ThemeToggle />
           </nav>
         </div>
       </PageContainer>
