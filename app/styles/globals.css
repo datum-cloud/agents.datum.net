@@ -7,6 +7,9 @@
 /* Datum cloud design system — fonts, design tokens, shadcn primitives, theme overrides. */
 @import '@datum-cloud/datum-ui/styles';
 
+/* CRT lightbox styles for the `/index.md` and `/llms.txt` viewers. */
+@import './terminal.css';
+
 @theme inline {
   --color-bg: var(--background);
   --color-fg: var(--foreground);

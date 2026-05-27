@@ -1,0 +1,192 @@
+/* Lightbox for viewing `/index.md` and `/llms.txt`. Follows the site's
+ * active colour scheme — surface colours, text colours, and borders all
+ * come from the existing shadcn / datum-ui tokens, so the modal looks like
+ * it belongs in light mode and dark mode without any per-mode rules here.
+ *
+ * Class names are kept as `.terminal-*` so the React component import
+ * paths don't need to change; the styling is intentionally not terminal-y. */
+
+.terminal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  background-color: oklch(0% 0 0 / 0.55);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  animation: terminal-fade-in 180ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes terminal-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.terminal-frame {
+  position: relative;
+  width: 100%;
+  max-width: 56rem;
+  max-height: min(90vh, 720px);
+  background-color: var(--card);
+  color: var(--foreground);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md, 0.375rem);
+  box-shadow:
+    0 1px 2px oklch(0% 0 0 / 0.04),
+    0 25px 60px -20px oklch(0% 0 0 / 0.35);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  animation: terminal-frame-in 220ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes terminal-frame-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px) scale(0.985);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.terminal-titlebar {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.625rem 0.875rem;
+  border-bottom: 1px solid var(--border);
+  background-color: var(--muted);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  line-height: 1;
+  color: var(--muted-foreground);
+}
+
+.terminal-titlebar__prompt {
+  color: var(--primary);
+  font-weight: 600;
+}
+
+.terminal-titlebar__title {
+  flex: 1;
+  color: var(--foreground);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.terminal-titlebar__rawlink {
+  color: var(--muted-foreground);
+  text-decoration: none;
+  padding: 0.25rem 0.5rem;
+  border-radius: var(--radius-sm, 0.1875rem);
+  transition:
+    color 150ms cubic-bezier(0.4, 0, 0.2, 1),
+    background-color 150ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.terminal-titlebar__rawlink:hover,
+.terminal-titlebar__rawlink:focus-visible {
+  color: var(--foreground);
+  background-color: color-mix(in oklch, var(--foreground) 6%, transparent);
+  outline: none;
+}
+
+.terminal-titlebar__close {
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  color: var(--muted-foreground);
+  background: transparent;
+  border: 1px solid var(--border);
+  padding: 0.25rem 0.5rem;
+  border-radius: var(--radius-sm, 0.1875rem);
+  cursor: pointer;
+  transition:
+    color 150ms cubic-bezier(0.4, 0, 0.2, 1),
+    border-color 150ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.terminal-titlebar__close:hover,
+.terminal-titlebar__close:focus-visible {
+  color: var(--foreground);
+  border-color: var(--foreground);
+  outline: none;
+}
+
+.terminal-body {
+  flex: 1;
+  overflow: auto;
+  padding: 1.25rem 1.5rem;
+  -webkit-overflow-scrolling: touch;
+  background-color: var(--card);
+}
+
+.terminal-body:focus-visible {
+  outline: 1px solid var(--primary);
+  outline-offset: -4px;
+}
+
+.terminal-output {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  line-height: 1.6;
+  color: var(--foreground);
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+/* Trigger link used in the hero — small mono uppercase chip that opens the
+ * lightbox. Picks up the canyon-clay link colour in light mode and the
+ * aurora-moss accent in dark mode via the `--primary` token swap. */
+.md-trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  line-height: 1;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--primary);
+  text-decoration: none;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid transparent;
+  transition: border-color 180ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.md-trigger:hover,
+.md-trigger:focus-visible {
+  border-bottom-color: var(--primary);
+}
+
+.md-trigger__arrow {
+  display: inline-block;
+  transition: transform 180ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.md-trigger:hover .md-trigger__arrow,
+.md-trigger:focus-visible .md-trigger__arrow {
+  transform: translateY(1px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .terminal-backdrop,
+  .terminal-frame {
+    animation: none;
+  }
+  .md-trigger,
+  .md-trigger__arrow {
+    transition: none;
+  }
+}
