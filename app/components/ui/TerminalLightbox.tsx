@@ -1,3 +1,4 @@
+import { Icon } from '@/components/Icon';
 import { useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 
@@ -73,6 +74,16 @@ export function TerminalLightbox({ open, onClose, href, title }: TerminalLightbo
     };
   }, [open, onClose]);
 
+  async function onCopyMarkdown() {
+    let text = content;
+    if (text === null) {
+      const response = await fetch(href, { headers: { Accept: 'text/plain,text/markdown,*/*' } });
+      if (!response.ok) throw new Error(`HTTP ${response.status}`);
+      text = await response.text();
+    }
+    await navigator.clipboard.writeText(text);
+  }
+
   if (!mounted || !open) return null;
 
   const display = error ?? content ?? 'Loading…';
@@ -94,12 +105,20 @@ export function TerminalLightbox({ open, onClose, href, title }: TerminalLightbo
           <span className="terminal-titlebar__title">{title}</span>
           <a
             href={href}
-            className="terminal-titlebar__rawlink"
+            className="terminal-titlebar__action"
             target="_blank"
             rel="noreferrer"
             aria-label="Open the raw file in a new tab">
-            raw ↗
+            <span>raw</span>
+            <Icon name="external-link" size="sm" className="terminal-titlebar__actionicon" />
           </a>
+          <button
+            type="button"
+            onClick={onCopyMarkdown}
+            className="terminal-titlebar__action"
+            aria-label="Copy markdown content to clipboard">
+            <Icon name="copy" size="sm" className="terminal-titlebar__actionicon" />
+          </button>
           <button
             ref={closeBtnRef}
             type="button"
