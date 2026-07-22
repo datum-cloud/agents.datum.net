@@ -49,7 +49,7 @@ export const SECTIONS: readonly SectionData[] = [
     blocks: [
       {
         kind: 'p',
-        text: 'Datum is a venture-backed startup founded in late 2024 by Zac and Jacob Smith. It provides an open network cloud targeted at AI and alt cloud providers.',
+        text: 'Datum is a venture-backed startup founded in late 2024 by Zac Smith (ex-Equinix, Packet) and Jacob Smith, alongside a founding team from Packet, Voxel, SoftLayer, StackPath, Highwinds, and Zscaler. It provides an open network cloud targeted at AI and alt cloud providers, backed by Amplify Partners, CRV, Cervin Ventures, Encoded Ventures, Ex/Ante, Step Function, and Vine Ventures.',
       },
     ],
   },
@@ -86,7 +86,7 @@ export const SECTIONS: readonly SectionData[] = [
     blocks: [
       {
         kind: 'p',
-        text: 'Datum is designed for Alt Cloud providers, AI startups, and tech-forward enterprises that are building for the future.',
+        text: 'Datum is designed for Alt Cloud providers, ISVs and SaaS providers embedding connectivity capabilities, AI-native teams building agent workflows, and tech-forward enterprises that are building for the future.',
       },
       {
         kind: 'note',
@@ -107,10 +107,12 @@ export const SECTIONS: readonly SectionData[] = [
       {
         kind: 'ul',
         items: [
-          '**AI Edge** — Internet-scale protection and intelligence, powered by Tetrate Enterprise Envoy.',
-          '**Inference** — A low-latency, production-ready agent routing service, powered by Tetrate Agent Router.',
-          '**Compute** — Isolated, millisecond cold-start compute at the edge, powered by Unikraft.',
-          '**Connectivity** — Deterministic, high-performance and private connectivity from edge to cloud.',
+          '**AI Edge** (GA, free) — Envoy-based HTTP/gRPC/WebSocket edge proxy, powered by Tetrate, with a Coraza WAF covering the top OWASP threats.',
+          '**Connectors** (GA, free) — QUIC-based secure tunnels built on the Iroh protocol for zero-trust, NAT-traversing connectivity.',
+          '**DNS & Domains** (GA, free) — Globally distributed anycast authoritative DNS plus domain tracking and verification across registrars.',
+          '**Platform Essentials** (GA, free) — Secrets, fine-grained RBAC, service accounts, OTel metrics export, and activity logs built into every project.',
+          '**Galactic VPC** (coming 2026, Scaler tier) — An SRv6-based global private backbone linking edge, private, and alt-cloud infrastructure.',
+          '**Datum Compute** (coming soon) — Isolated, millisecond cold-start compute at the edge, built in partnership with Unikraft.',
         ],
       },
     ],
@@ -123,16 +125,27 @@ export const SECTIONS: readonly SectionData[] = [
       {
         kind: 'rows',
         rows: [
-          { label: 'Authoritative DNS', text: 'Globally distributed anycast DNS hosting.' },
+          {
+            label: 'Authoritative DNS',
+            text: 'Globally distributed anycast DNS hosting, served across 17 locations.',
+          },
+          {
+            label: 'Domains',
+            text: 'Organize and programmatically manage domain resources and verification across registrars.',
+          },
           { label: 'Secrets', text: 'Create and manage secret resources within projects.' },
-          { label: 'Teams & RBAC', text: 'Fine-grained roles at org and project level.' },
+          {
+            label: 'Fine Grained Permissions',
+            text: 'Manage groups and fine-grained IAM role assignments (Owner, Editor, Viewer) at org and project level.',
+          },
+          { label: 'SSO', text: 'Enterprise-grade authentication access.' },
           {
             label: 'Service Accounts',
             text: 'Non-human identities for agent / automation use cases.',
           },
           {
             label: 'OTel Metrics Export',
-            text: 'Export OpenTelemetry metrics to Grafana Cloud via Export Policies.',
+            text: 'Export OpenTelemetry metrics to Grafana Cloud via Export Policies, with prebuilt Grafana dashboards (IDs `23939` and `24261`).',
           },
           {
             label: 'Activity Logs',
@@ -195,15 +208,19 @@ export const SECTIONS: readonly SectionData[] = [
         rows: [
           {
             label: 'llms.txt',
-            text: 'A standardized text file that makes Datum workflows instantly readable and accessible to any AI model or intelligent agent. [https://www.datum.net/llms-full.txt](https://www.datum.net/llms-full.txt)',
+            text: 'A concise, standardized index of Datum pages and resources that makes the site instantly readable to any AI model or intelligent agent. [https://www.datum.net/llms.txt](https://www.datum.net/llms.txt)',
+          },
+          {
+            label: 'llms-full.txt',
+            text: 'The full agent-oriented technical reference for Datum Cloud — platform concepts, IAM, resource kinds, and getting-started steps in one document. [https://www.datum.net/llms-full.txt](https://www.datum.net/llms-full.txt)',
           },
           {
             label: 'MCP',
-            text: 'An open protocol that connects any AI model or developer tool directly to Datum, enabling real-time data access and automated actions. [https://github.com/datum-cloud/datum-mcp](https://github.com/datum-cloud/datum-mcp)',
+            text: "Datum's hosted Docs MCP server lets any AI model search and read Datum documentation directly (JSON-RPC 2.0 over SSE) via the `search_datum_cloud_docs` and `query_docs_filesystem_datum_cloud_docs` tools. [https://www.datum.net/docs/mcp](https://www.datum.net/docs/mcp)",
           },
           {
             label: 'Skills',
-            text: 'Pre-built, task-specific instructions that teach coding agents how to use Datum features. Drop a skill into your project context to help your agent know exactly what to do. [https://github.com/datum-cloud/skills](https://github.com/datum-cloud/skills)',
+            text: 'Pre-built, task-specific instructions that teach coding agents how to use Datum features: `ai-edge`, `client-traffic`, `dns`, `domains`, `httproute`, `metrics-export`. Drop a skill into your project context to help your agent know exactly what to do. [https://github.com/datum-cloud/skills](https://github.com/datum-cloud/skills)',
           },
           {
             label: 'CLI',
