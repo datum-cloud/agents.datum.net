@@ -18,7 +18,7 @@
     "clean": "rm -rf node_modules/.vite node_modules/.react-router .react-router build"
   },
   "dependencies": {
-    "@datum-cloud/datum-ui": "^0.10.0",
+    "@datum-cloud/datum-ui": "^1.0.0",
     "@hono/node-server": "^2.0.0",
     "@react-router/fs-routes": "^7.14.2",
     "@react-router/node": "^7.14.2",
