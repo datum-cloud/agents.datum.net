@@ -187,7 +187,7 @@ export const SECTIONS: readonly SectionData[] = [
       },
       {
         kind: 'note',
-        text: 'See [Agent Recipes](/docs/recipes) for copy-pasteable task flows built on these verbs.',
+        text: 'See [Agent Recipes](/recipes) for copy-pasteable task flows built on these verbs.',
       },
     ],
   },
@@ -287,7 +287,7 @@ export const SECTIONS: readonly SectionData[] = [
           },
           {
             label: 'Agent Recipes',
-            text: 'Canonical, copy-pasteable task flows for agents operating Datum using real `datumctl` commands. [/docs/recipes](/docs/recipes)',
+            text: 'Canonical, copy-pasteable task flows for agents operating Datum using real `datumctl` commands. [/recipes](/recipes)',
           },
         ],
       },

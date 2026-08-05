@@ -15,7 +15,7 @@ export const meta: MetaFunction = ({ matches }) => {
       title: 'Datum — Agent Recipes',
       description:
         'Canonical, copy-pasteable task flows for agents operating Datum using real datumctl commands.',
-      path: '/docs/recipes',
+      path: '/recipes',
     }),
   ];
 };
