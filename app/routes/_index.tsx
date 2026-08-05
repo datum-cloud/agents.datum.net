@@ -3,6 +3,7 @@ import { Header } from '@/components/layout/Header';
 import { PageContainer } from '@/components/layout/PageContainer';
 import { CompanySection } from '@/components/sections/CompanySection';
 import { CustomersSection } from '@/components/sections/CustomersSection';
+import { DataTransferSection } from '@/components/sections/DataTransferSection';
 import { EssentialsSection } from '@/components/sections/EssentialsSection';
 import { Hero } from '@/components/sections/Hero';
 import { HumanToolsSection } from '@/components/sections/HumanToolsSection';
@@ -12,6 +13,7 @@ import { PricingSection } from '@/components/sections/PricingSection';
 import { ProductSection } from '@/components/sections/ProductSection';
 import { ProgrammaticToolsSection } from '@/components/sections/ProgrammaticToolsSection';
 import { RegionsSection } from '@/components/sections/RegionsSection';
+import { ResourceModelSection } from '@/components/sections/ResourceModelSection';
 import { WhySection } from '@/components/sections/WhySection';
 import { buildMeta, organizationJsonLd } from '@/lib/seo';
 import type { MetaFunction } from 'react-router';
@@ -62,7 +64,9 @@ export default function Home() {
           <ProductSection />
           <EssentialsSection />
           <RegionsSection />
+          <ResourceModelSection />
           <PricingSection />
+          <DataTransferSection />
           <ProgrammaticToolsSection />
           <HumanToolsSection />
           <PlatformDevSection />
