@@ -26,7 +26,13 @@ export default function AgentRecipes() {
       <Header />
       <main id="main" className="bg-background text-foreground min-h-dvh">
         <PageContainer className="py-16">
-          <h1 className="text-[32px] leading-[38px] font-semibold">Datum — Agent Recipes</h1>
+          <a href="/" className="md-trigger">
+            <span aria-hidden="true" className="md-trigger__arrow">
+              ←
+            </span>
+            <span>Back to agents.datum.net</span>
+          </a>
+          <h1 className="mt-6 text-[32px] leading-[38px] font-semibold">Datum — Agent Recipes</h1>
           <p className="text-foreground/70 mt-4 max-w-[var(--section-content-max)] text-[16px] leading-[24px]">
             Canonical, copy-pasteable task flows for agents operating Datum using real{' '}
             <code className="font-mono text-[0.875em]">datumctl</code> commands. Where a recipe

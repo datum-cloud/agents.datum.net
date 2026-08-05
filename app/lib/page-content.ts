@@ -185,6 +185,10 @@ export const SECTIONS: readonly SectionData[] = [
           '`datumctl diff` — preview what an `apply` would change before committing.',
         ],
       },
+      {
+        kind: 'note',
+        text: 'See [Agent Recipes](/docs/recipes) for copy-pasteable task flows built on these verbs.',
+      },
     ],
   },
   {
@@ -280,6 +284,10 @@ export const SECTIONS: readonly SectionData[] = [
           {
             label: 'CLI',
             text: 'A powerful command-line interface that lets developers integrate Datum into any stack, script, or automated pipeline without touching a UI. [https://github.com/datum-cloud/datumctl](https://github.com/datum-cloud/datumctl)',
+          },
+          {
+            label: 'Agent Recipes',
+            text: 'Canonical, copy-pasteable task flows for agents operating Datum using real `datumctl` commands. [/docs/recipes](/docs/recipes)',
           },
         ],
       },
