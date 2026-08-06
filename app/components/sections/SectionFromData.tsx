@@ -80,13 +80,45 @@ function BodyBlock({ block }: { block: Exclude<Block, { kind: 'rows' }> }) {
       </p>
     );
   }
-  // kind === 'ul'
+  if (block.kind === 'ul') {
+    return (
+      <ul className="flex flex-col gap-2">
+        {block.items.map((item, i) => (
+          <li key={i}>{renderInline(parseInline(item))}</li>
+        ))}
+      </ul>
+    );
+  }
+  // kind === 'table'
   return (
-    <ul className="flex flex-col gap-2">
-      {block.items.map((item, i) => (
-        <li key={i}>{renderInline(parseInline(item))}</li>
-      ))}
-    </ul>
+    <div className="overflow-x-auto">
+      <table className="w-full text-left">
+        <thead>
+          <tr>
+            {block.headers.map((h, i) => (
+              <th
+                key={i}
+                className="border-border text-foreground border-b py-2 pr-6 text-[14px] leading-[21px] font-semibold last:pr-0">
+                {h}
+              </th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          {block.rows.map((row, i) => (
+            <tr key={i}>
+              {row.map((cell, j) => (
+                <td
+                  key={j}
+                  className="border-border text-foreground border-b py-3 pr-6 align-top text-[14px] leading-[21px] last:pr-0">
+                  {renderInline(parseInline(cell))}
+                </td>
+              ))}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
   );
 }
 
