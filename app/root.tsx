@@ -218,7 +218,7 @@ export default function App() {
         {
           name: 'get_platform_overview',
           description:
-            'Get an overview of Datum Cloud: what it is, key products, pricing, and why it was built for AI agents',
+            'Get an overview of Datum Cloud: what it is, key products, how to sign up, and why it was built for AI agents',
           inputSchema: { type: 'object', properties: {} },
           execute: async () => ({
             name: 'Datum Cloud',
@@ -232,7 +232,8 @@ export default function App() {
               'Secrets & Machine Accounts',
               'Galactic VPC (coming H1 2026)',
             ],
-            pricing: { builder: '$0/month (forever free)', scaler: '$20/month + usage' },
+            access:
+              'Currently free of charge. A valid payment method is required at signup to deter fraud. For a demo, contact https://www.datum.net/contact/.',
             signup: 'https://cloud.datum.net',
             docs: 'https://www.datum.net/docs',
           }),

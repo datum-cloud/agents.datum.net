@@ -1,6 +1,6 @@
 # Datum
 
-> Datum is the open network cloud for AI — a neutral, programmable foundation for edge, inference, compute, and connectivity. Usage-based pricing, a Kubernetes-style API, no feature gates, and no sales call to see a price or use a feature. Available as public cloud, as Dedicated Cloud for scaled deployments, or as open source (AGPLv3).
+> Datum is the open network cloud for AI — a neutral, programmable foundation for edge, inference, compute, and connectivity. A Kubernetes-style API, no feature gates. Available as public cloud, as Dedicated Cloud for scaled deployments, or as open source (AGPLv3). Currently free of charge to use; a valid payment method is required at signup.
 
 General availability begins September 2026. Agents act through `datumctl` (a CLI built on the Kubernetes apiserver, also runnable as a local API proxy and an MCP server) or directly against the HTTP API at `https://api.datum.net`. The API is self-describing: `datumctl api-resources` lists every resource type and `datumctl explain <resource>` returns its schema, so an agent can learn the full surface at runtime.
 
@@ -19,11 +19,10 @@ General availability begins September 2026. Agents act through `datumctl` (a CLI
 - `datumctl get | describe | diff | apply | delete` — read and manage resources. `apply` has conflict management and is safe to retry.
 - `datumctl auth login --no-browser` — device-code login for SSH sessions, VMs, and containers.
 
-## Services and pricing
-Usage-based, public list rates. Ingress always free; first 200 GB/mo egress free; bulk discounts automatic.
-- DNS — $0.60 / M requests (first 500k/mo free).
-- Application Load Balancer (L7 routing + basic WAF, Envoy + Coraza) — $1.00 / M requests.
-- Compute (isolated VMs, 10 ms cold starts, scale-to-zero) — $0.0504 / vCPU-hour + $0.0162 / GiB-hour, metered per second.
+## Pricing
+Datum is currently free of charge to use. We require a valid payment method during the signup process.
+
+This helps us keep our platform stable by heading off fraud and abusive behavior. If you prefer a demo, just [reach out](https://www.datum.net/contact/).
 
 ## Roadmap
 - [Public changelog](https://www.datum.net/changelog/): meaningful platform improvements.
