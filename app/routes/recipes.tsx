@@ -157,9 +157,7 @@ datumctl apply -f workload.yaml
 datumctl get <compute-kind> hello-agent`}</CodeBlock>
               <SectionBody>
                 <p className="text-foreground/60 text-[14px] leading-[21px]">
-                  Cost to reason about before deploying: $0.0504/vCPU-hour + $0.0162/GiB-hour,
-                  metered per second, billed only while running. Ingress free; first 200 GB/mo
-                  egress free.
+                  Datum is currently free of charge. A valid payment method is required at signup.
                 </p>
               </SectionBody>
             </div>
@@ -188,11 +186,12 @@ datumctl get <compute-kind> hello-agent`}</CodeBlock>
                   control planes.
                 </li>
                 <li>
-                  Read prices from the machine-readable source (see the{' '}
+                  Datum is currently free of charge; a valid payment method is required at signup.
+                  Prefer the{' '}
                   <a href="/llms.txt" className="underline">
                     llms.txt
                   </a>{' '}
-                  dev note) rather than scraping prose, so cost decisions stay current.
+                  Pricing section over scraping the HTML page.
                 </li>
               </ul>
             </SectionBody>

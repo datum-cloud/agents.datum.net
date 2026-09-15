@@ -3,7 +3,6 @@ import { Header } from '@/components/layout/Header';
 import { PageContainer } from '@/components/layout/PageContainer';
 import { CompanySection } from '@/components/sections/CompanySection';
 import { CustomersSection } from '@/components/sections/CustomersSection';
-import { DataTransferSection } from '@/components/sections/DataTransferSection';
 import { EssentialsSection } from '@/components/sections/EssentialsSection';
 import { Hero } from '@/components/sections/Hero';
 import { HumanToolsSection } from '@/components/sections/HumanToolsSection';
@@ -66,7 +65,6 @@ export default function Home() {
           <RegionsSection />
           <ResourceModelSection />
           <PricingSection />
-          <DataTransferSection />
           <ProgrammaticToolsSection />
           <HumanToolsSection />
           <PlatformDevSection />

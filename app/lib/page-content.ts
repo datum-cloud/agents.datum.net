@@ -194,68 +194,21 @@ export const SECTIONS: readonly SectionData[] = [
   {
     id: 'pricing',
     n: '09',
-    title: 'Services & Pricing',
+    title: 'Pricing',
     blocks: [
       {
         kind: 'p',
-        text: 'Three services are generally available on Datum Cloud as of September 2026:',
+        text: 'Datum is currently free of charge to use. We require a valid payment method during the signup process.',
       },
-      {
-        kind: 'table',
-        headers: ['Service', 'What it does', 'Price'],
-        rows: [
-          [
-            'DNS',
-            'Authoritative DNS on a global network.',
-            '$0.60 / M requests · first 500k free/mo',
-          ],
-          [
-            'Application Load Balancer',
-            'Layer 7 routing + basic WAF, powered by Envoy and Coraza.',
-            '$1.00 / M requests',
-          ],
-          [
-            'Compute',
-            'Fully isolated VMs, 10 ms cold starts, scale-to-zero. Metered per second.',
-            '$0.0504 / vCPU-hour · $0.0162 / GiB-hour',
-          ],
-        ],
-      },
-      {
-        kind: 'note',
-        text: 'For full details use [https://www.datum.net/pricing/](https://www.datum.net/pricing/).',
-      },
-    ],
-  },
-  {
-    id: 'data-transfer',
-    n: '10',
-    title: 'Data Transfer',
-    blocks: [
       {
         kind: 'p',
-        text: 'Ingress is always free. The first 200 GB of monthly egress is free. Bulk discounts apply automatically for most services.',
-      },
-      {
-        kind: 'table',
-        headers: ['Monthly egress', 'US / EU', 'Rest of World'],
-        rows: [
-          ['0–200 GB', 'Free', 'Free'],
-          ['200 GB–10 TB', '$0.05 / GB', '$0.15 / GB'],
-          ['10–150 TB', '$0.04 / GB', '$0.12 / GB'],
-          ['150–500 TB', '$0.03 / GB', '$0.09 / GB'],
-          ['500 TB+', 'Contact Sales', 'Contact Sales'],
-        ],
-      },
-      {
-        kind: 'note',
-        text: 'Internal transfer (within Datum): same region free; cross-region NA/EU $0.02/GB; US→Rest of World $0.05/GB.',
+        text: 'This helps us keep our platform stable by heading off fraud and abusive behavior. If you prefer a demo, just [reach out](https://www.datum.net/contact/).',
       },
     ],
   },
   {
     id: 'programmatic-tools',
-    n: '11',
+    n: '10',
     title: 'Programmatic tools',
     blocks: [
       {
@@ -310,7 +263,7 @@ export const SECTIONS: readonly SectionData[] = [
   },
   {
     id: 'human-tools',
-    n: '12',
+    n: '11',
     title: 'Tools for humans',
     blocks: [
       {
@@ -330,7 +283,7 @@ export const SECTIONS: readonly SectionData[] = [
   },
   {
     id: 'platform-development',
-    n: '13',
+    n: '12',
     title: 'Platform development',
     blocks: [
       {

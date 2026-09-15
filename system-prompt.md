@@ -83,10 +83,11 @@ Return a structured report with the following sections. If a section has no find
 
 ### 5. Pricing
 
-- List all pricing tiers and what's included in each
+- Is the product free to use, or are there paid tiers? Quote the exact wording found.
+- Is a payment method required at signup, and is a reason given (e.g. fraud prevention)?
+- Any usage-based, flat-rate, or list-rate pricing mentioned anywhere on the site?
 - Any free or open-source components?
-- Usage-based vs. flat-rate?
-- Enterprise pricing available?
+- Enterprise pricing or custom/demo options available?
 
 ### 6. Developer tooling
 
