@@ -1,0 +1,26 @@
+public/llms.txt
+  s_d3c3d02cf55e1d::t_e45c3c25730b65 23,25-30
+app/lib/page-content.ts
+  s_d3c3d02cf55e1d::t_997e8ffa8d56fe 201,205-237
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "483b70802bbd4af81c0cb0b8afaac4de23fa26e8",
+  "prompts": {},
+  "humans": {
+    "h_c7951bc64db670": {
+      "author": "AriaEdo <aria.edo@gmail.com>"
+    }
+  },
+  "sessions": {
+    "s_d3c3d02cf55e1d": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "96c19f31-40e3-40f4-b2cc-271a8fa723bd",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "AriaEdo <aria.edo@gmail.com>"
+    }
+  }
+}
