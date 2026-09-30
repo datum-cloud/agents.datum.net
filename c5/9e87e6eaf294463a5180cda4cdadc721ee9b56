@@ -1,0 +1,19 @@
+public/robots.txt
+  s_cf61832e276664::t_0018f5b4d82f18 38
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "c59e87e6eaf294463a5180cda4cdadc721ee9b56",
+  "prompts": {},
+  "sessions": {
+    "s_cf61832e276664": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "dfdd1876-caa0-4d74-b5aa-9f63c4f81862",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "AriaEdo <aria.edo@gmail.com>"
+    }
+  }
+}
