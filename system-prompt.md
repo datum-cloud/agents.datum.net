@@ -22,13 +22,14 @@ https://datum.net/docs
 https://datum.net/docs/overview
 https://datum.net/docs/platform/setup
 https://datum.net/docs/desktop-apps
-https://datum.net/docs/ai-edge/overview
+https://datum.net/docs/alb/overview
 https://datum.net/docs/connectors/tunnels
 https://datum.net/docs/galactic-vpc/overview
 https://datum.net/docs/datumctl/overview
 https://datum.net/docs/datum-mcp
 https://datum.net/docs/domain-dns/domains
-https://datum.net/docs/platform/machine-accounts
+https://datum.net/docs/domain-dns/dns
+https://datum.net/docs/platform/service-accounts
 https://datum.net/docs/platform/secrets
 
 GitHub — org overview:
