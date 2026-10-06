@@ -85,6 +85,7 @@ jobs:
             **/node_modules
           key: ${{ runner.os }}-deps-${{ hashFiles('**/bun.lock', '**/package.json') }}
       - run: bun run build
+      - run: bin/smoke-start
 
   # ─── Status Gate ────────────────────────────────────────────
   status-check:
