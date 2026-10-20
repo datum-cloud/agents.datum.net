@@ -1,0 +1,44 @@
+name: Publish Kubernetes (manual)
+
+# The Kubernetes deploy is no longer part of CI: the site runs on Datum Compute
+# (see deploy-datum.yml and docs/datum-compute.md). These are the two jobs that
+# used to live in ci.yml, kept here so a rollback to Kubernetes stays possible.
+# Run it by hand from the Actions tab. Nothing starts it automatically.
+#
+# Not tested since the move: the image tags come from the reusable workflow, and
+# on a manual run they may differ from the ones a push or a release produced.
+# Check its tag rules first. Flux in the infra repo reads the kustomize bundle.
+on:
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  publish-container-image:
+    name: Publish Container Image
+    permissions:
+      id-token: write
+      contents: read
+      packages: write
+      attestations: write
+    uses: datum-cloud/actions/.github/workflows/publish-docker.yaml@v1.22.0
+    with:
+      image-name: agents-datum-net
+    secrets: inherit
+
+  publish-kustomize-bundles:
+    name: Publish Kustomize Bundles
+    needs: [ publish-container-image ]
+    permissions:
+      id-token: write
+      contents: read
+      packages: write
+    uses: datum-cloud/actions/.github/workflows/publish-kustomize-bundle.yaml@v1.22.0
+    with:
+      bundle-name: ghcr.io/datum-cloud/agents-datum-net-kustomize
+      bundle-path: config
+      image-overlays: config/base
+      image-name: ghcr.io/datum-cloud/agents-datum-net
+    secrets: inherit
