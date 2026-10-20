@@ -15,15 +15,15 @@ the same runtime. We first tried the unikernel runtime and went back; see
 | Image         | `ghcr.io/datum-cloud/agents-datum-net-compute:<tag>`        |
 | Port          | `3000` (HTTP; the edge terminates TLS)                      |
 | Env           | `HOST=::` (set by the deploy)                               |
-| URL (current) | `https://joyful-vital-v4kpc.datumproxy.net`                 |
+| Public name   | `https://agents.datum.net` (custom hostname on the ALB)     |
+| Generated URL | `https://joyful-vital-v4kpc.datumproxy.net`                 |
 
 The GHCR package `agents-datum-net-compute` was created by hand (so a person owns
 it) and is public. See [One-time setup](#one-time-setup).
 
-**DNS is not changed.** `agents.datum.net` still points at the Kubernetes
-deployment in `config/`. The Compute workload answers only on its generated
-`*.datumproxy.net` URL until we decide to move the name. The URL stays the same
-while the workload exists and changes on `destroy`.
+**`agents.datum.net` is served from Compute.** See [Custom domain](#custom-domain).
+The generated `*.datumproxy.net` URL keeps working and stays the same while the
+workload exists. `destroy` changes it.
 
 ## How it fits together
 
@@ -39,9 +39,12 @@ conventional commits on main
 
 - The workflow builds the regular `Dockerfile`, the same one the Kubernetes image
   uses. `Dockerfile.datum` is the unikernel variant and is not used by CI.
-- The old pipeline (`publish-container-image` and `publish-kustomize-bundles` in
-  `ci.yml`) is **disabled with `if: false`, not removed**. The files in
-  `config/` stay as they are. To go back, restore the condition on both jobs.
+- The Kubernetes publish jobs (`publish-container-image` and
+  `publish-kustomize-bundles`) are **not part of CI any more**. They moved,
+  unchanged, to `publish-kubernetes.yml`, which only runs by hand
+  (Actions → Publish Kubernetes (manual)), so a rollback to Kubernetes stays
+  possible. `ci.yml` now only runs lint, typecheck and build. The files in
+  `config/` stay as they are. The manual workflow is untested since the move.
 - The release deploy is called from `release-please.yml` because a release that
   `GITHUB_TOKEN` creates does not start workflows on `release: published`.
 
@@ -133,6 +136,45 @@ The workflow ends with a request to the generated URL and expects `200`. If your
 local resolver does not know a new `*.datumproxy.net` name yet, look it up with
 `dig +short AAAA <host> @1.1.1.1` and pin it with `curl --resolve`.
 
+## Custom domain
+
+`agents.datum.net` is a custom hostname on the workload's ALB (`HTTPProxy`
+`agents-datum-net-gp`, `spec.hostnames`). The DNS record is a manual `CNAME` in
+the `datum.net` zone, which Datum DNS hosts in the `datum-cloud` project:
+
+```text
+agents.datum.net  CNAME  joyful-vital-v4kpc.datumproxy.net.
+```
+
+It is one of 23 entries in the DNSRecordSet `datum-net-xq088a-cname`, next to
+`www`, `docs`, `api`, `auth` and others. Change one entry only, with a JSON patch
+that tests the name first, and run it with `--dry-run=server` before the real
+one. Never `apply` a whole file over that object. The zone is not under Git.
+
+Before the move, `agents` was `CNAME agents.prod.env.datum.net.` (the Kubernetes
+gateway, `34.48.170.137`). To go back to Kubernetes, set the entry's
+`cname.content` to `agents.prod.env.datum.net.`. The TTL is 300 seconds, so it
+takes about five minutes. Kubernetes was not touched, so it can take traffic
+again at once.
+
+```bash
+datumctl get httpproxy agents-datum-net-gp -n default --project datum-cloud -o json \
+  | jq '.status.hostnameStatuses[] | select(.hostname=="agents.datum.net")'
+```
+
+The platform expects exactly this record (`managedBy: User`) and reports it as
+`Present` once it exists.
+
+- A new custom hostname gets its certificate only after DNS points at the ALB. In
+  between, HTTPS to the name is reset for a few minutes. Plan the DNS switch for a
+  quiet moment.
+- `datumctl compute deploy` keeps the custom hostname when it updates the
+  workload. **`datumctl compute destroy` removes the ALB together with its custom
+  hostnames**, so `agents.datum.net` would stop answering until the hostname is
+  added again.
+- `staging.env` and `prod.env` in the `datum.net` zone are delegated to Google
+  Cloud DNS. Records under those names live there, not in Datum DNS.
+
 ## Quotas
 
 The URL of a workload is an `HTTPProxy`, and the project has a separate quota for
@@ -182,8 +224,9 @@ datumctl compute build --analyze \
 
 ## Known gaps
 
-- The workflow itself has not run on GitHub yet. The deploy command, the image
-  and the URL were tested by hand against `datum-cloud`.
+- The deploy workflow has run once on a real release (`v0.2.3`, after a rerun
+  because the package access was missing the first time). A release that only
+  updates the workload is the normal case from now on, and has not run yet.
 - `VITE_*` values are baked in at build time with their defaults, which is what
   production uses.
 - One instance, no autoscaling.
@@ -194,4 +237,6 @@ datumctl compute build --analyze \
 datumctl compute destroy agents-datum-net-gp --project datum-cloud --yes
 ```
 
-This removes the instances and the generated URL, and frees the HTTPProxy quota.
+This removes the instances, the generated URL and the custom hostname, and frees
+the HTTPProxy quota. Point `agents` back at Kubernetes first, or the name stops
+answering.

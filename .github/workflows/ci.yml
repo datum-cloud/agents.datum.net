@@ -105,37 +105,3 @@ jobs:
           else
             echo "✅ All jobs passed"
           fi
-
-  # ─── Publish (only after all checks pass) ───────────────────
-  # DISABLED: the Kubernetes deploy moved to Datum Compute (deploy-datum.yml,
-  # started by release-please.yml). To turn it back on, restore the condition
-  # `${{ !failure() && !cancelled() }}` on both jobs below.
-  publish-container-image:
-    name: Publish Container Image
-    needs: [ status-check ]
-    if: false
-    permissions:
-      id-token: write
-      contents: read
-      packages: write
-      attestations: write
-    uses: datum-cloud/actions/.github/workflows/publish-docker.yaml@v1.22.0
-    with:
-      image-name: agents-datum-net
-    secrets: inherit
-
-  publish-kustomize-bundles:
-    name: Publish Kustomize Bundles
-    needs: [ publish-container-image ]
-    if: false
-    permissions:
-      id-token: write
-      contents: read
-      packages: write
-    uses: datum-cloud/actions/.github/workflows/publish-kustomize-bundle.yaml@v1.22.0
-    with:
-      bundle-name: ghcr.io/datum-cloud/agents-datum-net-kustomize
-      bundle-path: config
-      image-overlays: config/base
-      image-name: ghcr.io/datum-cloud/agents-datum-net
-    secrets: inherit
