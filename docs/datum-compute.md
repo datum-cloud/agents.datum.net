@@ -85,10 +85,11 @@ Compute is already enabled on `datum-cloud`
 Merge the open **release PR** from release-please. It bumps `package.json`,
 updates `CHANGELOG.md` and creates the tag. The deploy starts by itself.
 
-Use conventional commit types: `feat` bumps the minor version, `fix` the patch,
-and `!` or a `BREAKING CHANGE` footer also bumps the minor while the version is
-below 1.0. `docs`, `chore`, `test`, `build` and `ci` commits do not appear in
-the changelog.
+Use conventional commit types. While the version is below 1.0, `feat` and `fix`
+both bump the patch (`bump-patch-for-minor-pre-major`), and `!` or a
+`BREAKING CHANGE` footer bumps the minor. `docs`, `chore`, `test`, `build` and
+`ci` commits do not appear in the changelog. `CHANGELOG.md` is generated, so
+Prettier ignores it.
 
 Release PRs are opened with `GITHUB_TOKEN`, so the CI checks do not run on them.
 That is fine for a content site. If you need required checks on release PRs, give
