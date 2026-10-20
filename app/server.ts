@@ -42,6 +42,9 @@ const oauthProtectedResource = {
 };
 
 export default createHonoServer({
+  // Datum Compute networks are IPv6 only: the unikernel image sets HOST=:: so
+  // the server answers there. Without HOST, Bun keeps its default address.
+  ...(process.env.HOST ? { customBunServer: { hostname: process.env.HOST } } : {}),
   configure(app) {
     // Serve /.well-known/api-catalog with RFC 9727 Content-Type
     app.get('/.well-known/api-catalog', (c) => {

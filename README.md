@@ -64,6 +64,8 @@ The GitHub Actions pipeline (`.github/workflows/ci.yml`) runs on every PR and pu
 4. **Build** — `bun run build` (only after Lint + Typecheck both pass)
 5. **Status Gate** — final aggregated pass/fail
 
+The image publish jobs in `ci.yml` (Kubernetes) are disabled. Releases go through [release-please](.github/workflows/release-please.yml): merging its release PR tags the version and deploys the container image to Datum Compute (general-purpose runtime). See [`docs/datum-compute.md`](docs/datum-compute.md).
+
 ## Docker
 
 Build and run the production image locally (simplest):

@@ -1,0 +1,54 @@
+# syntax = docker/dockerfile:1
+
+# Image for the Datum Compute unikernel runtime.
+# `datumctl compute build` uses this file instead of Dockerfile when it exists.
+# The final stage is packaged as the unikernel root filesystem, so it needs the
+# bun binary, its shared libraries and the app, and nothing that needs a shell.
+# The regular Dockerfile still builds the Kubernetes image.
+# CI does not use this file: the site runs on the general-purpose runtime (see
+# docs/datum-compute.md, "Unikernel attempt").
+
+# ==========================================
+# BUILD STAGE - Compile the app
+# ==========================================
+FROM oven/bun:1.3.14 AS build
+
+WORKDIR /app
+
+ENV BUN_RUNTIME_TRANSPILER_CACHE_PATH=/tmp/bun-transpiler-cache
+
+COPY --link package.json bun.lock ./
+RUN bun install --frozen-lockfile
+
+COPY --link . .
+
+RUN bun run build && \
+    bun install --production --frozen-lockfile
+
+# ==========================================
+# PRODUCTION STAGE - Unikernel root filesystem
+# ==========================================
+FROM oven/bun:1.3.14-slim
+
+WORKDIR /app
+
+ARG VERSION=dev
+
+# Datum networks are IPv6 only, so listen on :: (an IPv4-only socket never
+# answers). The root filesystem is held in memory, so the transpiler cache goes
+# to /tmp.
+ENV NODE_ENV=production \
+    PORT=3000 \
+    HOST=:: \
+    VERSION=${VERSION} \
+    BUN_RUNTIME_TRANSPILER_CACHE_PATH=/tmp/bun-transpiler-cache
+
+COPY --from=build /app/build ./build
+COPY --from=build /app/public ./public
+COPY --from=build /app/package.json ./package.json
+COPY --from=build /app/node_modules ./node_modules
+
+EXPOSE 3000
+
+# Exec form: the unikernel starts the entrypoint directly, without a shell.
+CMD ["bun", "./build/server/index.js"]
