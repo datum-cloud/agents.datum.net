@@ -49,6 +49,11 @@ COPY --from=build /app/node_modules ./node_modules
 
 EXPOSE ${PORT}
 
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends --only-upgrade ca-certificates && \
+    rm -rf /var/lib/apt/lists/* && \
+    apt-get clean
+
 RUN groupadd --gid 1001 datum && \
     useradd --uid 1001 --gid 1001 --no-create-home datum && \
     chown -R datum:datum /app
