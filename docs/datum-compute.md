@@ -132,8 +132,11 @@ datumctl get httpproxy agents-datum-net-gp -n default --project datum-cloud
 datumctl compute logs agents-datum-net-gp --project datum-cloud
 ```
 
-The workflow ends with a request to the generated URL and expects `200`. If your
-local resolver does not know a new `*.datumproxy.net` name yet, look it up with
+The workflow ends with a request to the URL the deploy printed and expects
+`200`. `datumctl` prints the custom hostname when the workload has one (so
+`https://agents.datum.net` here) and the generated `*.datumproxy.net` URL
+otherwise; `bin/deploy-url` extracts whichever it printed. If your local
+resolver does not know a new `*.datumproxy.net` name yet, look it up with
 `dig +short AAAA <host> @1.1.1.1` and pin it with `curl --resolve`.
 
 ## Custom domain

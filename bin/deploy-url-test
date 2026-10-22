@@ -1,0 +1,63 @@
+#!/usr/bin/env bash
+# Fixtures for bin/deploy-url, taken from real `datumctl compute deploy` logs.
+set -euo pipefail
+
+here="$(cd "$(dirname "$0")" && pwd)"
+tmp="$(mktemp -d)"
+trap 'rm -rf "$tmp"' EXIT
+
+fail=0
+
+check() {
+  local log="$1" expected="$2" actual
+  actual="$("$here/deploy-url" "$log" 2>/dev/null || true)"
+  if [[ "$actual" != "$expected" ]]; then
+    echo "FAIL: expected '${expected}', got '${actual}'" >&2
+    fail=1
+  else
+    echo "ok: ${expected:-<empty>}"
+  fi
+}
+
+# v0.2.3, before the custom hostname: datumctl printed the generated URL.
+cat >"$tmp/datumproxy.log" <<'EOF'
+  Rollout complete in 20s.
+
+Publishing...
+  Backends     1 healthy across us-central-1
+  Edge         programmed
+  Certificate  issued
+
+  https://joyful-vital-v4kpc.datumproxy.net
+EOF
+check "$tmp/datumproxy.log" "https://joyful-vital-v4kpc.datumproxy.net"
+
+# v0.2.4: the workload has the custom hostname, so datumctl printed that one.
+# The old regex only accepted *.datumproxy.net and produced an empty URL.
+cat >"$tmp/custom-domain.log" <<'EOF'
+  Rollout complete in 18s.
+
+Publishing...
+  Backends     1 healthy across us-central-1
+  Edge         programmed
+  Certificate  issued
+
+  https://agents.datum.net
+EOF
+check "$tmp/custom-domain.log" "https://agents.datum.net"
+
+# If datumctl prints both names, take the last one.
+cat >"$tmp/both.log" <<'EOF'
+Publishing...
+  https://joyful-vital-v4kpc.datumproxy.net
+  https://agents.datum.net
+EOF
+check "$tmp/both.log" "https://agents.datum.net"
+
+# No URL: print nothing so the smoke test's own guard reports the failure.
+cat >"$tmp/none.log" <<'EOF'
+Rollout complete in 18s.
+EOF
+check "$tmp/none.log" ""
+
+exit "$fail"
