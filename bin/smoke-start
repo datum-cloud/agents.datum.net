@@ -4,7 +4,7 @@ set -euo pipefail
 port="${SMOKE_PORT:-3917}"
 log="$(mktemp)"
 
-PORT="$port" bun ./build/server/index.js >"$log" 2>&1 &
+PORT="$port" node ./build/server/index.js >"$log" 2>&1 &
 pid=$!
 trap 'kill "$pid" 2>/dev/null || true; wait "$pid" 2>/dev/null || true; rm -f "$log"' EXIT
 

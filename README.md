@@ -5,8 +5,8 @@ A small, content-driven public website that communicates what Datum is in a form
 ## Stack
 
 - React Router v7 (SSR)
-- Hono via [`react-router-hono-server`](https://github.com/rphlmr/react-router-hono-server) (Bun runtime)
-- Bun runtime + package manager
+- Hono via [`react-router-hono-server`](https://github.com/rphlmr/react-router-hono-server) (Node runtime)
+- Node runtime + npm
 - Vite
 - Tailwind CSS v4
 - [`@datum-cloud/datum-ui`](https://github.com/datum-cloud/datum-ui) — Datum's design system (built on shadcn/ui + Radix)
@@ -20,19 +20,19 @@ Implemented via `@datum-cloud/datum-ui`'s `ThemeProvider` in system mode (`attri
 
 ## Prerequisites
 
-- Bun `1.3.13` and Node `24.15.0` (see [`.tool-versions`](.tool-versions))
+- Node `26.12.1` (see [`.tool-versions`](.tool-versions))
 
 ## Setup
 
 ```bash
-bun install
+npm install
 cp .env.example .env
 ```
 
 ## Develop
 
 ```bash
-bun run dev
+npm run dev
 # http://localhost:3000
 ```
 
@@ -41,27 +41,27 @@ To verify theme switching: open the page, then change your OS appearance (macOS:
 ## Build & run production
 
 ```bash
-bun run build
-bun run start
+npm run build
+npm run start
 ```
 
 ## Quality
 
 ```bash
-bun run lint
-bun run typecheck
-bun run format:check   # check only (CI)
-bun run format         # auto-fix
+npm run lint
+npm run typecheck
+npm run format:check   # check only (CI)
+npm run format         # auto-fix
 ```
 
 ## CI
 
 The GitHub Actions pipeline (`.github/workflows/ci.yml`) runs on every PR and push to `main`:
 
-1. **Install** — `bun install --frozen-lockfile` (cached by `bun.lock` hash)
-2. **Lint & Format** — `bun run lint && bun run format:check` (parallel with Typecheck)
-3. **Type Check** — `bun run typecheck` (parallel with Lint)
-4. **Build** — `bun run build` (only after Lint + Typecheck both pass)
+1. **Install** — `npm ci` (cached by `package-lock.json` hash)
+2. **Lint & Format** — `npm run lint && npm run format:check` (parallel with Typecheck)
+3. **Type Check** — `npm run typecheck` (parallel with Lint)
+4. **Build** — `npm run build` (only after Lint + Typecheck both pass)
 5. **Status Gate** — final aggregated pass/fail
 
 The Kubernetes publish jobs moved out of `ci.yml` into a manual-only workflow ([`publish-kubernetes.yml`](.github/workflows/publish-kubernetes.yml)). Releases go through [release-please](.github/workflows/release-please.yml): merging its release PR tags the version and deploys the container image to Datum Compute (general-purpose runtime). See [`docs/datum-compute.md`](docs/datum-compute.md).
@@ -88,7 +88,7 @@ To tag a specific version (e.g. for CI):
 docker build --build-arg VERSION=$(git rev-parse --short HEAD) -t agents-datum-net:local .
 ```
 
-The image uses Debian (not Alpine), runs as a non-root `datum` user (UID 1001), and includes a `HEALTHCHECK` against `GET /`. Dev dependencies are pruned during the build stage so the final image contains only production deps.
+The image uses Node on Alpine, runs as a non-root `datum` user (UID 1001), and includes a `HEALTHCHECK` against `GET /`. Dev dependencies are pruned during the build stage so the final image contains only production deps.
 
 ## Project structure
 
@@ -101,6 +101,6 @@ app/
 └── styles/globals.css    Tailwind v4 + datum-ui tokens
 
 Hono server: virtual default from `react-router-hono-server`. Materialize
-with `bunx react-router-hono-server reveal file` when custom routes
+with `npx react-router-hono-server reveal file` when custom routes
 (`/llms.txt`, `/manifest.json`, etc.) are needed in Phase 4.
 ```

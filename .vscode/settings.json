@@ -75,7 +75,7 @@
     "**/build": true,
     "**/.react-router": true,
     "**/dist": true,
-    "**/bun.lock": true,
+    "**/package-lock.json": true,
     "**/.git": true
   },
   "files.watcherExclude": {
