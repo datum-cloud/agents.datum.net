@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.2.5](https://github.com/datum-cloud/agents.datum.net/compare/v0.2.4...v0.2.5) (2026-10-22)
+
+
+### Bug Fixes
+
+* **deploy:** Use the URL datumctl prints ([103c292](https://github.com/datum-cloud/agents.datum.net/commit/103c292463dd038dc1a3d4ab9446a6dd7801b501))
+* **deploy:** Use the URL datumctl prints ([d780de9](https://github.com/datum-cloud/agents.datum.net/commit/d780de95f51aeb24cef496b2464deff237d0d711))
+
 ## [0.2.4](https://github.com/datum-cloud/agents.datum.net/compare/v0.2.3...v0.2.4) (2026-10-22)
 
 
