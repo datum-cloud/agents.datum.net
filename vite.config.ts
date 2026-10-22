@@ -10,7 +10,7 @@ export default defineConfig({
   resolve: {
     tsconfigPaths: true,
   },
-  plugins: [tailwindcss(), reactRouterHonoServer({ runtime: 'bun' }), reactRouter()],
+  plugins: [tailwindcss(), reactRouterHonoServer(), reactRouter()],
   optimizeDeps: {
     include: ['@datum-cloud/datum-ui/theme', '@datum-cloud/datum-ui/utils', 'lucide-react', 'zod'],
   },

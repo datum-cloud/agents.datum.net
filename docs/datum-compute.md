@@ -51,7 +51,7 @@ conventional commits on main
 ## Notes
 
 - Instances have IPv6 addresses only, so the app must listen on `::`. The deploy
-  sets `HOST=::`, and `app/server.ts` passes `HOST` to `Bun.serve`. With
+  sets `HOST=::`, and `app/server.ts` passes `HOST` to the Node server. With
   `HOST=0.0.0.0` the app starts and never answers.
 - The app needs no Secret. Every variable has a default in `app/lib/env.ts`. To
   set a value, add `--env KEY=VALUE` to the deploy command.

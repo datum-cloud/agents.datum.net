@@ -16,7 +16,7 @@ concurrency:
   cancel-in-progress: true
 
 env:
-  BUN_CACHE: ~/.bun/install/cache
+  NPM_CACHE: ~/.npm
 
 jobs:
   # ─── Install ────────────────────────────────────────────────
@@ -25,17 +25,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
-      - uses: oven-sh/setup-bun@v2
-        with: { bun-version: latest }
+      - uses: actions/setup-node@v7
+        with: { node-version: 26.12.1 }
       - uses: actions/cache@v6
         id: cache-deps
         with:
           path: |
-            ${{ env.BUN_CACHE }}
+            ${{ env.NPM_CACHE }}
             **/node_modules
-          key: ${{ runner.os }}-deps-${{ hashFiles('**/bun.lock', '**/package.json') }}
+          key: ${{ runner.os }}-deps-${{ hashFiles('**/package-lock.json', '**/package.json', '.npmrc') }}
       - if: steps.cache-deps.outputs.cache-hit != 'true'
-        run: bun install --frozen-lockfile
+        run: npm ci --ignore-scripts
 
   # ─── Quality ────────────────────────────────────────────────
   lint:
@@ -44,14 +44,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
-      - uses: oven-sh/setup-bun@v2
+      - uses: actions/setup-node@v7
+        with: { node-version: 26.12.1 }
       - uses: actions/cache@v6
         with:
           path: |
-            ${{ env.BUN_CACHE }}
+            ${{ env.NPM_CACHE }}
             **/node_modules
-          key: ${{ runner.os }}-deps-${{ hashFiles('**/bun.lock', '**/package.json') }}
-      - run: bun run lint && bun run format:check
+          key: ${{ runner.os }}-deps-${{ hashFiles('**/package-lock.json', '**/package.json', '.npmrc') }}
+      - run: npm run lint && npm run format:check
 
   typecheck:
     name: Type Check
@@ -59,15 +60,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
-      - uses: oven-sh/setup-bun@v2
-        with: { bun-version: latest }
+      - uses: actions/setup-node@v7
+        with: { node-version: 26.12.1 }
       - uses: actions/cache@v6
         with:
           path: |
-            ${{ env.BUN_CACHE }}
+            ${{ env.NPM_CACHE }}
             **/node_modules
-          key: ${{ runner.os }}-deps-${{ hashFiles('**/bun.lock', '**/package.json') }}
-      - run: bun run typecheck
+          key: ${{ runner.os }}-deps-${{ hashFiles('**/package-lock.json', '**/package.json', '.npmrc') }}
+      - run: npm run typecheck
 
   build:
     name: Build
@@ -76,15 +77,15 @@ jobs:
     if: ${{ !failure() && !cancelled() }}
     steps:
       - uses: actions/checkout@v7
-      - uses: oven-sh/setup-bun@v2
-        with: { bun-version: latest }
+      - uses: actions/setup-node@v7
+        with: { node-version: 26.12.1 }
       - uses: actions/cache@v6
         with:
           path: |
-            ${{ env.BUN_CACHE }}
+            ${{ env.NPM_CACHE }}
             **/node_modules
-          key: ${{ runner.os }}-deps-${{ hashFiles('**/bun.lock', '**/package.json') }}
-      - run: bun run build
+          key: ${{ runner.os }}-deps-${{ hashFiles('**/package-lock.json', '**/package.json', '.npmrc') }}
+      - run: npm run build
       - run: bin/smoke-start
 
   # ─── Status Gate ────────────────────────────────────────────

@@ -3,19 +3,15 @@
 # ==========================================
 # BASE STAGE - Common dependencies and setup
 # ==========================================
-FROM oven/bun:1.4.2 AS base
+FROM node:26.12.1-alpine3.24 AS base
 
-RUN apt-get update && \
-    apt-get install -y --no-install-recommends unzip ca-certificates wget && \
-    update-ca-certificates && \
-    rm -rf /var/lib/apt/lists/* && \
-    apt-get clean
+RUN apk add --no-cache --upgrade 'ca-certificates>=20261020-r0'
+RUN ! grep -q MIICTjCCAdOgAwIBAgIKPPYHqWhwDtqLhDAKBggqhkjOPQQDAzBrMQswCQYDVQQG /etc/ssl/certs/ca-certificates.crt
 
 WORKDIR /app
 
 ENV NODE_ENV=production \
-    PORT=3000 \
-    BUN_RUNTIME_TRANSPILER_CACHE_PATH=/tmp/bun-transpiler-cache
+    PORT=3000
 
 # ==========================================
 # BUILD STAGE - Compile and prepare the app
@@ -25,13 +21,13 @@ FROM base AS build
 ARG VERSION=dev
 ENV VERSION=${VERSION}
 
-COPY --link package.json bun.lock ./
-RUN bun install --frozen-lockfile
+COPY --link package.json package-lock.json .npmrc ./
+RUN npm ci --include=dev --ignore-scripts
 
 COPY --link . .
 
-RUN bun run build && \
-    bun install --production --frozen-lockfile && \
+RUN npm run build && \
+    npm prune --omit=dev --ignore-scripts && \
     touch .env
 
 # ==========================================
@@ -49,18 +45,12 @@ COPY --from=build /app/node_modules ./node_modules
 
 EXPOSE ${PORT}
 
-RUN apt-get update && \
-    apt-get install -y --no-install-recommends --only-upgrade ca-certificates && \
-    rm -rf /var/lib/apt/lists/* && \
-    apt-get clean
-
-RUN groupadd --gid 1001 datum && \
-    useradd --uid 1001 --gid 1001 --no-create-home datum && \
-    chown -R datum:datum /app
+RUN addgroup -g 1001 datum && \
+    adduser -u 1001 -G datum -D -H datum
 
 USER datum
 
 HEALTHCHECK --interval=30s --timeout=5s --start-period=10s --retries=3 \
   CMD wget -qO- http://127.0.0.1:${PORT}/ > /dev/null 2>&1 || exit 1
 
-CMD ["bun", "run", "start"]
+CMD ["node", "./build/server/index.js"]

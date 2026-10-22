@@ -1,5 +1,6 @@
 import llmsContent from '../public/llms.txt?raw';
-import { createHonoServer } from 'react-router-hono-server/bun';
+import type { Server } from 'node:http';
+import { createHonoServer } from 'react-router-hono-server/node';
 
 const apiCatalog = {
   linkset: [
@@ -42,9 +43,16 @@ const oauthProtectedResource = {
 };
 
 export default createHonoServer({
-  // Datum Compute networks are IPv6 only: the unikernel image sets HOST=:: so
-  // the server answers there. Without HOST, Bun keeps its default address.
-  ...(process.env.HOST ? { customBunServer: { hostname: process.env.HOST } } : {}),
+  hostname: process.env.HOST || undefined,
+  onServe(server) {
+    const http = server as Server;
+    http.keepAliveTimeout = 75_000;
+    http.headersTimeout = 76_000;
+    process.once('SIGTERM', () => {
+      http.close(() => process.exit(0));
+      http.closeIdleConnections();
+    });
+  },
   configure(app) {
     // Serve /.well-known/api-catalog with RFC 9727 Content-Type
     app.get('/.well-known/api-catalog', (c) => {
