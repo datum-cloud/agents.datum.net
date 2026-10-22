@@ -87,6 +87,7 @@ jobs:
           key: ${{ runner.os }}-deps-${{ hashFiles('**/package-lock.json', '**/package.json', '.npmrc') }}
       - run: npm run build
       - run: bin/smoke-start
+      - run: bin/deploy-url-test
 
   # ─── Status Gate ────────────────────────────────────────────
   status-check:

@@ -5,7 +5,8 @@ name: Deploy Datum Compute
 # the general-purpose runtime.
 # release-please.yml calls this workflow when it creates a release, so a release
 # tag deploys automatically. It can also be run by hand from the Actions tab.
-# DNS is not managed here: the workload answers on its *.datumproxy.net URL.
+# DNS is not managed here: the workload answers on its custom hostname and its
+# generated *.datumproxy.net URL.
 # See docs/datum-compute.md.
 on:
   workflow_call:
@@ -140,7 +141,9 @@ jobs:
             --runtime-class general-purpose \
             --env "HOST=::" \
             --yes | tee "$RUNNER_TEMP/deploy.log"
-          url="$(grep -oE 'https://[a-z0-9.-]+\.datumproxy\.net' "$RUNNER_TEMP/deploy.log" | tail -n 1)"
+          # datumctl prints the custom hostname when the workload has one and
+          # the generated *.datumproxy.net URL otherwise.
+          url="$(bin/deploy-url "$RUNNER_TEMP/deploy.log")"
           echo "url=${url}" >> "$GITHUB_OUTPUT"
 
       - name: Check the workload
