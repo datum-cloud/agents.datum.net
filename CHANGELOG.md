@@ -1,5 +1,15 @@
 # Changelog
 
+## [0.2.4](https://github.com/datum-cloud/agents.datum.net/compare/v0.2.3...v0.2.4) (2026-10-22)
+
+
+### Bug Fixes
+
+* drop the distrusted eMudhra root from the agents site image ([6dad20d](https://github.com/datum-cloud/agents.datum.net/commit/6dad20df68871c8609f8fa50279fab7e966d3485))
+* drop the distrusted eMudhra root from the image ([91815d2](https://github.com/datum-cloud/agents.datum.net/commit/91815d24d60889d5bb44d00aff994dd241ff9585))
+* run the site on Node instead of Bun ([6283f06](https://github.com/datum-cloud/agents.datum.net/commit/6283f061a343b63d1154cb72f2114ed458bb3095))
+* Run the site on Node instead of Bun ([3c4dcc9](https://github.com/datum-cloud/agents.datum.net/commit/3c4dcc921499aba2707fcacb5f0e69a9cc634c28))
+
 ## [0.2.3](https://github.com/datum-cloud/agents.datum.net/compare/v0.2.2...v0.2.3) (2026-10-20)
 
 
