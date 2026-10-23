@@ -38,9 +38,9 @@ export type HeroData = {
 };
 
 export const HERO: HeroData = {
-  prefix: 'Datum is the',
-  emphasis: 'open network cloud',
-  suffix: 'for AI.',
+  prefix: 'Connected',
+  emphasis: 'infrastructure',
+  suffix: 'for AI companies',
 };
 
 export const SECTIONS: readonly SectionData[] = [
@@ -51,7 +51,7 @@ export const SECTIONS: readonly SectionData[] = [
     blocks: [
       {
         kind: 'p',
-        text: 'Datum is a venture-backed startup founded in late 2024 by Zac Smith (ex-Equinix, Packet) and Jacob Smith, alongside a founding team from Packet, Voxel, SoftLayer, StackPath, Highwinds, and Zscaler. It provides an open network cloud targeted at AI and alt cloud providers, backed by Amplify Partners, CRV, Cervin Ventures, Encoded Ventures, Ex/Ante, Step Function, and Vine Ventures.',
+        text: 'Datum is a venture-backed startup founded in late 2024 by Zac Smith (ex-Equinix, Packet) and Jacob Smith, alongside a founding team from Packet, Voxel, SoftLayer, StackPath, Highwinds, and Zscaler. It provides a network cloud built for agents, targeted at AI companies and alt cloud providers, backed by Amplify Partners, CRV, Cervin Ventures, Encoded Ventures, Ex/Ante, Step Function, and Vine Ventures.',
       },
     ],
   },
@@ -62,7 +62,7 @@ export const SECTIONS: readonly SectionData[] = [
     blocks: [
       {
         kind: 'p',
-        text: "Datum's mission is to help the next 1k clouds by unlocking internet superpowers for every agent and builder.",
+        text: "Datum's mission is to help the next 1k clouds by unlocking internet superpowers for every agent and builder. The internet wasn't designed for AI and agents; we're on a mission to fix that. In the future we're building, intelligence is private by default, platforms can scale anywhere, and companies don't have to choose between velocity and control.",
       },
     ],
   },
@@ -103,7 +103,7 @@ export const SECTIONS: readonly SectionData[] = [
     blocks: [
       {
         kind: 'p',
-        text: 'Datum is the open network cloud for AI — a neutral, programmable foundation for edge, inference, compute, and connectivity. Available as public cloud, as Dedicated Cloud for scaled deployments, or as open source (AGPLv3). The control plane is built for both engineers and agents.',
+        text: 'Datum replaces legacy CDNs, DIY networks, and fragmented infrastructure with a network cloud built for agents — faster, cheaper, and more secure. It combines powerful primitives, global reach, and a neutral strategy, backed by open source. Available as multi-tenant public cloud, as single-tenant Dedicated Cloud (GPU, CPU, and network infrastructure for scaling providers and enterprises who want full control, custom locations, and ideal economics), or as open source (AGPLv3). The control plane is built for both engineers and agents.',
       },
       {
         kind: 'note',
@@ -114,8 +114,37 @@ export const SECTIONS: readonly SectionData[] = [
   {
     id: 'essentials',
     n: '06',
-    title: 'Platform Essentials',
+    title: 'Platform',
     blocks: [
+      {
+        kind: 'p',
+        text: 'A modern edge cloud, backed by open source: a virtual backbone that goes everywhere. Datum helps agents and builders run workloads at the edge and securely connect everything from doorbells to databases, with a consistent runtime designed for Kubernetes platform engineers and AI builders.',
+      },
+      {
+        kind: 'rows',
+        rows: [
+          {
+            label: 'Deliver',
+            text: 'Bring traffic into your world and meet the internet with confidence using Layer 7 load balancers (ALB / GSLB, powered by Envoy), a WAF, and global DNS.',
+          },
+          {
+            label: 'Build',
+            text: 'Push intelligence to the edge with microVM compute (secure microVMs that boot in milliseconds), object storage (S3 compatible, zero egress fees — coming soon), and a marketplace of partner solutions.',
+          },
+          {
+            label: 'Connect',
+            text: 'Bring in traffic with "dial by key, not by IP" zero trust tunnels (QUIC + MASQUE) and aggregate connections with Galactic VPC. Cloud Interconnects for private connections to clouds and enterprises are coming soon.',
+          },
+          {
+            label: 'Essentials',
+            text: 'A modern CLI and terminal with scalable constructs for authorization, billing accounts, and more.',
+          },
+        ],
+      },
+      {
+        kind: 'p',
+        text: '**Galactic VPC** is a free virtual backbone you can start in about 60 seconds. Like a public cloud VPC, but everywhere: it spans clouds and providers, is built with SRv6, and is backed by open source. Attach resources from your desktop to your database — Datum microVMs, ALBs, S3 buckets, Tailscale tailnets, a Mac Mini on your desk, workloads in AWS or GCP, agentic sandboxes at Daytona or Modal, colocation, or GPU infrastructure from a neocloud. Spin up one, dozens, or thousands: agents need VPCs, too.',
+      },
       {
         kind: 'rows',
         rows: [
@@ -135,7 +164,7 @@ export const SECTIONS: readonly SectionData[] = [
           { label: 'SSO', text: 'Enterprise-grade authentication access.' },
           {
             label: 'Service Accounts',
-            text: 'Non-human identities for agent / automation use cases.',
+            text: 'Give agents and apps their own identity. Non-human identities for agent / automation use cases.',
           },
           {
             label: 'OTel Metrics Export',
@@ -228,7 +257,7 @@ export const SECTIONS: readonly SectionData[] = [
           },
           {
             label: 'Datum MCP',
-            text: 'An official, self-hosted MCP server, Cursor-integrated. The `datumctl ai` tools also run as an MCP server for Claude Desktop or any MCP client.',
+            text: 'An official, self-hosted MCP server, tightly integrated with Cursor. The `datumctl ai` tools also run as an MCP server for Claude Desktop or any MCP client.',
           },
           {
             label: 'Skills',
@@ -271,7 +300,7 @@ export const SECTIONS: readonly SectionData[] = [
         rows: [
           {
             label: 'Desktop apps',
-            text: 'Quickly and safely expose local environments to the internet. [Mac](https://www.datum.net/download/mac-os/), [Windows](https://www.datum.net/download/windows/), [Linux](https://www.datum.net/download/linux/).',
+            text: 'macOS, Windows, and Linux apps for exposing localhost to the internet quickly and safely. [Mac](https://www.datum.net/download/mac-os/), [Windows](https://www.datum.net/download/windows/), [Linux](https://www.datum.net/download/linux/).',
           },
           {
             label: 'Get support',
@@ -297,8 +326,8 @@ export const SECTIONS: readonly SectionData[] = [
           '[Connectors](https://github.com/datum-cloud/enhancements/issues/808) — manage tunnels and connections into a private gVPC network.',
           '[GSLB](https://github.com/datum-cloud/enhancements/issues/833) — intelligent cross-region traffic routing for availability and latency.',
           '[Edge Apps](https://github.com/datum-cloud/enhancements/issues/826) — deploy full-stack open source and commercial apps at the network edge.',
-          '[Object Storage](https://github.com/datum-cloud/enhancements/issues/837) — highly available, scalable storage with no per-request charges.',
-          '[Interconnects](https://github.com/datum-cloud/enhancements/issues/718) — dedicated, high-speed private connections to AWS and GCP.',
+          '[Object Storage](https://github.com/datum-cloud/enhancements/issues/837) — highly available, scalable S3-compatible storage with zero egress fees (coming soon).',
+          '[Interconnects](https://github.com/datum-cloud/enhancements/issues/718) — dedicated, high-speed private connections to AWS and GCP (coming soon).',
         ],
       },
       {
@@ -391,7 +420,7 @@ function serializeSection(s: SectionData): string {
 }
 
 export function serializePageMarkdown(): string {
-  return `# Datum — Open Network Cloud for AI
+  return `# Datum — Connected Infrastructure for AI Companies
 
 > Source: https://agents.datum.net/
 > The agent-readable surface for Datum Cloud.

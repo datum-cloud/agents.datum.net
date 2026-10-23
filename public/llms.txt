@@ -1,6 +1,6 @@
 # Datum
 
-> Datum is the open network cloud for AI — a neutral, programmable foundation for edge, inference, compute, and connectivity. A Kubernetes-style API, no feature gates. Available as public cloud, as Dedicated Cloud for scaled deployments, or as open source (AGPLv3). Currently free of charge to use; a valid payment method is required at signup.
+> Datum replaces legacy CDNs, DIY networks, and fragmented infrastructure with a network cloud built for agents: connected infrastructure for AI companies, backed by open source. A Kubernetes-style API, no feature gates. Available as public cloud, as Dedicated Cloud for scaled deployments, or as open source (AGPLv3). Currently free of charge to use; a valid payment method is required at signup.
 
 General availability begins September 2026. Agents act through `datumctl` (a CLI built on the Kubernetes apiserver, also runnable as a local API proxy and an MCP server) or directly against the HTTP API at `https://api.datum.net`. The API is self-describing: `datumctl api-resources` lists every resource type and `datumctl explain <resource>` returns its schema, so an agent can learn the full surface at runtime.
 
