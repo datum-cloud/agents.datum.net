@@ -222,7 +222,7 @@ export default function App() {
           inputSchema: { type: 'object', properties: {} },
           execute: async () => ({
             name: 'Datum Cloud',
-            tagline: 'Open network cloud for AI',
+            tagline: 'Connected infrastructure for AI companies',
             description:
               'Programmatic access to enterprise-grade internet infrastructure — anycast routing, QUIC tunnels, DNS, DDoS protection, and global BGP — built for AI agents and autonomous systems.',
             products: [
