@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.2.7](https://github.com/datum-cloud/agents.datum.net/compare/v0.2.6...v0.2.7) (2026-10-23)
+
+
+### Bug Fixes
+
+* align meta descriptions with new datum.net positioning ([64cede5](https://github.com/datum-cloud/agents.datum.net/commit/64cede579cfc82b2c2e5a1c2bc295cf2e9352e0c))
+* align meta descriptions with new datum.net positioning ([770208b](https://github.com/datum-cloud/agents.datum.net/commit/770208bc6ade5bb1a4b2820179b59942afa5e065))
+
 ## [0.2.6](https://github.com/datum-cloud/agents.datum.net/compare/v0.2.5...v0.2.6) (2026-10-23)
 
 
