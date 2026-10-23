@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.2.6](https://github.com/datum-cloud/agents.datum.net/compare/v0.2.5...v0.2.6) (2026-10-23)
+
+
+### Features
+
+* sync agent portal copy with datum.net home and platform language ([065561b](https://github.com/datum-cloud/agents.datum.net/commit/065561b2b5a84444667e30a7b80e81c503484667))
+* sync agent portal copy with datum.net home and platform language ([ccb30f1](https://github.com/datum-cloud/agents.datum.net/commit/ccb30f180327518f32d63b8e45dc90f2c9a8144c))
+
 ## [0.2.5](https://github.com/datum-cloud/agents.datum.net/compare/v0.2.4...v0.2.5) (2026-10-22)
 
 
