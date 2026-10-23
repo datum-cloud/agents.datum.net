@@ -36,8 +36,8 @@ export const meta: MetaFunction = ({ matches }) => {
     ...buildMeta({
       title: 'Datum — Connected Infrastructure for AI Companies',
       description:
-        "Datum's agent portal. Programmatic access to a network cloud built for agents: anycast routing, QUIC connectors, DNS, DDoS protection, and global BGP — built for AI agents and autonomous systems.",
-      ogDescription: 'Internet infrastructure built for AI. No network team required.',
+        "Datum's agent portal. Programmatic access to a network cloud built for agents: Layer 7 load balancers, microVM compute, zero trust tunnels, Galactic VPC, DNS, and a WAF.",
+      ogDescription: 'Connected infrastructure for AI companies. A network cloud built for agents.',
       path: '/',
     }),
   ];
