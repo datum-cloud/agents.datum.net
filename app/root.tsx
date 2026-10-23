@@ -224,7 +224,7 @@ export default function App() {
             name: 'Datum Cloud',
             tagline: 'Connected infrastructure for AI companies',
             description:
-              'Programmatic access to enterprise-grade internet infrastructure — anycast routing, QUIC tunnels, DNS, DDoS protection, and global BGP — built for AI agents and autonomous systems.',
+              'A network cloud built for agents — Layer 7 load balancers, microVM compute, zero trust tunnels, Galactic VPC, DNS, and a WAF — with a Kubernetes-style API and CLI.',
             products: [
               'AI Edge (Envoy proxy + Coraza WAF)',
               'Connectors (QUIC tunnels)',
