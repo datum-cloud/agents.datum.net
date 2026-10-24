@@ -20,9 +20,14 @@ General availability begins September 2026. Agents act through `datumctl` (a CLI
 - `datumctl auth login --no-browser` — device-code login for SSH sessions, VMs, and containers.
 
 ## Pricing
-Datum is currently free of charge to use. We require a valid payment method during the signup process.
+Usage-based and transparent — no feature gates, no seat limits, no hidden fees. Every rate is published per unit, billing is per-second, and ingress is always free. Full rate card: [datum.net/pricing](https://www.datum.net/pricing) (markdown: https://www.datum.net/pricing.md).
 
-This helps us keep our platform stable by heading off fraud and abusive behavior. If you prefer a demo, just [reach out](https://www.datum.net/contact/).
+Datum is free during public beta. We require a valid payment method during signup to head off fraud and abusive behavior, but you are not charged. We commit to advance notice and a grace period to review rates before any billing begins. If you prefer a demo, just [reach out](https://www.datum.net/contact/).
+
+- Deliver: DNS (coming soon) $0.60 per million requests after the first 500K; ALB $1.00 per million requests; GSLB $0.60 per million requests.
+- Build: Compute $0.0504 per vCPU-hour and $0.0162 per GiB-memory-hour (billed per second); Object Storage $0.0085 per GB-month (Standard) or $0.024 per GB-month (Performance).
+- Connect: Gateways (coming Q3 2026) $0.045 per hour; Tunnels $0.01 per endpoint-hour; Public IPv4 $0.005 per IP-hour.
+- Data transfer: egress free for the first 200 GB/month, then $0.05/GB to 10 TB, $0.04/GB to 150 TB, $0.03/GB to 500 TB, contact sales beyond 500 TB; internal same-region free, cross-region $0.03/GB.
 
 ## Roadmap
 - [Public changelog](https://www.datum.net/changelog/): meaningful platform improvements.
