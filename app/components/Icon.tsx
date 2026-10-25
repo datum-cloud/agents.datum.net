@@ -5,6 +5,7 @@ import { YoutubeIcon } from './icons/YoutubeIcon';
 import { getIcon, type LucideIconName } from '@/lib/iconMap';
 import { cn } from '@/lib/utils';
 import { HelpCircle } from 'lucide-react';
+import { createElement } from 'react';
 
 /** Brand-marked icons that always take precedence over lucide equivalents. */
 type BrandIconName = 'discord' | 'youtube' | 'linkedin' | 'datum-logo';
@@ -57,9 +58,9 @@ export function Icon({ name, size = 'md', className }: IconProps) {
       return <DatumLogoIcon className={composed} />;
   }
 
-  const LucideIcon = getIcon(name);
-  if (LucideIcon) {
-    return <LucideIcon className={composed} aria-hidden="true" />;
+  const lucideIcon = getIcon(name);
+  if (lucideIcon) {
+    return createElement(lucideIcon, { className: composed, 'aria-hidden': true });
   }
 
   return <HelpCircle className={composed} aria-hidden="true" />;

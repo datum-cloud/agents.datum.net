@@ -1,4 +1,5 @@
 import { Icon } from '@/components/Icon';
+import { useMounted } from '@/hooks/useMounted';
 import { useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 
@@ -20,15 +21,11 @@ interface TerminalLightboxProps {
  * the portal, and the modal shouldn't be in the SSR markup anyway.
  */
 export function TerminalLightbox({ open, onClose, href, title }: TerminalLightboxProps) {
-  const [mounted, setMounted] = useState(false);
+  const mounted = useMounted();
   const [content, setContent] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
   const frameRef = useRef<HTMLDivElement>(null);
   const closeBtnRef = useRef<HTMLButtonElement>(null);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
 
   // Fetch content the first time the lightbox is opened for a given href.
   useEffect(() => {

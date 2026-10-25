@@ -1,6 +1,6 @@
+import { useMounted } from '@/hooks/useMounted';
 import { useTheme } from '@datum-cloud/datum-ui/theme';
 import { Monitor, Moon, Sun } from 'lucide-react';
-import { useEffect, useState } from 'react';
 
 type Mode = 'system' | 'light' | 'dark';
 
@@ -31,11 +31,7 @@ function ModeIcon({ mode, className }: { mode: Mode; className?: string }) {
  */
 export function ThemeToggle() {
   const { theme, setTheme } = useTheme();
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
+  const mounted = useMounted();
 
   const current = (mounted ? (theme as Mode | undefined) : undefined) ?? 'system';
   const next = NEXT[current];
