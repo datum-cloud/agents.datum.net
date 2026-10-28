@@ -1,5 +1,19 @@
 # Changelog
 
+## [0.2.9](https://github.com/datum-cloud/agents.datum.net/compare/v0.2.8...v0.2.9) (2026-10-28)
+
+
+### Features
+
+* sync agent portal with datum.net use-cases and pricing ([54371d7](https://github.com/datum-cloud/agents.datum.net/commit/54371d723e3137bc31d25ca3fcd72e7a89737755))
+* sync agent portal with datum.net use-cases and pricing ([0d10e59](https://github.com/datum-cloud/agents.datum.net/commit/0d10e5948a0e21081a37d0f6e0d5c9bbce50f7e7))
+
+
+### Bug Fixes
+
+* align release-please manifest with latest tag v0.2.8 ([be2b49a](https://github.com/datum-cloud/agents.datum.net/commit/be2b49a32ea9c1ce5cd0e4af773d726f1a515350))
+* align release-please manifest with latest tag v0.2.8 ([0f4a3aa](https://github.com/datum-cloud/agents.datum.net/commit/0f4a3aa4bc8f30535ba628df735bf2ff2f56af90))
+
 ## [0.2.8](https://github.com/datum-cloud/agents.datum.net/compare/v0.2.7...v0.2.8) (2026-10-28)
 
 
