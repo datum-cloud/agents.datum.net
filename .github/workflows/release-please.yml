@@ -20,6 +20,21 @@ jobs:
       release_created: ${{ steps.release.outputs.release_created }}
       tag_name: ${{ steps.release.outputs.tag_name }}
     steps:
+      # release-please trusts the manifest, not the tags. A release published
+      # by hand leaves the manifest behind and the run dies with a duplicate
+      # tag error, so fail early with the actual fix.
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          fetch-tags: true
+      - name: Check manifest is not behind latest tag
+        run: |
+          manifest=$(jq -r '."."' .release-please-manifest.json)
+          latest=$(git tag --list 'v*' | sed 's/^v//' | sort -V | tail -n1)
+          if [ -n "$latest" ] && [ "$(printf '%s\n%s\n' "$manifest" "$latest" | sort -V | tail -n1)" != "$manifest" ]; then
+            echo "::error::.release-please-manifest.json ($manifest) is behind latest tag v$latest. Set the manifest, package.json and package-lock.json to $latest, and release only through the release-please PR."
+            exit 1
+          fi
       - id: release
         uses: googleapis/release-please-action@v4
         with:
