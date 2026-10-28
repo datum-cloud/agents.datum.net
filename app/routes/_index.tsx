@@ -13,6 +13,7 @@ import { ProductSection } from '@/components/sections/ProductSection';
 import { ProgrammaticToolsSection } from '@/components/sections/ProgrammaticToolsSection';
 import { RegionsSection } from '@/components/sections/RegionsSection';
 import { ResourceModelSection } from '@/components/sections/ResourceModelSection';
+import { UseCasesSection } from '@/components/sections/UseCasesSection';
 import { WhySection } from '@/components/sections/WhySection';
 import { buildMeta, organizationJsonLd } from '@/lib/seo';
 import type { MetaFunction } from 'react-router';
@@ -60,6 +61,7 @@ export default function Home() {
           <MissionSection />
           <WhySection />
           <CustomersSection />
+          <UseCasesSection />
           <ProductSection />
           <EssentialsSection />
           <RegionsSection />

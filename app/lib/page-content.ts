@@ -88,7 +88,7 @@ export const SECTIONS: readonly SectionData[] = [
     blocks: [
       {
         kind: 'p',
-        text: 'Datum is designed for Alt Cloud providers, ISVs and SaaS providers embedding connectivity capabilities, AI-native teams building agent workflows, and tech-forward enterprises that are building for the future.',
+        text: 'Datum is designed for Alt Cloud providers (inference clouds, sandboxes, and frontier labs), ISVs and SaaS providers embedding connectivity capabilities, AI-native teams building agent workflows, and tech-forward enterprises that are building for the future.',
       },
       {
         kind: 'note',
@@ -97,8 +97,61 @@ export const SECTIONS: readonly SectionData[] = [
     ],
   },
   {
-    id: 'product',
+    id: 'use-cases',
     n: '05',
+    title: 'Use Cases',
+    blocks: [
+      {
+        kind: 'p',
+        text: 'Infrastructure for the next 1k clouds. Datum is optimized for agents first and developers next.',
+      },
+      {
+        kind: 'rows',
+        rows: [
+          {
+            label: 'Hyperscale-style networking',
+            text: 'Give agents, devs, and enterprises the observability, connectivity, and network controls they enjoy at big public clouds.',
+          },
+          {
+            label: 'Private by default',
+            text: 'Reduce attack surface area and accelerate performance by taking agentic workloads off the public internet.',
+          },
+          {
+            label: 'Edge workloads',
+            text: 'From inference and sandboxes to routers and gateways, push key workloads to sit in between all of the clouds.',
+          },
+          {
+            label: 'GPU/CPU capacity',
+            text: 'Leverage our experience, industry relationships, platform, and operational muscle to deliver capacity in the way you need it (Dedicated Cloud).',
+          },
+        ],
+      },
+      {
+        kind: 'rows',
+        rows: [
+          {
+            label: 'Inference Clouds',
+            text: 'Put GPU and CPU capacity closer to users, cloud on-ramps, and enterprise networks, and wire in your existing hardware.',
+          },
+          {
+            label: 'Sandboxes',
+            text: 'Stable IPs, a virtual backbone across all of your infrastructure, and connectors for zero-trust customer access.',
+          },
+          {
+            label: 'Frontier Labs',
+            text: 'Datacenter engineering, site selection, procurement, and a platform backed by open source.',
+          },
+        ],
+      },
+      {
+        kind: 'note',
+        text: 'See [datum.net/use-cases](https://www.datum.net/use-cases) for details.',
+      },
+    ],
+  },
+  {
+    id: 'product',
+    n: '06',
     title: 'Product',
     blocks: [
       {
@@ -113,7 +166,7 @@ export const SECTIONS: readonly SectionData[] = [
   },
   {
     id: 'essentials',
-    n: '06',
+    n: '07',
     title: 'Platform',
     blocks: [
       {
@@ -184,7 +237,7 @@ export const SECTIONS: readonly SectionData[] = [
   },
   {
     id: 'regions',
-    n: '07',
+    n: '08',
     title: 'Global Network Regions',
     blocks: [
       {
@@ -195,7 +248,7 @@ export const SECTIONS: readonly SectionData[] = [
   },
   {
     id: 'resource-model',
-    n: '08',
+    n: '09',
     title: 'Resource Model',
     blocks: [
       {
@@ -222,22 +275,76 @@ export const SECTIONS: readonly SectionData[] = [
   },
   {
     id: 'pricing',
-    n: '09',
+    n: '10',
     title: 'Pricing',
     blocks: [
       {
         kind: 'p',
-        text: 'Datum is currently free of charge to use. We require a valid payment method during the signup process.',
+        text: 'Usage-based pricing with no seat fees. Datum Cloud is free until billing begins on February 1st, 2027. A credit card is required at signup to keep the platform stable by heading off fraud and abuse. You are notified before billing starts and get a grace period: no unexpected bills, no hidden fees, no per-seat or per-user licensing. If you prefer a demo, just [reach out](https://www.datum.net/contact/).',
       },
       {
         kind: 'p',
-        text: 'This helps us keep our platform stable by heading off fraud and abusive behavior. If you prefer a demo, just [reach out](https://www.datum.net/contact/).',
+        text: '**Galactic VPC (gVPC)** — a virtual backbone that spans providers. Create as many as you want and pay only for data transfer.',
+      },
+      {
+        kind: 'table',
+        headers: ['Data transfer', 'Price'],
+        rows: [
+          ['Egress to public internet: first 200 GB', 'Free'],
+          ['Egress: 200 GB–10 TB', '$0.05/GB'],
+          ['Egress: 10–150 TB', '$0.04/GB'],
+          ['Egress: 150–500 TB', '$0.03/GB'],
+          ['Egress: 500 TB+', '[Contact sales](https://www.datum.net/contact/)'],
+          ['Internal, same region', 'Free'],
+          ['Internal, cross-region', '$0.03/GB'],
+          ['Ingress', 'Always free'],
+        ],
+      },
+      {
+        kind: 'p',
+        text: '**Hosted resources**',
+      },
+      {
+        kind: 'table',
+        headers: ['Resource', 'Price'],
+        rows: [
+          ['DNS', '$0.60 per million requests after the first 500K'],
+          ['ALB', '$1.00 per million requests'],
+          ['GSLB (soon)', '$0.60 per million requests'],
+          ['Compute', '$0.0504 per vCPU-hour, $0.0162 per GiB-memory-hour'],
+          ['Object Storage (soon)', 'Standard $0.0085/GB-month; Performance $0.024/GB-month'],
+          ['Tunnels', '$0.01 per endpoint-hour'],
+        ],
+      },
+      {
+        kind: 'p',
+        text: '**Always free**',
+      },
+      {
+        kind: 'ul',
+        items: [
+          '`datumctl` (CLI)',
+          'Coarse-grained permissions and team invites',
+          'Secrets',
+          'Metrics Export',
+          'Audit & Activity Logs',
+          'SSO (passkey, Google, GitHub)',
+          'Service Accounts',
+          'Datum MCP',
+          'AI Assistant (Patch)',
+          'Domains',
+          'Desktop Apps',
+        ],
+      },
+      {
+        kind: 'note',
+        text: 'See [datum.net/pricing](https://www.datum.net/pricing) for the latest rates.',
       },
     ],
   },
   {
     id: 'programmatic-tools',
-    n: '10',
+    n: '11',
     title: 'Programmatic tools',
     blocks: [
       {
@@ -292,7 +399,7 @@ export const SECTIONS: readonly SectionData[] = [
   },
   {
     id: 'human-tools',
-    n: '11',
+    n: '12',
     title: 'Tools for humans',
     blocks: [
       {
@@ -312,7 +419,7 @@ export const SECTIONS: readonly SectionData[] = [
   },
   {
     id: 'platform-development',
-    n: '12',
+    n: '13',
     title: 'Platform development',
     blocks: [
       {

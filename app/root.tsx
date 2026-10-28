@@ -233,7 +233,7 @@ export default function App() {
               'Galactic VPC (coming H1 2026)',
             ],
             access:
-              'Currently free of charge. A valid payment method is required at signup to deter fraud. For a demo, contact https://www.datum.net/contact/.',
+              'Free until billing begins February 1st, 2027, then usage-based with no seat fees. A credit card is required at signup to deter fraud. For a demo, contact https://www.datum.net/contact/.',
             signup: 'https://cloud.datum.net',
             docs: 'https://www.datum.net/docs',
           }),
