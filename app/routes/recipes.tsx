@@ -157,7 +157,8 @@ datumctl apply -f workload.yaml
 datumctl get <compute-kind> hello-agent`}</CodeBlock>
               <SectionBody>
                 <p className="text-foreground/60 text-[14px] leading-[21px]">
-                  Datum is currently free of charge. A valid payment method is required at signup.
+                  Datum is free until billing begins February 1st, 2027, then usage-based. A credit
+                  card is required at signup.
                 </p>
               </SectionBody>
             </div>
@@ -186,8 +187,8 @@ datumctl get <compute-kind> hello-agent`}</CodeBlock>
                   control planes.
                 </li>
                 <li>
-                  Datum is currently free of charge; a valid payment method is required at signup.
-                  Prefer the{' '}
+                  Datum is free until February 1st, 2027, then usage-based; a credit card is
+                  required at signup. Prefer the{' '}
                   <a href="/llms.txt" className="underline">
                     llms.txt
                   </a>{' '}
