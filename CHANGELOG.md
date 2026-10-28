@@ -1,5 +1,22 @@
 # Changelog
 
+## [0.2.8](https://github.com/datum-cloud/agents.datum.net/compare/v0.2.7...v0.2.8) (2026-10-28)
+
+
+### Features
+
+* sync agent portal with datum.net use-cases and pricing ([54371d7](https://github.com/datum-cloud/agents.datum.net/commit/54371d723e3137bc31d25ca3fcd72e7a89737755))
+* sync agent portal with datum.net use-cases and pricing ([0d10e59](https://github.com/datum-cloud/agents.datum.net/commit/0d10e5948a0e21081a37d0f6e0d5c9bbce50f7e7))
+
+
+### Bug Fixes
+
+* Clear the remaining Tailwind typography advisory ([c97081f](https://github.com/datum-cloud/agents.datum.net/commit/c97081f763031c92f5cec6cdb6867a20891341ab))
+* Pass eslint-plugin-react-hooks v7 lint rules ([af79c8e](https://github.com/datum-cloud/agents.datum.net/commit/af79c8e72f06152ab16f0dd6daaa4c76fd550d8f))
+* Pass eslint-plugin-react-hooks v7 lint rules ([6b63c87](https://github.com/datum-cloud/agents.datum.net/commit/6b63c87fb5d53aed7ed642831ff1a9a10a8fb237))
+* Patch dependency advisories of every severity ([da965bc](https://github.com/datum-cloud/agents.datum.net/commit/da965bc141a19e4459ba7b9a96902409d3b4256f))
+* Patch XSS and DoS advisories in dependencies ([3c75b12](https://github.com/datum-cloud/agents.datum.net/commit/3c75b1280be0770fbe9e6bb5e6d4f1337f264db2))
+
 ## [0.2.7](https://github.com/datum-cloud/agents.datum.net/compare/v0.2.6...v0.2.7) (2026-10-23)
 
 
