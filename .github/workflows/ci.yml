@@ -26,7 +26,7 @@ jobs:
     steps:
       - uses: actions/checkout@v7
       - uses: actions/setup-node@v7
-        with: { node-version: 26.12.1 }
+        with: { node-version: 26.13.0 }
       - uses: actions/cache@v6
         id: cache-deps
         with:
@@ -45,7 +45,7 @@ jobs:
     steps:
       - uses: actions/checkout@v7
       - uses: actions/setup-node@v7
-        with: { node-version: 26.12.1 }
+        with: { node-version: 26.13.0 }
       - uses: actions/cache@v6
         with:
           path: |
@@ -61,7 +61,7 @@ jobs:
     steps:
       - uses: actions/checkout@v7
       - uses: actions/setup-node@v7
-        with: { node-version: 26.12.1 }
+        with: { node-version: 26.13.0 }
       - uses: actions/cache@v6
         with:
           path: |
@@ -78,7 +78,7 @@ jobs:
     steps:
       - uses: actions/checkout@v7
       - uses: actions/setup-node@v7
-        with: { node-version: 26.12.1 }
+        with: { node-version: 26.13.0 }
       - uses: actions/cache@v6
         with:
           path: |
