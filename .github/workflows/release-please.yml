@@ -23,7 +23,7 @@ jobs:
       # release-please trusts the manifest, not the tags. A release published
       # by hand leaves the manifest behind and the run dies with a duplicate
       # tag error, so fail early with the actual fix.
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
         with:
           fetch-depth: 0
           fetch-tags: true
