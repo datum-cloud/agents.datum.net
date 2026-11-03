@@ -3,7 +3,7 @@
 # ==========================================
 # BASE STAGE - Common dependencies and setup
 # ==========================================
-FROM node:26.12.1-alpine3.24 AS base
+FROM node:26.13.0-alpine3.24 AS base
 
 RUN apk add --no-cache --upgrade 'ca-certificates>=20261020-r0'
 RUN ! grep -q MIICTjCCAdOgAwIBAgIKPPYHqWhwDtqLhDAKBggqhkjOPQQDAzBrMQswCQYDVQQG /etc/ssl/certs/ca-certificates.crt
