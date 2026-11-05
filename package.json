@@ -59,8 +59,14 @@
     "vite": "^8.0.16"
   },
   "overrides": {
+    "@hono/vite-dev-server": {
+      "@hono/node-server": "^2.1.5"
+    },
     "@tailwindcss/typography": {
       "postcss-selector-parser": "^7.1.6"
+    },
+    "react-router-hono-server": {
+      "@hono/node-server": "^2.1.5"
     }
   }
 }
