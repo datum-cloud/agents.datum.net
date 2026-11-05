@@ -30,7 +30,7 @@
     "react": "^19.2.5",
     "react-dom": "^19.2.5",
     "react-router": "^8.3.0",
-    "react-router-hono-server": "^4.0.0",
+    "react-router-hono-server": "^4.1.7",
     "tailwind-scrollbar-hide": "^4.0.0",
     "zod": "^4.0.0"
   },
@@ -61,6 +61,9 @@
   "overrides": {
     "@tailwindcss/typography": {
       "postcss-selector-parser": "^7.1.6"
+    },
+    "@hono/vite-dev-server": {
+      "@hono/node-server": "^2.1.3"
     }
   }
 }
