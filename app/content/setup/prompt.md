@@ -10,13 +10,13 @@ When you finish, you will have:
 - the Datum skills from [datum-cloud/skills](https://github.com/datum-cloud/skills)
 - a signed-in `datumctl`, pointed at the right organization and project
 
-Run every command below yourself. Do not ask the user to run them, except for the sign-in in step 5, which needs a person at a terminal and a browser. If a step fails, say which one and why, carry on with the rest, and include it in the summary at the end.
+Run every command below yourself. Do not ask the user to run them. The one thing the user does is approve the sign-in in their browser in step 5. If a step fails, say which one and why, carry on with the rest, and include it in the summary at the end.
 
 If the user named an organization and project when they gave you this link (for example "Use organization `acme` and project `acme-web`"), remember them for step 5.
 
 ## 1. Install datumctl and datum-mcp
 
-Skip any tool that is already installed (`datumctl version`, `command -v datum-mcp`). If it is installed through Homebrew, run `brew upgrade` on it instead.
+Check what is installed with `datumctl version` and `command -v datum-mcp`. Install what is missing. Upgrade what is already there (`brew upgrade datumctl datum-mcp` with Homebrew), because steps 2 and 5 use `datumctl` flags that older versions don't have.
 
 ### macOS and Linux with Homebrew
 
@@ -39,21 +39,15 @@ On Windows, download `datum-mcp_windows_<arch>.exe` from <https://github.com/dat
 
 ## 2. Install every datumctl plugin
 
-Plugins add commands to `datumctl`, such as `datumctl dns`, `datumctl compute` and `datumctl assistant`. Install every plugin in Datum's official `datum` catalog, and nothing from other catalogs:
+Plugins add commands to `datumctl`, such as `datumctl dns`, `datumctl compute` and `datumctl assistant`. Install every plugin in Datum's official `datum` catalog:
 
 ```bash
-datumctl plugin search --index datum \
-  | awk 'NR > 1 { print $1 }' \
-  | while read -r plugin; do datumctl plugin install "$plugin"; done
+datumctl plugin install --all-available
 ```
 
-Then bring any plugins that were already installed up to date:
+It installs what is missing, upgrades what is behind, and leaves alone any plugin of the same name that the user installed from somewhere else. It only uses the official catalog, so it needs no confirmation. Do not add `--index` or `--yes`.
 
-```bash
-datumctl plugin upgrade --all
-```
-
-If the loop installs nothing, run `datumctl plugin search --index datum` and install each plugin it lists by name.
+If `datumctl` says `--all-available` is an unknown flag, it is older than this guide expects: upgrade it (step 1) and run the command again.
 
 ## 3. Connect this agent
 
@@ -152,21 +146,30 @@ Check first:
 datumctl whoami
 ```
 
-If that shows a signed-in user, skip to choosing a project below. Otherwise the user has to sign in themselves: `datumctl login` opens a browser and then shows an organization and project picker, and the picker needs an interactive terminal. When run without one, it fails for anyone with more than one project and saves nothing. Ask the user to run:
-
-```bash
-datumctl login
-```
-
-In Claude Code they can type `! datumctl login` in the prompt. On a machine with no browser (SSH, a container), use `datumctl login --no-browser`, which prints a URL and a code to approve from any device. Wait for the user to say they have finished, then run `datumctl whoami` again.
-
-If the user named an organization and project, make it the active context:
+If that shows a signed-in user and the user named an organization and project, switch to it and go on to datum-mcp:
 
 ```bash
 datumctl ctx use <organization>/<project>
 ```
 
-Otherwise leave the one they chose in the picker. `datumctl ctx` lists every organization and project they can use.
+Otherwise, sign in. Tell the user a browser window is about to open for them to sign in to Datum Cloud, then run the login yourself. If they named an organization and project:
+
+```bash
+datumctl login --project <organization>/<project>
+```
+
+If they didn't:
+
+```bash
+datumctl login
+```
+
+- The command waits until the user finishes in the browser, which can take a few minutes. If your shell tool has a time limit, run it in the background and wait for it to exit rather than cutting it off.
+- Without `--project`, login picks the context itself only when the user has a single one. Otherwise it signs in and leaves the context unset. Then run `datumctl ctx`, ask the user which project to use, and run `datumctl ctx use <organization>/<project>`.
+- On a machine with no browser (SSH, a container, a remote box), add `--no-browser`. It prints a URL and a short code instead: run it in the background, read its output, give the user the URL and code to approve on any device, and wait for it to exit.
+- If `datumctl` says `--project` is an unknown flag for `login`, upgrade it (step 1). If you can't, ask the user to run `datumctl login` in a terminal themselves (in Claude Code they can type `! datumctl login`), then run `datumctl ctx use` as above.
+
+Run `datumctl whoami` afterwards to check the account and context.
 
 ### datum-mcp
 
