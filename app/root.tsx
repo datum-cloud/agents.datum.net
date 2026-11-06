@@ -249,7 +249,7 @@ export default function App() {
               'MCP server for Datum Cloud — manage AI Edge, Connectors, DNS, Domains, Secrets, and other infrastructure resources',
             repository: 'https://github.com/datum-cloud/datum-mcp',
             docs: 'https://www.datum.net/docs/datum-mcp',
-            skills: 'https://github.com/datum-cloud/skills',
+            skills: 'https://github.com/datum-cloud/claude-code-plugins',
             agentSkillsIndex: 'https://agents.datum.net/.well-known/agent-skills/index.json',
           }),
         },
@@ -278,8 +278,8 @@ export default function App() {
             if (method === 'mcp') {
               return {
                 install: 'See https://www.datum.net/docs/datum-mcp',
-                claudeCode: '/plugin marketplace add datum-cloud/skills',
-                npm: 'npx skills add https://github.com/datum-cloud/skills',
+                claudeCode: '/plugin marketplace add datum-cloud/claude-code-plugins',
+                claudeCodePlugin: '/plugin install datum-cloud@datum-claude-code-plugins',
               };
             }
             return {
