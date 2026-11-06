@@ -368,7 +368,7 @@ export const SECTIONS: readonly SectionData[] = [
           },
           {
             label: 'Skills',
-            text: 'Pre-built, task-specific instructions that teach coding agents how to use Datum features: `ai-edge`, `client-traffic`, `dns`, `domains`, `httproute`, `metrics-export`. Drop a skill into your project context to help your agent know exactly what to do. [https://github.com/datum-cloud/skills](https://github.com/datum-cloud/skills)',
+            text: 'Task-specific instructions that teach coding agents to use Datum, shipped as Claude Code plugins: `datum-cloud` (sign-in and the Datum MCP server), `datum-networking` (the `alb` load balancer skill, `httproute`, `client-traffic`, `domains`, `networks`), `datum-dns`, `datum-compute`, `milo-observe`, and `milo-activity`. Add the marketplace with `/plugin marketplace add datum-cloud/claude-code-plugins`, then install a plugin, such as `/plugin install datum-networking@datum-claude-code-plugins`. Other agents can fetch each `SKILL.md` from the [skill index](/.well-known/agent-skills/index.json). [https://github.com/datum-cloud/claude-code-plugins](https://github.com/datum-cloud/claude-code-plugins)',
           },
           {
             label: 'CLI',

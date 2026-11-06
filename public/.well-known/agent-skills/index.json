@@ -1,49 +1,451 @@
 {
-  "$schema": "https://agentskills.io/schemas/v0.2.0/index.json",
+  "$schema": "https://schemas.agentskills.io/discovery/0.2.0/schema.json",
   "name": "Datum Cloud Agent Skills",
-  "description": "Agent skills for working with Datum Cloud APIs and infrastructure primitives",
-  "repository": "https://github.com/datum-cloud/skills",
+  "description": "Claude Code plugins for working with Datum Cloud products",
+  "marketplace": "https://github.com/datum-cloud/claude-code-plugins",
   "installation": {
-    "claude-code": "/plugin marketplace add datum-cloud/skills",
-    "npm": "npx skills add https://github.com/datum-cloud/skills",
-    "cursor": "Add via remote rule settings"
+    "claude-code": "/plugin marketplace add datum-cloud/claude-code-plugins"
   },
   "skills": [
     {
-      "name": "ai-edge",
-      "type": "claude-code",
-      "description": "Manage Datum Cloud AI Edge resources — Envoy-based intelligent HTTP proxy with WAF",
-      "url": "https://raw.githubusercontent.com/datum-cloud/skills/main/ai-edge/SKILL.md"
+      "name": "ci-service-account",
+      "type": "skill-md",
+      "description": "Set up a Datum Cloud service account so CI, GitHub Actions, a cron job, a Kubernetes workload or a headless agent can run datumctl or datum-mcp without a person signing in. Use when someone wants to deploy to Datum Cloud from a pipeline, write a GitHub Actions workflow that calls datumctl, run datum-mcp on a server, or asks how to authenticate without a browser.",
+      "url": "https://raw.githubusercontent.com/datum-cloud/skills/bc7ffbe327ef850750edd1b9b5055a9287e954f4/skills/ci-service-account/SKILL.md",
+      "digest": "sha256:5d95ad34e16afd355b7985f7340a47c20e03b132f4befc0a656b758bafd824b7",
+      "plugin": "datum-cloud"
+    },
+    {
+      "name": "datum-cloud-assistant",
+      "type": "skill-md",
+      "description": "Know when to hand a Datum Cloud task to Patch (datumctl's own AI assistant plugin) instead of reaching for datum-mcp's resource tools directly. Use this whenever working against Datum Cloud through the datum-mcp MCP server and the task is an open-ended diagnostic question (\"why is X broken\", \"what's wrong with my proxy\", \"is anything unhealthy in this project\"), a request for a plan-reviewed change to something risky or multi-resource, or a task where you'd otherwise have to guess at a resource's schema via trial and error. Also use this before telling a user that something isn't possible with datum-mcp's current tools — check whether Patch already covers it first.",
+      "url": "https://raw.githubusercontent.com/datum-cloud/skills/bc7ffbe327ef850750edd1b9b5055a9287e954f4/skills/datum-cloud-assistant/SKILL.md",
+      "digest": "sha256:121a4e7870ab955f1fd2b0367e5f808f54d5476f409da2646150966cc345ec11",
+      "plugin": "datum-cloud"
+    },
+    {
+      "name": "sign-in",
+      "type": "skill-md",
+      "description": "Get a person signed in to Datum Cloud and pointed at the right organization and project, with datumctl and the datum-mcp server. Use when someone is setting up Datum Cloud for the first time, when a datumctl command or datum-mcp tool fails with an auth error, returns nothing, or acts on the wrong project, or when they ask which account, organization or project they are using.",
+      "url": "https://raw.githubusercontent.com/datum-cloud/skills/bc7ffbe327ef850750edd1b9b5055a9287e954f4/skills/sign-in/SKILL.md",
+      "digest": "sha256:37418af2736faa44f62ea942881e6f0373b0b5859fcd84d942a0685abeadb8ad",
+      "plugin": "datum-cloud"
+    },
+    {
+      "name": "deploy-container",
+      "type": "skill-md",
+      "description": "Deploy a container to Datum Cloud Compute from the person's own code or image and put it on a public HTTPS URL: build and push with datumctl compute build, deploy with datumctl compute deploy --http-port, then confirm it serves. Use when someone wants to ship, host, run or put their app, API or Dockerfile on Datum Cloud.",
+      "url": "https://raw.githubusercontent.com/datum-cloud/compute/e4f8b2649f731bed7595d09969efc2cb8a431a6b/claude-plugin/skills/deploy-container/SKILL.md",
+      "digest": "sha256:52e48e62199e5d09d15e55be251ad06f3b37e7cd72e0d4a8831f4394dacb414e",
+      "plugin": "datum-compute"
+    },
+    {
+      "name": "instance-command-check",
+      "type": "skill-md",
+      "description": "Suggest one safe, read-only command for a person to run inside a Datum Compute instance with datumctl compute exec, when status and logs leave a specific question. Use before proposing to exec into an instance.",
+      "url": "https://raw.githubusercontent.com/datum-cloud/compute/e4f8b2649f731bed7595d09969efc2cb8a431a6b/claude-plugin/skills/instance-command-check/SKILL.md",
+      "digest": "sha256:fa9246d305d5ea460aa95443539f38c6466068bcb76442f4305439d22536667b",
+      "plugin": "datum-compute"
+    },
+    {
+      "name": "instance-not-ready",
+      "type": "skill-md",
+      "description": "Triage Datum Compute instances that never become Ready: ImageUnavailable, InstanceCrashing, ConfigurationError, or an instance stuck provisioning. Use when a workload's instances exist but are failing, crash-looping or can't pull their image.",
+      "url": "https://raw.githubusercontent.com/datum-cloud/compute/e4f8b2649f731bed7595d09969efc2cb8a431a6b/claude-plugin/skills/instance-not-ready/SKILL.md",
+      "digest": "sha256:70a5d2cee9c0c3983607f1754bb2d6b8bb60295092908646bc7be32a5aa6728a",
+      "plugin": "datum-compute"
+    },
+    {
+      "name": "manage-workload",
+      "type": "skill-md",
+      "description": "Operate a running Datum Compute workload with datumctl compute: read its status and logs, scale it, restart it, watch a rollout, change its image or environment, and delete it. Use when someone wants to check on, debug, resize, restart, update or remove a workload that already exists on Datum Cloud.",
+      "url": "https://raw.githubusercontent.com/datum-cloud/compute/e4f8b2649f731bed7595d09969efc2cb8a431a6b/claude-plugin/skills/manage-workload/SKILL.md",
+      "digest": "sha256:0fde34c8b5532e7e646946bf6cd422b858414b1be1e89432a9b9ef61c492cf33",
+      "plugin": "datum-compute"
+    },
+    {
+      "name": "placement-triage",
+      "type": "skill-md",
+      "description": "Triage Datum Compute placement failures: NoMatchingLocation, AmbiguousServingLocation, LocationMismatch and RuntimeClassNotServed. Use when a workload can't be placed in a location, or a location doesn't offer its runtime class.",
+      "url": "https://raw.githubusercontent.com/datum-cloud/compute/e4f8b2649f731bed7595d09969efc2cb8a431a6b/claude-plugin/skills/placement-triage/SKILL.md",
+      "digest": "sha256:014e8218de7d19e0c1a36fc2750267f184d1f892a7978d3fbbb1f8e9470ec17d",
+      "plugin": "datum-compute"
+    },
+    {
+      "name": "quota-triage",
+      "type": "skill-md",
+      "description": "Explain a Datum Compute workload blocked on project quota: QuotaNotGranted, QuotaExceeded, QuotaNoBudget or a quota check that never finished. Use when a workload won't start because of CPU or memory limits.",
+      "url": "https://raw.githubusercontent.com/datum-cloud/compute/e4f8b2649f731bed7595d09969efc2cb8a431a6b/claude-plugin/skills/quota-triage/SKILL.md",
+      "digest": "sha256:d308cbb11257c2c43867bacf03e8e78cbe7325a840d6aea61181986b07c6b7a3",
+      "plugin": "datum-compute"
+    },
+    {
+      "name": "referenced-data-triage",
+      "type": "skill-md",
+      "description": "Fix a Datum Compute workload whose ConfigMaps or Secrets are missing, unreadable or too large: ReferencedDataNotReady or ReferencedDataReady=False. Use when a workload reports it can't find or read its configuration or secrets.",
+      "url": "https://raw.githubusercontent.com/datum-cloud/compute/e4f8b2649f731bed7595d09969efc2cb8a431a6b/claude-plugin/skills/referenced-data-triage/SKILL.md",
+      "digest": "sha256:22ac2ea4af3f8cb1137ff6661212c88a5a1481314c8373a22e478aec9be08cba",
+      "plugin": "datum-compute"
+    },
+    {
+      "name": "stalled-transient",
+      "type": "skill-md",
+      "description": "Handle a Datum Compute workload or instance that has stayed in a waiting state (provisioning, starting, awaiting propagation) far longer than it should. Use when something has been 'in progress' for hours or days.",
+      "url": "https://raw.githubusercontent.com/datum-cloud/compute/e4f8b2649f731bed7595d09969efc2cb8a431a6b/claude-plugin/skills/stalled-transient/SKILL.md",
+      "digest": "sha256:74215370e11696a3e48729e28a4fd8176ad6b8e5a18657f8f153e4c384769b7d",
+      "plugin": "datum-compute"
+    },
+    {
+      "name": "workload-create",
+      "type": "skill-md",
+      "description": "Create a Datum Compute workload from a manifest: check prerequisites, choose runtime class, locations and instance type, render, dry-run, confirm, then create. Use when someone wants to deploy or run something new on Datum Cloud Compute and needs more than the deploy-container walkthrough covers.",
+      "url": "https://raw.githubusercontent.com/datum-cloud/compute/e4f8b2649f731bed7595d09969efc2cb8a431a6b/claude-plugin/skills/workload-create/SKILL.md",
+      "digest": "sha256:3839eb2eac629383df22deb227a3a7803af27eaafe439b0738d460242d83d014",
+      "plugin": "datum-compute"
+    },
+    {
+      "name": "workload-not-available",
+      "type": "skill-md",
+      "description": "Find out why a Datum Compute workload is not running, not available, degraded or stuck, and who has to fix it. Use when someone asks why their workload or site on Datum Cloud is down, or a workload shows Available=False.",
+      "url": "https://raw.githubusercontent.com/datum-cloud/compute/e4f8b2649f731bed7595d09969efc2cb8a431a6b/claude-plugin/skills/workload-not-available/SKILL.md",
+      "digest": "sha256:ea59cb3ee1fabf07dd602fd1f57f519c8a5ac30de0827fbfc7ad9221397cdcf8",
+      "plugin": "datum-compute"
+    },
+    {
+      "name": "conflicting-record",
+      "type": "skill-md",
+      "description": "Use when a Datum DNS record reports Conflict, such as a CNAME clashing with another record at the same name. Tells a customer-fixable conflict apart from one only Datum can clear.",
+      "url": "https://raw.githubusercontent.com/datum-cloud/dns-operator/7501a372749c68436f3f182f54b826e691e18af1/claude-plugin/skills/conflicting-record/SKILL.md",
+      "digest": "sha256:9ff286a86d746135d9e3fcb44ea1dc57c53069d19c2dd64872d5631699484477",
+      "plugin": "datum-dns"
+    },
+    {
+      "name": "delegation-check",
+      "type": "skill-md",
+      "description": "Use when a Datum DNS zone is Accepted and Programmed but the domain still doesn't resolve, or someone asks whether their registrar nameservers are set up right. Names exactly which nameservers are missing.",
+      "url": "https://raw.githubusercontent.com/datum-cloud/dns-operator/7501a372749c68436f3f182f54b826e691e18af1/claude-plugin/skills/delegation-check/SKILL.md",
+      "digest": "sha256:2496526bcdd0086a0e78530ded8bc0b07ef74d99c5880e56bee62b64c77a7599",
+      "plugin": "datum-dns"
+    },
+    {
+      "name": "datum-dns-domain-verification",
+      "type": "skill-md",
+      "description": "Use when a Datum DNS zone shows PendingDomainVerification or domainLinked false, or a newly created zone isn't doing anything. Explains the domain ownership gate and where the customer clears it.",
+      "url": "https://raw.githubusercontent.com/datum-cloud/dns-operator/7501a372749c68436f3f182f54b826e691e18af1/claude-plugin/skills/domain-verification/SKILL.md",
+      "digest": "sha256:1f261eede099bd4a85cb1205b61344bc78d5370a01c35309fc69a54fb31b4b97",
+      "plugin": "datum-dns"
+    },
+    {
+      "name": "manage-dns",
+      "type": "skill-md",
+      "description": "Use when someone wants to create, list, change, export or delete Datum DNS zones and records from their terminal or a script with datumctl. Covers the datumctl dns plugin commands and the rules that catch most mistakes.",
+      "url": "https://raw.githubusercontent.com/datum-cloud/dns-operator/7501a372749c68436f3f182f54b826e691e18af1/claude-plugin/skills/manage-dns/SKILL.md",
+      "digest": "sha256:1e87d55a2d45adefcef52047499257d0557150573b68e1f1e713b73f91349b5e",
+      "plugin": "datum-dns"
+    },
+    {
+      "name": "managed-record-refused",
+      "type": "skill-md",
+      "description": "Use when someone wants to edit or delete a Datum DNS record, or asks why a change won't stick, and the record is managed by a Gateway, connector, external-dns or the platform. Explains where the real edit belongs.",
+      "url": "https://raw.githubusercontent.com/datum-cloud/dns-operator/7501a372749c68436f3f182f54b826e691e18af1/claude-plugin/skills/managed-record-refused/SKILL.md",
+      "digest": "sha256:14d645552f4aca1719a183a69adf2ef075111a754fb4bd856bb142018d831529",
+      "plugin": "datum-dns"
+    },
+    {
+      "name": "record-create",
+      "type": "skill-md",
+      "description": "Use when someone wants to add a DNS record (A, AAAA, CNAME, TXT, MX, SRV, CAA and more) to a Datum DNS zone. Checks for existing owners, renders the record set, and writes only after an explicit yes.",
+      "url": "https://raw.githubusercontent.com/datum-cloud/dns-operator/7501a372749c68436f3f182f54b826e691e18af1/claude-plugin/skills/record-create/SKILL.md",
+      "digest": "sha256:a49b285fd41dcae36ec7316b99b020b5304892868dd0b48e51c8fbad3c26e408",
+      "plugin": "datum-dns"
+    },
+    {
+      "name": "record-not-owner",
+      "type": "skill-md",
+      "description": "Use when a Datum DNS record reports NotOwner, meaning another record set already holds that zone, type and name. Finds the competing record set and what has to change.",
+      "url": "https://raw.githubusercontent.com/datum-cloud/dns-operator/7501a372749c68436f3f182f54b826e691e18af1/claude-plugin/skills/record-not-owner/SKILL.md",
+      "digest": "sha256:492854e5fc6983d8bf721f858ae3f5cce865f8d03f93dffb4078f4fd5e54915e",
+      "plugin": "datum-dns"
+    },
+    {
+      "name": "record-not-programmed",
+      "type": "skill-md",
+      "description": "Use when one DNS record on Datum isn't showing up or looks right but isn't working, after the zone and delegation are ruled out. Reads per-owner-name status and its reason.",
+      "url": "https://raw.githubusercontent.com/datum-cloud/dns-operator/7501a372749c68436f3f182f54b826e691e18af1/claude-plugin/skills/record-not-programmed/SKILL.md",
+      "digest": "sha256:dac20d5e5d4a3e25a2f455c4bd107c0bdf221c5f2c3e03e94dbe638953e37773",
+      "plugin": "datum-dns"
+    },
+    {
+      "name": "zone-import",
+      "type": "skill-md",
+      "description": "Use when someone wants to move a domain they already host at another DNS provider onto Datum DNS. Walks the discovery snapshot, the DNSSEC gate, recreating records and the nameserver cutover in a safe order.",
+      "url": "https://raw.githubusercontent.com/datum-cloud/dns-operator/7501a372749c68436f3f182f54b826e691e18af1/claude-plugin/skills/zone-import/SKILL.md",
+      "digest": "sha256:2e73dab3dbfb61e4da75cb55db5ce86561a603afd80eb31102d0c8295f723be8",
+      "plugin": "datum-dns"
+    },
+    {
+      "name": "zone-not-resolving",
+      "type": "skill-md",
+      "description": "Use when a domain on Datum DNS isn't resolving, returns the wrong answer, or \"isn't working\" and the broken layer is unknown. Top-level DNS triage that checks verification, zone, delegation, then records in order.",
+      "url": "https://raw.githubusercontent.com/datum-cloud/dns-operator/7501a372749c68436f3f182f54b826e691e18af1/claude-plugin/skills/zone-not-resolving/SKILL.md",
+      "digest": "sha256:341a98386d5b61126c2ed094b5ff0a90e70c44b8db6be8603d8af67868a17a1c",
+      "plugin": "datum-dns"
+    },
+    {
+      "name": "access-log-triage",
+      "type": "skill-md",
+      "description": "Read what actually reached a Datum load balancer from its access logs. Use when status reports nothing wrong and requests still fail, or to check whether it is serving at all.",
+      "url": "https://raw.githubusercontent.com/datum-cloud/network-services-operator/22075cece143866e74167e214616b83fb7bcf6fa/claude-plugin/skills/access-log-triage/SKILL.md",
+      "digest": "sha256:8d7c0905af8a93f5b2e35a46b357f1b79c8309e5dfb6789e06fac2fd456e1672",
+      "plugin": "datum-networking"
+    },
+    {
+      "name": "alb-create",
+      "type": "skill-md",
+      "description": "Create a Datum Cloud Application Load Balancer, or add a hostname, route or origin to one. Use when someone wants to put a site or API behind Datum, and before any change to an existing load balancer.",
+      "url": "https://raw.githubusercontent.com/datum-cloud/network-services-operator/22075cece143866e74167e214616b83fb7bcf6fa/claude-plugin/skills/alb-create/SKILL.md",
+      "digest": "sha256:c85ed8b330166d87fc373241ab77e082dcdc723619f6e64ef62173f5fabcb074",
+      "plugin": "datum-networking"
+    },
+    {
+      "name": "alb-not-serving",
+      "type": "skill-md",
+      "description": "Triage a Datum load balancer that is down, returns errors, or \"isn't working\" when the cause is not known yet. Start here for \"why isn't my site up?\".",
+      "url": "https://raw.githubusercontent.com/datum-cloud/network-services-operator/22075cece143866e74167e214616b83fb7bcf6fa/claude-plugin/skills/alb-not-serving/SKILL.md",
+      "digest": "sha256:68905c88ead7cc3b76fcabc90c9ee88a46e8b2cc268e20db4c0d1ac6d7b1bb64",
+      "plugin": "datum-networking"
+    },
+    {
+      "name": "alb",
+      "type": "skill-md",
+      "description": "Drive Datum Cloud Application Load Balancers yourself with the datumctl alb plugin: create one, attach hostnames, routes, origins, headers, traffic protection and basic auth, read access logs, and attach advanced Envoy Gateway policies. Use when the person wants datumctl commands or manifests rather than the datum-mcp tools.",
+      "url": "https://raw.githubusercontent.com/datum-cloud/network-services-operator/22075cece143866e74167e214616b83fb7bcf6fa/claude-plugin/skills/alb/SKILL.md",
+      "digest": "sha256:3e1c23e60d3df4f13d8209d7a408df1b0ebcb633644a9f5dc85dbf746c8b514e",
+      "plugin": "datum-networking"
+    },
+    {
+      "name": "backend-not-reachable",
+      "type": "skill-md",
+      "description": "Fix a Datum load balancer that cannot reach its origin. Use when it returns errors from the origin rather than from Datum, or the cause names a backend, network service or port.",
+      "url": "https://raw.githubusercontent.com/datum-cloud/network-services-operator/22075cece143866e74167e214616b83fb7bcf6fa/claude-plugin/skills/backend-not-reachable/SKILL.md",
+      "digest": "sha256:c3a4aa8de5cdb777cf12dd4d30268a6fd75ae66795d55ff2ddcfeedecb0de013",
+      "plugin": "datum-networking"
+    },
+    {
+      "name": "certificate-not-issued",
+      "type": "skill-md",
+      "description": "Fix a TLS certificate that Datum has not issued for a load balancer hostname. Use when HTTPS fails on one hostname while HTTP works, or its certificate step is not ok.",
+      "url": "https://raw.githubusercontent.com/datum-cloud/network-services-operator/22075cece143866e74167e214616b83fb7bcf6fa/claude-plugin/skills/certificate-not-issued/SKILL.md",
+      "digest": "sha256:24bf1d4e9a5fc4f68340378e357576683984e85955db61299f530385ad837c37",
+      "plugin": "datum-networking"
     },
     {
       "name": "client-traffic",
-      "type": "claude-code",
-      "description": "Configure client traffic policies and routing for AI Edge",
-      "url": "https://raw.githubusercontent.com/datum-cloud/skills/main/client-traffic/SKILL.md"
+      "type": "skill-md",
+      "description": "Tune how Datum Cloud edge gateways accept client connections with a ClientTrafficPolicy: TLS versions and ciphers, mutual TLS, HTTP/2 and HTTP/3, timeouts, connection limits, and real client IP detection.",
+      "url": "https://raw.githubusercontent.com/datum-cloud/network-services-operator/22075cece143866e74167e214616b83fb7bcf6fa/claude-plugin/skills/client-traffic/SKILL.md",
+      "digest": "sha256:4140dc202309f639ab934e10f5e874a893e085c5b0dbc319c9595fa9de007cfc",
+      "plugin": "datum-networking"
     },
     {
-      "name": "dns",
-      "type": "claude-code",
-      "description": "Manage DNS zones and records via Datum Cloud",
-      "url": "https://raw.githubusercontent.com/datum-cloud/skills/main/dns/SKILL.md"
+      "name": "dns-delegation",
+      "type": "skill-md",
+      "description": "Work out whether Datum or the customer answers DNS for a load balancer hostname's domain. Use when a cause is DNSAuthorityMissing, DNSZoneNotReady or DNSZoneNameserverMismatch, or a DNS-record step reads notApplicable.",
+      "url": "https://raw.githubusercontent.com/datum-cloud/network-services-operator/22075cece143866e74167e214616b83fb7bcf6fa/claude-plugin/skills/dns-delegation/SKILL.md",
+      "digest": "sha256:89058879e7790af63a1f60cbf13ed35a965225aebca1372a70e29b958d0704e9",
+      "plugin": "datum-networking"
+    },
+    {
+      "name": "datum-networking-domain-verification",
+      "type": "skill-md",
+      "description": "Prove ownership of a domain for a Datum load balancer hostname. Use when a hostname's ownership-verified step is not ok, or Datum reports a domain as not verified.",
+      "url": "https://raw.githubusercontent.com/datum-cloud/network-services-operator/22075cece143866e74167e214616b83fb7bcf6fa/claude-plugin/skills/domain-verification/SKILL.md",
+      "digest": "sha256:5245220df9fc7f60ab2f7bb701fda551d664f6a48c8b959968ebf4fc7eb4a79a",
+      "plugin": "datum-networking"
     },
     {
       "name": "domains",
-      "type": "claude-code",
-      "description": "Manage domain registration and configuration on Datum Cloud",
-      "url": "https://raw.githubusercontent.com/datum-cloud/skills/main/domains/SKILL.md"
+      "type": "skill-md",
+      "description": "Manage Datum Cloud Domain resources with datumctl: attach a domain to a project, read its verification record or token, and check whether it is verified.",
+      "url": "https://raw.githubusercontent.com/datum-cloud/network-services-operator/22075cece143866e74167e214616b83fb7bcf6fa/claude-plugin/skills/domains/SKILL.md",
+      "digest": "sha256:59dc9e50fb198c592d727ec73e611c4d5a18063e30fb60478fcc9b100af50911",
+      "plugin": "datum-networking"
+    },
+    {
+      "name": "edge-propagation",
+      "type": "skill-md",
+      "description": "Explain a Datum load balancer that reports healthy but does not answer, especially just after it was created or changed, and when that stops being propagation.",
+      "url": "https://raw.githubusercontent.com/datum-cloud/network-services-operator/22075cece143866e74167e214616b83fb7bcf6fa/claude-plugin/skills/edge-propagation/SKILL.md",
+      "digest": "sha256:84d6d15e0f85fbd0e7bd22a934731d4813a5f1ba1b5a39efc597b9e83eb03dac",
+      "plugin": "datum-networking"
+    },
+    {
+      "name": "hostname-not-working",
+      "type": "skill-md",
+      "description": "Fix one hostname on a Datum load balancer that does not work while others do, or a newly attached custom hostname that has never worked.",
+      "url": "https://raw.githubusercontent.com/datum-cloud/network-services-operator/22075cece143866e74167e214616b83fb7bcf6fa/claude-plugin/skills/hostname-not-working/SKILL.md",
+      "digest": "sha256:5fb886c65723e434d900d890cf9f1a5a6f49122f7a2095173bdad055cb59ab85",
+      "plugin": "datum-networking"
     },
     {
       "name": "httproute",
-      "type": "claude-code",
-      "description": "Configure HTTP routing rules and filters for AI Edge",
-      "url": "https://raw.githubusercontent.com/datum-cloud/skills/main/httproute/SKILL.md"
+      "type": "skill-md",
+      "description": "Write and change HTTPRoute rules on a Datum Cloud Gateway with datumctl: match on path, method, header or query, split traffic by weight, redirect, rewrite, mirror, and set timeouts.",
+      "url": "https://raw.githubusercontent.com/datum-cloud/network-services-operator/22075cece143866e74167e214616b83fb7bcf6fa/claude-plugin/skills/httproute/SKILL.md",
+      "digest": "sha256:1ae6a06fafa5465881aa7912acc2bab867977b15298271195c7d738fe8933e54",
+      "plugin": "datum-networking"
     },
     {
-      "name": "metrics-export",
-      "type": "claude-code",
-      "description": "Configure OpenTelemetry metrics export from Datum Cloud resources",
-      "url": "https://raw.githubusercontent.com/datum-cloud/skills/main/metrics-export/SKILL.md"
+      "name": "network-create",
+      "type": "skill-md",
+      "description": "Create a Datum Cloud network (VPC) for workloads. Use when someone asks for a network or VPC, or a workload names a network that does not exist.",
+      "url": "https://raw.githubusercontent.com/datum-cloud/network-services-operator/22075cece143866e74167e214616b83fb7bcf6fa/claude-plugin/skills/network-create/SKILL.md",
+      "digest": "sha256:27512ffa927e6c0ac2fa343b1403d07a74258bf9e27ab839004e44ad4b955423",
+      "plugin": "datum-networking"
+    },
+    {
+      "name": "network-deletion-stuck",
+      "type": "skill-md",
+      "description": "Finish deleting a Datum network that is still there, or reports Terminating or RangeOccupied, and say what a delete takes down first.",
+      "url": "https://raw.githubusercontent.com/datum-cloud/network-services-operator/22075cece143866e74167e214616b83fb7bcf6fa/claude-plugin/skills/network-deletion-stuck/SKILL.md",
+      "digest": "sha256:12f8982f204d38e1b7e787adf68a382941e0b7d679c0ea306d4efae45ed892b0",
+      "plugin": "datum-networking"
+    },
+    {
+      "name": "network-interface-triage",
+      "type": "skill-md",
+      "description": "Fix one Datum instance whose network interface is not addressed, so the instance is stuck.",
+      "url": "https://raw.githubusercontent.com/datum-cloud/network-services-operator/22075cece143866e74167e214616b83fb7bcf6fa/claude-plugin/skills/network-interface-triage/SKILL.md",
+      "digest": "sha256:02004734ccac26def0287a429fc24d711915a576fd1e6f73f31aa3c19c8ab443",
+      "plugin": "datum-networking"
+    },
+    {
+      "name": "network-location-triage",
+      "type": "skill-md",
+      "description": "Fix a Datum network that is not reaching one location, when a workload's instances there are waiting on the network.",
+      "url": "https://raw.githubusercontent.com/datum-cloud/network-services-operator/22075cece143866e74167e214616b83fb7bcf6fa/claude-plugin/skills/network-location-triage/SKILL.md",
+      "digest": "sha256:0f9879a6e6eaa920d0adca4601f405724c64584494932bee6a8726cf82e27a43",
+      "plugin": "datum-networking"
+    },
+    {
+      "name": "network-not-ready",
+      "type": "skill-md",
+      "description": "Fix a Datum network that is not ready, or a workload that says its network is not ready.",
+      "url": "https://raw.githubusercontent.com/datum-cloud/network-services-operator/22075cece143866e74167e214616b83fb7bcf6fa/claude-plugin/skills/network-not-ready/SKILL.md",
+      "digest": "sha256:49f730e475ae05b1846660a0d7a1a050eb0f23ed2589ad830d7fb390afc35c4f",
+      "plugin": "datum-networking"
+    },
+    {
+      "name": "network-service-create",
+      "type": "skill-md",
+      "description": "Create a Datum network service, the stable name a load balancer uses to reach a workload's instances. Use when someone asks for a \"service\" on a network.",
+      "url": "https://raw.githubusercontent.com/datum-cloud/network-services-operator/22075cece143866e74167e214616b83fb7bcf6fa/claude-plugin/skills/network-service-create/SKILL.md",
+      "digest": "sha256:3b608d1168ab258ed28e72597c49d75f3bda2421bd3924ddabbe6d6199975277",
+      "plugin": "datum-networking"
+    },
+    {
+      "name": "network-service-not-serving",
+      "type": "skill-md",
+      "description": "Fix a Datum network service that sends traffic nowhere: not ready, \"no endpoints\", or a load balancer pointing at it returns origin errors.",
+      "url": "https://raw.githubusercontent.com/datum-cloud/network-services-operator/22075cece143866e74167e214616b83fb7bcf6fa/claude-plugin/skills/network-service-not-serving/SKILL.md",
+      "digest": "sha256:fd6e9c82160bfd8b86118f8eb2a6db978f79281b853373171922471a9b7c0772",
+      "plugin": "datum-networking"
+    },
+    {
+      "name": "networks",
+      "type": "skill-md",
+      "description": "Drive Datum Cloud networks and network services yourself with the datumctl network plugin: create, change and delete them, release kept interfaces, and read why one is not working. Use when the person wants datumctl commands rather than the datum-mcp tools.",
+      "url": "https://raw.githubusercontent.com/datum-cloud/network-services-operator/22075cece143866e74167e214616b83fb7bcf6fa/claude-plugin/skills/networks/SKILL.md",
+      "digest": "sha256:dcf15d04652d5a5de625e95d8c3b8fd8a108202dfff29dc444c8427749a3b57d",
+      "plugin": "datum-networking"
+    },
+    {
+      "name": "traffic-protection-triage",
+      "type": "skill-md",
+      "description": "Check a Datum load balancer's traffic protection (WAF): whether it is attached, observing or enforcing, and what to do when it blocks legitimate traffic.",
+      "url": "https://raw.githubusercontent.com/datum-cloud/network-services-operator/22075cece143866e74167e214616b83fb7bcf6fa/claude-plugin/skills/traffic-protection-triage/SKILL.md",
+      "digest": "sha256:2057e02da7a394c32bb4964d7b0430aa3df69012fb26ba3b4986d4a54370e54c",
+      "plugin": "datum-networking"
+    },
+    {
+      "name": "activity-summary",
+      "type": "skill-md",
+      "description": "Generate a summary of recent cluster activity for handoffs, standups, or status updates. Use when the user asks for a status update, what happened recently, needs a summary for a handoff, or says \"catch me up\".",
+      "url": "https://raw.githubusercontent.com/milo-os/activity/750d54c35d58cd7c8191ad94b33a79250f57b18b/claude-plugin/skills/activity-summary/SKILL.md",
+      "digest": "sha256:bd091e79f6b61efe9fe0ecd8a1de2b22bcbd397564e0541adade430d5f7238c1",
+      "plugin": "milo-activity"
+    },
+    {
+      "name": "audit-user",
+      "type": "skill-md",
+      "description": "Audit a specific user's recent actions across all resources. Use when the user asks about what someone did, requests a user activity report, or needs to review actions for security or compliance purposes.",
+      "url": "https://raw.githubusercontent.com/milo-os/activity/750d54c35d58cd7c8191ad94b33a79250f57b18b/claude-plugin/skills/audit-user/SKILL.md",
+      "digest": "sha256:25c10cf258c6849d19d898b75743601621fc87b2e2e6f01763b89a7f15c91b0e",
+      "plugin": "milo-activity"
+    },
+    {
+      "name": "author-policy",
+      "type": "skill-md",
+      "description": "Create or edit an ActivityPolicy that translates audit logs or events into human-readable activity summaries. Use when the user mentions ActivityPolicy, wants to create translation rules, asks about CEL expressions for activity, or wants to define how changes appear in the activity timeline.",
+      "url": "https://raw.githubusercontent.com/milo-os/activity/750d54c35d58cd7c8191ad94b33a79250f57b18b/claude-plugin/skills/author-policy/SKILL.md",
+      "digest": "sha256:9733314b830763f0dd82307cf95d1879e0ce7587b13d9758785ae7d09fd1f525",
+      "plugin": "milo-activity"
+    },
+    {
+      "name": "investigate-incident",
+      "type": "skill-md",
+      "description": "Investigate a cluster incident by systematically checking recent activity, failed operations, and resource changes. Use when the user reports something is broken, asks \"what happened\", mentions an outage, incident, or error, or wants to understand recent cluster changes.",
+      "url": "https://raw.githubusercontent.com/milo-os/activity/750d54c35d58cd7c8191ad94b33a79250f57b18b/claude-plugin/skills/investigate-incident/SKILL.md",
+      "digest": "sha256:96b6adc03da52a6b67d42f64833fdd952576c2bb9be28e682a1ce87849327dc7",
+      "plugin": "milo-activity"
+    },
+    {
+      "name": "investigate",
+      "type": "skill-md",
+      "description": "Start an incident investigation with a description of the issue",
+      "url": "https://raw.githubusercontent.com/milo-os/activity/750d54c35d58cd7c8191ad94b33a79250f57b18b/claude-plugin/skills/investigate/SKILL.md",
+      "digest": "sha256:07b665233865d0e625849c4c510ee7662976f32835f4d69a0fa9aeea325845ff",
+      "plugin": "milo-activity"
+    },
+    {
+      "name": "preview-policy",
+      "type": "skill-md",
+      "description": "Test an ActivityPolicy against sample data and iterate on its rules. Use when the user wants to test, debug, or validate an existing or in-progress ActivityPolicy, or when they say \"preview this policy\" or \"test this policy\".",
+      "url": "https://raw.githubusercontent.com/milo-os/activity/750d54c35d58cd7c8191ad94b33a79250f57b18b/claude-plugin/skills/preview-policy/SKILL.md",
+      "digest": "sha256:085488fe4a8d6a798d80131abf8e81bbd166c7291380e98f552fbf5631fc4dd0",
+      "plugin": "milo-activity"
+    },
+    {
+      "name": "status",
+      "type": "skill-md",
+      "description": "Quick summary of recent cluster activity (last hour)",
+      "url": "https://raw.githubusercontent.com/milo-os/activity/750d54c35d58cd7c8191ad94b33a79250f57b18b/claude-plugin/skills/status/SKILL.md",
+      "digest": "sha256:2b9c977ff90e549248684d5586e4640d7f3b640fe3067ddb3f98af657ddbd927",
+      "plugin": "milo-activity"
+    },
+    {
+      "name": "export-metrics",
+      "type": "skill-md",
+      "description": "Export a Datum Cloud project's metrics to Grafana Cloud or any Prometheus remote-write endpoint with an ExportPolicy. Use when someone wants Datum metrics in Grafana, Prometheus, Mimir, or another metrics tool, or asks why an export isn't working.",
+      "url": "https://raw.githubusercontent.com/milo-os/telemetry/151fc37e3099ab62624411b30310da6611e01c0d/claude-plugin/skills/export-metrics/SKILL.md",
+      "digest": "sha256:b6ba95ed69b5ad132c3d3fa0c71a5bdc944a0f68cb65b7083c989fbd48c81f85",
+      "plugin": "milo-observe"
+    },
+    {
+      "name": "query-logs",
+      "type": "skill-md",
+      "description": "Query a Datum Cloud project's logs with the datumctl telemetry plugin and LogQL. Use when someone asks to see, search, tail, or filter logs from their workloads, load balancers, or other Datum resources, or asks why a request failed.",
+      "url": "https://raw.githubusercontent.com/milo-os/telemetry/151fc37e3099ab62624411b30310da6611e01c0d/claude-plugin/skills/query-logs/SKILL.md",
+      "digest": "sha256:06bfa8d165661ad0f44e28b7e614bf3e1e41427a78286c0e93cedbb79027c368",
+      "plugin": "milo-observe"
+    },
+    {
+      "name": "status-metrics",
+      "type": "skill-md",
+      "description": "Read and query the status metrics Datum Cloud publishes for every resource (the _info and _status_condition series) in Grafana or another metrics tool. Use when someone wants to count resources, alert on resources that aren't ready, build a dashboard of resource health, or asks what a Datum metric means.",
+      "url": "https://raw.githubusercontent.com/milo-os/telemetry/151fc37e3099ab62624411b30310da6611e01c0d/claude-plugin/skills/status-metrics/SKILL.md",
+      "digest": "sha256:fd28c788c35a3ccf09d0819373aeb49927733ff72ed24e7e62f2f2a27f818c25",
+      "plugin": "milo-observe"
     }
   ]
 }
