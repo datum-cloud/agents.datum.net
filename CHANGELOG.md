@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.2.10](https://github.com/datum-cloud/agents.datum.net/compare/v0.2.9...v0.2.10) (2026-11-06)
+
+
+### Features
+
+* add Vercel to Datum Compute migration recipe ([886b966](https://github.com/datum-cloud/agents.datum.net/commit/886b96652c4468d710bf9a390bb668c4bf3a8acb))
+* add Vercel to Datum Compute migration recipe ([ad958ed](https://github.com/datum-cloud/agents.datum.net/commit/ad958edbbbbb8c4c36998cb328aa7dad53c2205a))
+
 ## [0.2.9](https://github.com/datum-cloud/agents.datum.net/compare/v0.2.8...v0.2.9) (2026-10-28)
 
 
