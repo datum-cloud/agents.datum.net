@@ -6,6 +6,8 @@ Agents act through `datumctl` (a CLI built on the Kubernetes apiserver, also run
 
 ## Act
 - [Agent home](https://agents.datum.net): canonical, machine-readable entry point for agents.
+- [Agent recipes](https://agents.datum.net/recipes): copy-pasteable `datumctl` task flows.
+- [Recipe: migrate from Vercel to Datum Compute](https://agents.datum.net/recipes/migrate-from-vercel.md): containerize, Secrets, deploy, domain cutover, CI, rollback.
 - [llms-full.txt](https://www.datum.net/llms-full.txt): full technical reference — concepts, IAM, resource kinds, getting started.
 - [Docs MCP](https://www.datum.net/docs/mcp): hosted MCP server to search and read Datum docs.
 - [datumctl docs](https://www.datum.net/docs/datumctl): install, auth, commands, plugins.

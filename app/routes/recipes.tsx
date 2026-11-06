@@ -164,7 +164,29 @@ datumctl get <compute-kind> hello-agent`}</CodeBlock>
             </div>
           </Section>
 
-          <Section id="conventions" n="04" title="Conventions for agents">
+          <Section id="recipe-4" n="04" title="Migrate from Vercel">
+            <div className="flex flex-col gap-4">
+              <SectionBody>
+                <p>
+                  Move a Node server-rendered app from Vercel to a Compute workload on the{' '}
+                  <code className="font-mono text-[0.875em]">general-purpose</code> runtime:
+                  containerize, move environment variables into a Secret, deploy, cut over the
+                  domain, and roll back. Steps are marked verified or untested.
+                </p>
+                <p>
+                  <a href="/recipes/migrate-from-vercel" className="underline">
+                    Read the full recipe
+                  </a>{' '}
+                  ·{' '}
+                  <a href="/recipes/migrate-from-vercel.md" className="underline">
+                    Markdown
+                  </a>
+                </p>
+              </SectionBody>
+            </div>
+          </Section>
+
+          <Section id="conventions" n="05" title="Conventions for agents">
             <SectionBody>
               <ul className="flex flex-col gap-2">
                 <li>
