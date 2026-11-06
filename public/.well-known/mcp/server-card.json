@@ -13,9 +13,8 @@
   "homepage": "https://github.com/datum-cloud/datum-mcp",
   "repository": "https://github.com/datum-cloud/datum-mcp",
   "installation": {
-    "brew": "brew install datum-cloud/tap/datum-mcp",
-    "script": "curl -fsSL https://github.com/datum-cloud/datum-mcp/releases/latest/download/install.sh | sh",
-    "claude-code": "claude mcp add --scope user datum-mcp -- datum-mcp",
-    "setup": "https://agents.datum.net/setup/prompt.md"
+    "setup": "https://agents.datum.net/setup/prompt.md",
+    "binary": "https://github.com/datum-cloud/datum-mcp/releases/latest",
+    "claude-code": "claude plugin marketplace add datum-cloud/skills && claude plugin install datum-cloud@datum-cloud"
   }
 }
