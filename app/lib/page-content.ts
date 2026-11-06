@@ -351,6 +351,10 @@ export const SECTIONS: readonly SectionData[] = [
         kind: 'rows',
         rows: [
           {
+            label: 'Agent setup',
+            text: 'One prompt that sets up any coding agent for Datum Cloud: `datumctl` with every official plugin, the Datum MCP and Docs MCP servers, the Datum skills, and sign-in. Paste "Fetch and execute the appropriate instructions to set me up for Datum Cloud from https://agents.datum.net/setup/prompt.md" into your agent. [/setup](/setup)',
+          },
+          {
             label: 'llms.txt',
             text: 'A concise, standardized index of Datum pages and resources that makes the site instantly readable to any AI model or intelligent agent. [https://www.datum.net/llms.txt](https://www.datum.net/llms.txt)',
           },
@@ -364,11 +368,11 @@ export const SECTIONS: readonly SectionData[] = [
           },
           {
             label: 'Datum MCP',
-            text: 'An official, self-hosted MCP server, tightly integrated with Cursor. The `datumctl ai` tools also run as an MCP server for Claude Desktop or any MCP client.',
+            text: 'The official Datum MCP server, `datum-mcp`: tools for organizations, projects, networking, DNS, compute and more, for Claude Code, Cursor, Codex or any MCP client. It runs locally over stdio and signs in through your browser on first use. [https://github.com/datum-cloud/datum-mcp](https://github.com/datum-cloud/datum-mcp)',
           },
           {
             label: 'Skills',
-            text: 'Pre-built, task-specific instructions that teach coding agents how to use Datum features: `ai-edge`, `client-traffic`, `dns`, `domains`, `httproute`, `metrics-export`. Drop a skill into your project context to help your agent know exactly what to do. [https://github.com/datum-cloud/skills](https://github.com/datum-cloud/skills)',
+            text: 'Instructions that teach coding agents to work with Datum Cloud: `sign-in`, `ci-service-account` and `datum-cloud-assistant`. In Claude Code they install as a plugin that also registers the Datum MCP and Docs MCP servers; other agents install them with `npx skills add datum-cloud/skills`. [https://github.com/datum-cloud/skills](https://github.com/datum-cloud/skills)',
           },
           {
             label: 'CLI',

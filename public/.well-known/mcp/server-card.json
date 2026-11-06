@@ -2,7 +2,7 @@
   "schemaVersion": "1",
   "serverInfo": {
     "name": "datum-mcp",
-    "description": "Datum Cloud MCP server — manage AI Edge, Connectors, DNS, Domains, Secrets, and infrastructure resources programmatically"
+    "description": "Datum Cloud MCP server — manage organizations, projects, networking, DNS, domains, compute and more. Signs in through the browser (OAuth 2.1 PKCE) on first use."
   },
   "transport": {
     "type": "stdio"
@@ -10,10 +10,12 @@
   "capabilities": {
     "tools": true
   },
-  "homepage": "https://www.datum.net/docs/datum-mcp",
+  "homepage": "https://github.com/datum-cloud/datum-mcp",
   "repository": "https://github.com/datum-cloud/datum-mcp",
   "installation": {
-    "npm": "npx datum-mcp",
-    "brew": "brew install datum-cloud/tap/desktop"
+    "brew": "brew install datum-cloud/tap/datum-mcp",
+    "script": "curl -fsSL https://github.com/datum-cloud/datum-mcp/releases/latest/download/install.sh | sh",
+    "claude-code": "claude mcp add --scope user datum-mcp -- datum-mcp",
+    "setup": "https://agents.datum.net/setup/prompt.md"
   }
 }

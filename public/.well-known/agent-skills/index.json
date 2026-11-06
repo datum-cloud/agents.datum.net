@@ -1,49 +1,32 @@
 {
   "$schema": "https://agentskills.io/schemas/v0.2.0/index.json",
   "name": "Datum Cloud Agent Skills",
-  "description": "Agent skills for working with Datum Cloud APIs and infrastructure primitives",
+  "description": "Agent skills for signing in to Datum Cloud, running datumctl and datum-mcp from CI, and handing questions to Patch, Datum's own assistant",
   "repository": "https://github.com/datum-cloud/skills",
+  "setup": "https://agents.datum.net/setup/prompt.md",
   "installation": {
-    "claude-code": "/plugin marketplace add datum-cloud/skills",
-    "npm": "npx skills add https://github.com/datum-cloud/skills",
+    "claude-code": "claude plugin marketplace add datum-cloud/skills && claude plugin install datum-cloud@datum-cloud",
+    "npm": "npx -y skills add datum-cloud/skills --skill '*' --yes --global",
     "cursor": "Add via remote rule settings"
   },
   "skills": [
     {
-      "name": "ai-edge",
+      "name": "sign-in",
       "type": "claude-code",
-      "description": "Manage Datum Cloud AI Edge resources — Envoy-based intelligent HTTP proxy with WAF",
-      "url": "https://raw.githubusercontent.com/datum-cloud/skills/main/ai-edge/SKILL.md"
+      "description": "Get signed in to Datum Cloud with datumctl and datum-mcp, and pointed at the right organization and project",
+      "url": "https://raw.githubusercontent.com/datum-cloud/skills/main/skills/sign-in/SKILL.md"
     },
     {
-      "name": "client-traffic",
+      "name": "ci-service-account",
       "type": "claude-code",
-      "description": "Configure client traffic policies and routing for AI Edge",
-      "url": "https://raw.githubusercontent.com/datum-cloud/skills/main/client-traffic/SKILL.md"
+      "description": "Set up a Datum Cloud service account so CI or a headless agent can run datumctl or datum-mcp without a person signing in",
+      "url": "https://raw.githubusercontent.com/datum-cloud/skills/main/skills/ci-service-account/SKILL.md"
     },
     {
-      "name": "dns",
+      "name": "datum-cloud-assistant",
       "type": "claude-code",
-      "description": "Manage DNS zones and records via Datum Cloud",
-      "url": "https://raw.githubusercontent.com/datum-cloud/skills/main/dns/SKILL.md"
-    },
-    {
-      "name": "domains",
-      "type": "claude-code",
-      "description": "Manage domain registration and configuration on Datum Cloud",
-      "url": "https://raw.githubusercontent.com/datum-cloud/skills/main/domains/SKILL.md"
-    },
-    {
-      "name": "httproute",
-      "type": "claude-code",
-      "description": "Configure HTTP routing rules and filters for AI Edge",
-      "url": "https://raw.githubusercontent.com/datum-cloud/skills/main/httproute/SKILL.md"
-    },
-    {
-      "name": "metrics-export",
-      "type": "claude-code",
-      "description": "Configure OpenTelemetry metrics export from Datum Cloud resources",
-      "url": "https://raw.githubusercontent.com/datum-cloud/skills/main/metrics-export/SKILL.md"
+      "description": "Know when to hand a Datum Cloud task to Patch, datumctl's AI assistant plugin, instead of using datum-mcp's resource tools directly",
+      "url": "https://raw.githubusercontent.com/datum-cloud/skills/main/skills/datum-cloud-assistant/SKILL.md"
     }
   ]
 }
