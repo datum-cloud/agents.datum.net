@@ -1,6 +1,6 @@
 {
   "name": "agents-datum-net",
-  "version": "0.2.9",
+  "version": "0.2.10",
   "private": true,
   "sideEffects": false,
   "type": "module",
