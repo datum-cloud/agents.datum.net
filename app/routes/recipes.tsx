@@ -131,30 +131,56 @@ datumctl diff -f desired-state.yaml`}</CodeBlock>
                 <p className="font-semibold">Fast path (plugin command):</p>
               </SectionBody>
               <CodeBlock>{`datumctl plugin install compute
-datumctl compute deploy   # see \`datumctl compute deploy --help\` for flags`}</CodeBlock>
+
+datumctl compute deploy hello-agent \\
+  --image=docker.io/traefik/whoami:v1.10.3 \\
+  --location=us-central-1 \\
+  --http-port=80 \\
+  --runtime-class=general-purpose \\
+  --yes
+
+# The last line deploy prints is the public URL. The first request can take a
+# few minutes while the certificate and DNS settle.
+curl -sS https://<url-from-deploy>/`}</CodeBlock>
+              <SectionBody>
+                <ul className="flex flex-col gap-2">
+                  <li>
+                    Keep{' '}
+                    <code className="font-mono text-[0.875em]">
+                      --runtime-class=general-purpose
+                    </code>{' '}
+                    for a normal container image. Without it the workload gets the platform default,{' '}
+                    <code className="font-mono text-[0.875em]">unikernel</code>, which only boots
+                    images built with{' '}
+                    <code className="font-mono text-[0.875em]">datumctl compute build</code>. A
+                    workload keeps its runtime class; to change it, deploy under a new name.
+                  </li>
+                  <li>
+                    <code className="font-mono text-[0.875em]">--image</code> must be fully
+                    qualified, and <code className="font-mono text-[0.875em]">--http-port</code> is
+                    the port the container listens on. Without it the workload gets no URL.
+                  </li>
+                  <li>
+                    <code className="font-mono text-[0.875em]">--yes</code> skips the prompts an
+                    agent cannot answer. Without any flags,{' '}
+                    <code className="font-mono text-[0.875em]">deploy</code> starts an interactive
+                    prompt.
+                  </li>
+                </ul>
+              </SectionBody>
               <SectionBody>
                 <p className="font-semibold">Declarative path (recommended for agents):</p>
               </SectionBody>
-              <CodeBlock>{`# 1. Find the compute resource kind and confirm its fields.
-datumctl api-resources | grep -i compute
-datumctl explain <compute-kind>.spec          # substitute the kind from step 1
+              <CodeBlock>{`# 1. Read the schema for any field you want to change.
+datumctl explain workloads.spec.template.spec
 
-# 2. Write a manifest using ONLY fields confirmed above. Illustrative shape:
-cat > workload.yaml <<'YAML'
-# apiVersion / kind / spec fields MUST be taken from \`explain\` output above —
-# the block below is a placeholder to show structure, not verified schema.
-apiVersion: <group>/<version>
-kind: <ComputeKind>
-metadata:
-  name: hello-agent
-spec:
-  # scale-to-zero, per-second metered; set vCPU / memory / image / region here
-YAML
+# 2. Keep the workload under review as a manifest.
+datumctl get workload hello-agent -o yaml > workload.yaml
 
-# 3. Preview, apply (retry-safe), verify.
+# 3. Edit workload.yaml, then preview, apply (retry-safe), and verify.
 datumctl diff -f workload.yaml
 datumctl apply -f workload.yaml
-datumctl get <compute-kind> hello-agent`}</CodeBlock>
+datumctl get workload hello-agent`}</CodeBlock>
               <SectionBody>
                 <p className="text-foreground/60 text-[14px] leading-[21px]">
                   Datum is free until billing begins February 1st, 2027, then usage-based. A credit
