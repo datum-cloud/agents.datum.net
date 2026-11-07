@@ -15,6 +15,6 @@
   "installation": {
     "setup": "https://agents.datum.net/setup/prompt.md",
     "binary": "https://github.com/datum-cloud/datum-mcp/releases/latest",
-    "claude-code": "claude plugin marketplace add datum-cloud/skills && claude plugin install datum-cloud@datum-cloud"
+    "claude-code": "claude plugin marketplace add datum-cloud/claude-code-plugins && claude plugin install datum-cloud@datum-claude-code-plugins"
   }
 }

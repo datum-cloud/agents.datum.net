@@ -352,7 +352,7 @@ export const SECTIONS: readonly SectionData[] = [
         rows: [
           {
             label: 'Agent setup',
-            text: 'One prompt that sets up any coding agent for Datum Cloud: `datumctl` with every official plugin, the Datum MCP and Docs MCP servers, the Datum skills, and sign-in. Paste "Fetch and execute the appropriate instructions to set me up for Datum Cloud from https://agents.datum.net/setup/prompt.md" into your agent. [/setup](/setup)',
+            text: 'One prompt that sets up any coding agent for Datum Cloud: `datumctl` and the plugins you choose, the Datum MCP and Docs MCP servers, the matching Datum skills, and sign-in. Nothing needs to be installed first. Paste "Fetch and execute the appropriate instructions to set me up for Datum Cloud from https://agents.datum.net/setup/prompt.md" into your agent. [/setup](/setup)',
           },
           {
             label: 'llms.txt',

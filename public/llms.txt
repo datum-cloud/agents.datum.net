@@ -6,7 +6,7 @@ Agents act through `datumctl` (a CLI built on the Kubernetes apiserver, also run
 
 ## Act
 - [Agent home](https://agents.datum.net): canonical, machine-readable entry point for agents.
-- [Set up your agent](https://agents.datum.net/setup/prompt.md): fetch and follow this to install `datumctl` with every plugin, the Datum MCP and Docs MCP servers, and the Datum skills, then sign in.
+- [Set up your agent](https://agents.datum.net/setup/prompt.md): fetch and follow this to install `datumctl` and the plugins the user chooses, the Datum MCP and Docs MCP servers, and the matching Datum skills, then sign in. Nothing needs to be installed first.
 - [Agent recipes](https://agents.datum.net/recipes): copy-pasteable `datumctl` task flows.
 - [Recipe: migrate from Vercel to Datum Compute](https://agents.datum.net/recipes/migrate-from-vercel.md): containerize, Secrets, deploy, domain cutover, CI, rollback.
 - [llms-full.txt](https://www.datum.net/llms-full.txt): full technical reference — concepts, IAM, resource kinds, getting started.
@@ -14,7 +14,7 @@ Agents act through `datumctl` (a CLI built on the Kubernetes apiserver, also run
 - [datumctl docs](https://www.datum.net/docs/datumctl): install, auth, commands, plugins.
 - API base `https://api.datum.net`: Kubernetes-style paths, e.g. `/apis/resourcemanager.miloapis.com/v1alpha1/organizations`.
 - Local authenticated gateway: `datumctl api proxy` serves the API on `127.0.0.1` with your session attached and auto-refreshed — no token handling.
-- MCP: [`datum-mcp`](https://github.com/datum-cloud/datum-mcp) is the Datum MCP server (stdio, browser sign-in on first use); the Claude Code plugin in [datum-cloud/skills](https://github.com/datum-cloud/skills) registers it for you.
+- MCP: [`datum-mcp`](https://github.com/datum-cloud/datum-mcp) is the Datum MCP server (stdio, browser sign-in on first use); the `datum-cloud` plugin in the [Datum plugin marketplace](https://github.com/datum-cloud/claude-code-plugins) registers it for Claude Code.
 
 ## Core verbs (datumctl)
 - `datumctl api-resources` — list every resource type.

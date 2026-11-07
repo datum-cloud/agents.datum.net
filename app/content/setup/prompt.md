@@ -7,7 +7,7 @@ When you finish, you will have:
 - `datumctl`, the Datum Cloud CLI, with the plugins the user chose
 - `datum-mcp`, the Datum MCP server, connected to this agent
 - the hosted Datum Docs MCP server, connected to this agent
-- the Datum skills from [datum-cloud/skills](https://github.com/datum-cloud/skills)
+- the Datum skills for the products the user chose, from the [Datum plugin marketplace](https://github.com/datum-cloud/claude-code-plugins)
 - a signed-in `datumctl`, pointed at the right organization and project
 
 The user doesn't need anything installed beforehand. You download everything from GitHub with `curl` and `tar` (macOS, Linux) or PowerShell (Windows), into a folder in the user's home directory. Never use `sudo` or ask for admin rights.
@@ -22,7 +22,7 @@ Ask these together, in one message, and wait for the answer. If you have a tool 
 
 > I'll install datumctl (the Datum CLI) and the Datum MCP server, and connect them to this agent. Two choices first:
 >
-> 1. **datumctl plugins** add commands for DNS, compute, load balancers, networking, billing and more. Install all of them (recommended), pick which ones, or none?
+> 1. **datumctl plugins** add commands for DNS, compute, load balancers, networking, billing and more, and I'll add my skills for the same products. Install all of them (recommended), pick which ones, or none?
 > 2. **Agent instructions:** add one line to your global instructions file (`<path for this agent, from step 4>`) so I use datumctl and the Datum MCP server for Datum work in every project? Yes or no?
 
 If the user says to go ahead with the defaults, install all plugins and add the line.
@@ -119,33 +119,43 @@ Use the full path to `datum-mcp` from step 1, written out (for example `/Users/a
 
 If an entry with the same name already exists, update it instead of adding a duplicate. Keep every other setting in the file.
 
+The skills come in groups, one per product. Install the groups that match the user's answer in step 0:
+
+| Install when                  | Claude Code plugin | Skills repository (other agents)        |
+| ----------------------------- | ------------------ | --------------------------------------- |
+| always                        | `datum-cloud`      | `datum-cloud/skills`                    |
+| always                        | `milo-activity`    | `milo-os/activity`                      |
+| they chose `compute`          | `datum-compute`    | `datum-cloud/compute`                   |
+| they chose `dns`              | `datum-dns`        | `datum-cloud/dns-operator`              |
+| they chose `alb` or `network` | `datum-networking` | `datum-cloud/network-services-operator` |
+| they chose `telemetry`        | `milo-observe`     | `milo-os/telemetry`                     |
+
+"All" means every row. The other datumctl plugins have no skills of their own.
+
 ### Claude Code
 
-Run exactly these two commands. Do not use `claude mcp add` or `npx skills`, because the plugin registers both MCP servers and the skills:
+Add Datum's plugin marketplace, then install `datum-cloud` and each other plugin from the table. Do not use `claude mcp add` or `npx skills`: `datum-cloud` registers both MCP servers, and the plugins bring the skills.
 
 ```bash
-claude plugin marketplace add datum-cloud/skills
-claude plugin install datum-cloud@datum-cloud
+claude plugin marketplace add datum-cloud/claude-code-plugins
+claude plugin install datum-cloud@datum-claude-code-plugins
+claude plugin install milo-activity@datum-claude-code-plugins
+claude plugin install <plugin>@datum-claude-code-plugins   # once per row that applies
 ```
 
-This plugin starts `datum-mcp` by name, so it relies on the `PATH` change from step 1. Tell the user to run `/reload-plugins`, or to restart Claude Code if you changed `PATH`. You cannot do either yourself.
+If `claude plugin list` shows `datum-cloud@datum-cloud`, from the older `datum-cloud/skills` marketplace, remove it so the MCP servers aren't registered twice: `claude plugin uninstall datum-cloud@datum-cloud`.
+
+`datum-cloud` starts `datum-mcp` by name, so it relies on the `PATH` change from step 1. Tell the user to run `/reload-plugins`, or to restart Claude Code if you changed `PATH`. You cannot do either yourself.
 
 ### Every other agent: install the skills
 
-If `npx` is available:
+If `npx` is available, run this once for each repository in the table that applies:
 
 ```bash
-npx -y skills add datum-cloud/skills --skill '*' --yes --global
+npx -y skills add <repository> --skill '*' --yes --global
 ```
 
-If it isn't, download the skills and copy each folder into your agent's user-level skills directory (for example `~/.codex/skills` for Codex; check your agent's docs for others):
-
-```bash
-tmp="$(mktemp -d)"
-curl -fsSL https://codeload.github.com/datum-cloud/skills/tar.gz/refs/heads/main \
-  | tar -xz -C "$tmp" --strip-components=2 skills-main/skills
-cp -R "$tmp"/* <your agent's skills directory>/
-```
+If it isn't, use Datum's skill index at <https://agents.datum.net/.well-known/agent-skills/index.json>. For each skill whose `plugin` is one you are installing, download its `url` to `<your agent's skills directory>/<name>/SKILL.md` (for example `~/.codex/skills/<name>/SKILL.md` for Codex; check your agent's docs for others), and check the file's SHA-256 against its `digest` (`shasum -a 256` on macOS, `sha256sum` on Linux). Skip any file that doesn't match.
 
 Then register the MCP servers in the agent's config, as below.
 
@@ -268,7 +278,7 @@ Datum Cloud agent setup complete
 ✓ Plugins         <names of installed plugins, or "none, as you chose">
 ✓ datum-mcp       <full path>, registered with <agent>
 ✓ Docs MCP        https://www.datum.net/docs/mcp
-✓ Skills          datum-cloud/skills
+✓ Skills          <plugins or repositories installed>
 ✓ Instructions    <file the line was added to, or "skipped, as you chose">
 ✓ PATH            <startup file you changed, or "already set">
 ✓ Signed in       <email>, context <organization>/<project>
@@ -283,7 +293,8 @@ Then suggest a first thing to try, such as "List the DNS zones in my project" or
 - datumctl: <https://github.com/datum-cloud/datumctl> and <https://www.datum.net/docs/datumctl>
 - datumctl plugin catalog: <https://github.com/datum-cloud/datumctl-plugins>
 - datum-mcp: <https://github.com/datum-cloud/datum-mcp>
-- Skills: <https://github.com/datum-cloud/skills>
+- Plugin marketplace: <https://github.com/datum-cloud/claude-code-plugins>
+- Skill index: <https://agents.datum.net/.well-known/agent-skills/index.json>
 - Datum Docs MCP: <https://www.datum.net/docs/mcp>
 - Service accounts for CI and agents running without a person present: <https://github.com/datum-cloud/datumctl/blob/main/docs/authentication.md#service-accounts-ci-and-automation>
 - Agent home: <https://agents.datum.net>
