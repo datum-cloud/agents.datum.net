@@ -1,6 +1,6 @@
 {
   "name": "agents-datum-net",
-  "version": "0.2.9",
+  "version": "0.2.11",
   "private": true,
   "sideEffects": false,
   "type": "module",
@@ -15,7 +15,10 @@
     "lint": "eslint \"app/**/*.{ts,tsx}\" --fix",
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,css,md}\"",
     "format:check": "prettier --check \"**/*.{js,jsx,ts,tsx,json,css,md}\"",
-    "clean": "rm -rf node_modules/.vite node_modules/.react-router .react-router build"
+    "clean": "rm -rf node_modules/.vite node_modules/.react-router .react-router build",
+    "skills:generate": "node bin/skill-index.mjs generate",
+    "skills:check": "node bin/skill-index.mjs check",
+    "skills:drift": "node bin/skill-index.mjs drift"
   },
   "dependencies": {
     "@datum-cloud/datum-ui": "^3.8.0",

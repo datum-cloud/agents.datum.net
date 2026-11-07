@@ -1,0 +1,22 @@
+name: Skill Index
+
+on:
+  schedule:
+    - cron: '17 6 * * 1'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  skill-index:
+    name: Skill Index Drift
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with: { node-version: 26.13.0 }
+      - run: npm run skills:check
+      - run: npm run skills:drift
+        env:
+          GITHUB_TOKEN: ${{ github.token }}

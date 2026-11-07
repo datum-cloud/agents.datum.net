@@ -1,5 +1,24 @@
 # Changelog
 
+## [0.2.11](https://github.com/datum-cloud/agents.datum.net/compare/v0.2.10...v0.2.11) (2026-11-07)
+
+
+### Bug Fixes
+
+* Fix the skill index links and the compute recipe ([139ad95](https://github.com/datum-cloud/agents.datum.net/commit/139ad955f488deab1cd202dc944bc4e9f7381010))
+* Generate the skill index from the marketplace ([c427fdd](https://github.com/datum-cloud/agents.datum.net/commit/c427fdde4abeea31c3efa8d143f43962c38cd2e7))
+* Make the compute recipe deploy as written ([cf7d498](https://github.com/datum-cloud/agents.datum.net/commit/cf7d49817a19e8a51711ae1ebb719f29027aedbf))
+* refresh the Vercel migration recipe against the current Compute docs ([825c7a4](https://github.com/datum-cloud/agents.datum.net/commit/825c7a4166264b9a3adfb4e2d1d38987192d05cc))
+* refresh the Vercel migration recipe against the current Compute docs ([75291ef](https://github.com/datum-cloud/agents.datum.net/commit/75291efe79a349eced82563e8b39219400536ba3))
+
+## [0.2.10](https://github.com/datum-cloud/agents.datum.net/compare/v0.2.9...v0.2.10) (2026-11-06)
+
+
+### Features
+
+* add Vercel to Datum Compute migration recipe ([886b966](https://github.com/datum-cloud/agents.datum.net/commit/886b96652c4468d710bf9a390bb668c4bf3a8acb))
+* add Vercel to Datum Compute migration recipe ([ad958ed](https://github.com/datum-cloud/agents.datum.net/commit/ad958edbbbbb8c4c36998cb328aa7dad53c2205a))
+
 ## [0.2.9](https://github.com/datum-cloud/agents.datum.net/compare/v0.2.8...v0.2.9) (2026-10-28)
 
 

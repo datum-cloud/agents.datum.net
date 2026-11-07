@@ -11,6 +11,9 @@ on:
   release:
     types: [ "published" ]
 
+permissions:
+  contents: read
+
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
@@ -89,10 +92,20 @@ jobs:
       - run: bin/smoke-start
       - run: bin/deploy-url-test
 
+  # ─── Skill index ────────────────────────────────────────────
+  skill-index:
+    name: Skill Index
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with: { node-version: 26.13.0 }
+      - run: npm run skills:check
+
   # ─── Status Gate ────────────────────────────────────────────
   status-check:
     name: Final Status Check
-    needs: [ install, lint, typecheck, build ]
+    needs: [ install, lint, typecheck, build, skill-index ]
     if: always()
     runs-on: ubuntu-latest
     steps:

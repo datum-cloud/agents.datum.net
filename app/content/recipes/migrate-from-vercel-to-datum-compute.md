@@ -3,9 +3,13 @@
 Move a Node server-side-rendered app from Vercel to a Datum Compute workload on
 the `general-purpose` runtime.
 
-Based on the `datum.net` Compute walkthrough (`docs/datum-compute-walkthrough.md`).
-Steps marked **(verified)** were tested there. Steps marked **(untested)** are
-Vercel-specific advice that the walkthrough does not cover.
+Based on a real migration of the `datum.net` website to Compute. Steps marked
+**(verified)** were tested there. Steps marked **(untested)** are Vercel-specific
+advice that the migration did not cover. Commands match the current Compute,
+ALB and `datumctl` docs.
+
+A human-readable version lives in the docs:
+https://www.datum.net/docs/guides/migrate-from-vercel
 
 **Audience:** engineers who run an app on Vercel today.
 **Result:** your app runs as a container on Datum Compute, with secrets, a public
@@ -20,10 +24,10 @@ URL, a rollback path and CI deploys.
 | Deployment                                                                                              | A workload rollout to a new image tag                                                                                                       |
 | Environment variables                                                                                   | A Kubernetes-style **Secret**, imported with `--env-from-secret`                                                                            |
 | `vercel.app` URL                                                                                        | `*.datumproxy.net` URL, printed by `deploy`                                                                                                 |
-| Custom domain                                                                                           | `hostnames` on the workload's HTTPProxy (this changes DNS)                                                                                  |
+| Custom domain                                                                                           | `datumctl alb hostname add` on the workload's load balancer (this changes DNS)                                                              |
 | Instant rollback                                                                                        | Deploy an older image tag                                                                                                                   |
-| Preview deployments per branch                                                                          | Not available yet (a design exists in `datum-compute-previews.md`)                                                                          |
-| Password protection                                                                                     | Basic authentication on the whole load balancer, set in the console                                                                         |
+| Preview deployments per branch                                                                          | Not available yet                                                                                                                           |
+| Password protection                                                                                     | Basic authentication on the whole load balancer (`datumctl alb auth set`)                                                                   |
 | Serverless / Edge Functions, ISR, Cron, Image Optimization, BotID, Runtime Cache, `vercel.json` headers | No platform equivalent. See "Vercel-specific features: what to replace" for what to do with each. ISR and Edge Functions are **(untested)** |
 
 ## 2. Before you start
@@ -32,7 +36,7 @@ URL, a rollback path and CI deploys.
 - A Datum project with Compute enabled (step 4).
 - An app that runs as a long-lived Node server. Next.js apps need a server
   build (for example `output: "standalone"`), not a Vercel-only build output **(untested)**.
-- Somewhere to push images. The walkthrough used a **public** GHCR package, so
+- Somewhere to push images. The migration used a **public** GHCR package, so
   no registry login was needed. Private registries are **(untested)**.
 
 ## 3. Containerize the app **(untested for your app; the pattern is verified)**
@@ -94,6 +98,10 @@ unchanged, so a moved tag silently does nothing. **(verified)**
 
 ### Registry notes (GHCR) **(verified)**
 
+- For a **private** registry, store the credentials in a Secret and reference it
+  in `imagePullSecrets`. See
+  https://www.datum.net/docs/compute/configuration#use-images-from-a-private-registry.
+  The notes below apply to the public-package route.
 - A new GHCR package is **private**. Datum pulls without credentials, so make it
   public. Visibility can only be changed in the GitHub UI (package settings →
   Danger Zone → Change visibility). `gh` and the REST API cannot do it.
@@ -112,16 +120,20 @@ unchanged, so a moved tag silently does nothing. **(verified)**
 
 ## 4. Enable Compute
 
-A new project has Compute off. **(verified)**
+You do not request access. Compute turns on the first time you run a
+`datumctl compute` command in the project. Check the state:
 
 ```bash
-datumctl compute access --project <project>        # Status: Not requested
-datumctl services enable compute.datumapis.com --project <project>
+datumctl compute access --project <project>   # Access: Not requested, Processing or Active
 ```
 
-Compute turns on at once, but the project's **locations** show up a few
-minutes later. Until then a deploy fails with `Unsupported value: "us-central-1"`.
-Wait until this lists locations:
+To enable it without running another command, run
+`datumctl compute access request --project <project>`. Wait for `Active`, which
+normally takes a few seconds.
+
+On a brand-new project the **locations** can show up a few minutes later. Until
+then a deploy fails with `Unsupported value: "us-central-1"`. Wait until this
+lists locations:
 
 ```bash
 datumctl get locations --project <project>
@@ -129,8 +141,8 @@ datumctl get locations --project <project>
 
 **Listed is not the same as deployable.** `get locations` can list locations
 (for example `de-central-1` or `jp-east-1`) that a workload does not accept yet.
-At the time of writing a workload only accepted `us-central-1`, `us-east-1` and
-`us-west-1`. A deploy to an unsupported location fails with
+Workloads run in `us-central-1` (Dallas), `us-east-1` (Ashburn) and `us-west-1`
+(San Jose). A deploy to an unsupported location fails with
 `Unsupported value: "<location>": supported values: ...`, and that message is
 the reliable list, so use it. Pick the supported location closest to your
 users. **(verified)**
@@ -160,7 +172,7 @@ users. **(verified)**
 ### Create the Secret from the CLI, not the console form
 
 The console form can store values as raw bytes instead of text. In the
-walkthrough, six keys then held control characters, the instance failed with
+migration, six keys then held control characters, the instance failed with
 `ConfigurationError`, and the message only said "configuration error".
 **(verified)**
 
@@ -243,7 +255,7 @@ datumctl compute deploy <app>-gp \
 - The last line prints the public URL.
 - Use `general-purpose` for a normal container image. The unikernel runtime
   needs `datumctl compute build` instead of `docker build`, and it was unstable
-  for one service in the walkthrough's tests.
+  for one service in the migration's tests.
 - A workload keeps its runtime class. To change it, deploy under a new name and
   destroy the old one.
 
@@ -254,11 +266,9 @@ datumctl get workload <app>-gp -n default --project <project>    # AVAILABLE Tru
 datumctl compute instances --project <project>                    # list instances
 ```
 
-`datumctl compute logs` does **not** exist in compute plugin v0.11. Available
-subcommands: `access`, `build`, `deploy`, `destroy`, `exec`, `instances`,
-`quota`, `restart`, `rollout`, `scale`, `workloads`. A way to read application
-logs was not found, so add a diagnostic route or log to an external service if
-you need to see what the app receives. **(verified)**
+Read the app's output with `datumctl compute logs <app>-gp` (add `--follow` to
+stream it) and watch a rollout with `datumctl compute rollout <app>-gp`. If
+`logs` is an unknown command, run `datumctl plugin upgrade compute`.
 
 While a rollout is in progress the edge returns an HTML error page ("Datum AI
 Edge") instead of your app. Poll `/api/health` until it returns `200` before
@@ -274,7 +284,7 @@ curl -s -o /dev/null -w "%{http_code}\n" --resolve "$H:443:$IP" https://$H/
 ```
 
 Compare it with Vercel page by page: key routes, data from your CMS or API,
-forms, auth, and anything that calls a third party. The walkthrough did **not**
+forms, auth, and anything that calls a third party. The migration did **not**
 test login-protected pages, reCAPTCHA, or email forms, so test them yourself.
 
 ## 8. Cut over the custom domain
@@ -284,14 +294,17 @@ test login-protected pages, reCAPTCHA, or email forms, so test them yourself.
 2. Attach the hostname:
 
    ```bash
-   datumctl patch httpproxy <app>-gp -n default --project <project> \
-     --type merge -p '{"spec":{"hostnames":["www.example.com"]}}'
+   datumctl alb hostname add <app>-gp www.example.com --project <project>
+   datumctl alb describe <app>-gp --project <project>
    ```
+
+   Domain verification and DNS steps are in
+   https://www.datum.net/docs/alb/operations/custom-domains.
 
 3. Keep the Vercel project until you are sure. Rolling back DNS is your
    fallback. **(untested: DNS TTL and apex-domain behavior)**
 4. If your app builds absolute URLs, sitemaps or canonical links at build time,
-   build the image with the final domain. The walkthrough image did not, so its
+   build the image with the final domain. The migration image did not, so its
    canonical URL did not match the Compute hostname.
 5. **Keep search indexing off on the `*.datumproxy.net` URL**, or the staging
    copy gets indexed as a duplicate of your real site. If your app has an
@@ -361,25 +374,25 @@ datumctl compute deploy <app>-gp --project <project> \
 ## 11. Rolling after a Secret change
 
 Instances read the Secret only at start. A redeploy with the same image and
-settings does nothing, so change something in the template, such as a marker
-variable you raise each time:
+settings does nothing, so restart the workload after you change a Secret:
 
 ```bash
-datumctl compute deploy <app>-gp --project <project> \
-  --image=ghcr.io/<org>/<app>:v1.0.0 \
-  --location=us-central-1 --env="SECRETS_REV=2" --yes
+datumctl compute restart <app>-gp --project <project>
+datumctl compute rollout <app>-gp --project <project>   # watch it finish
 ```
 
 A failed instance blocks the rollout, because placement is `OrderedReady`. If
 the old instance is stuck in `ConfigurationError`, the rollout stays `Pending`
 and you cannot delete the instance (`Forbidden`). Fix the Secret, then
 `datumctl compute destroy <app>-gp --yes` and deploy again. That changes the
-URL and removes basic auth.
+URL and removes basic auth. **(verified)**
 
 ## Basic authentication (replaces Vercel password protection)
 
-The console dialog **Edit Basic Authentication** protects the whole load
-balancer. Be aware:
+`datumctl alb auth set <app>-gp --user admin --password-stdin` (or the console
+dialog **Edit Basic Authentication**) protects the whole load balancer. To
+protect a single route, use a `SecurityPolicy`. See
+https://www.datum.net/docs/alb/authentication/basic-auth. Be aware:
 
 - There are no path exceptions. `/livez` and `/readyz` also return `401` from the
   public URL. The backend stays healthy, because the platform checks health
@@ -391,22 +404,22 @@ balancer. Be aware:
 
 ## Troubleshooting
 
-| Symptom                                               | Cause                                                   | Fix                                                     |
-| ----------------------------------------------------- | ------------------------------------------------------- | ------------------------------------------------------- |
-| `Unsupported value: "us-central-1"` on deploy         | The project's locations are not provisioned yet         | Wait; `datumctl get locations` must list them           |
-| `ConfigurationError` on the instance                  | A Secret value is not valid text                        | Run the strict check, fix the key, destroy and redeploy |
-| Rollout stays `Pending` after a fix                   | `OrderedReady` waits for the failed instance            | Destroy and redeploy                                    |
-| `Forbidden` when deleting an instance                 | Users cannot delete instances                           | Destroy the workload instead                            |
-| App starts, never answers                             | Server bound to `0.0.0.0` instead of `::`               | Redeploy with `--env="HOST=::"`                         |
-| `Could not resolve host` for a new `*.datumproxy.net` | Local resolver cache                                    | Resolve through 1.1.1.1 and use `--resolve`             |
-| `401` on every URL                                    | Basic authentication is on                              | Send credentials, or turn it off in the console         |
-| Secret change has no effect                           | Instances read the Secret only at start                 | Roll the workload (section 11)                          |
-| Redeploy of the same tag does nothing                 | Datum does not replace an instance for an unchanged tag | Use a new tag                                           |
-| `Unsupported value: "de-central-1": supported values` | `get locations` lists more than workloads accept        | Use one of the supported values in the error            |
-| Secret has `[SENSITIVE]` values                       | `vercel env pull` cannot export sensitive variables     | Get real values elsewhere; run the placeholder check    |
-| Image will not pull                                   | GHCR package is private                                 | Make it public in the GitHub UI                         |
-| HTML "Datum AI Edge" error page right after deploy    | Rollout still in progress                               | Poll `/api/health` until `200`                          |
-| Pages return 404 after adding response headers        | A header value has a non-ASCII character                | Keep header values ASCII                                |
+| Symptom                                               | Cause                                                   | Fix                                                              |
+| ----------------------------------------------------- | ------------------------------------------------------- | ---------------------------------------------------------------- |
+| `Unsupported value: "us-central-1"` on deploy         | The project's locations are not provisioned yet         | Wait; `datumctl get locations` must list them                    |
+| `ConfigurationError` on the instance                  | A Secret value is not valid text                        | Run the strict check, fix the key, destroy and redeploy          |
+| Rollout stays `Pending` after a fix                   | `OrderedReady` waits for the failed instance            | Destroy and redeploy                                             |
+| `Forbidden` when deleting an instance                 | Users cannot delete instances                           | Destroy the workload instead                                     |
+| App starts, never answers                             | Server bound to `0.0.0.0` instead of `::`               | Redeploy with `--env="HOST=::"`                                  |
+| `Could not resolve host` for a new `*.datumproxy.net` | Local resolver cache                                    | Resolve through 1.1.1.1 and use `--resolve`                      |
+| `401` on every URL                                    | Basic authentication is on                              | Send credentials, or turn it off in the console                  |
+| Secret change has no effect                           | Instances read the Secret only at start                 | Run `datumctl compute restart` (section 11)                      |
+| Redeploy of the same tag does nothing                 | Datum does not replace an instance for an unchanged tag | Use a new tag                                                    |
+| `Unsupported value: "de-central-1": supported values` | `get locations` lists more than workloads accept        | Use one of the supported values in the error                     |
+| Secret has `[SENSITIVE]` values                       | `vercel env pull` cannot export sensitive variables     | Get real values elsewhere; run the placeholder check             |
+| Image will not pull                                   | GHCR package is private                                 | Make it public in the GitHub UI, or configure `imagePullSecrets` |
+| HTML "Datum AI Edge" error page right after deploy    | Rollout still in progress                               | Poll `/api/health` until `200`                                   |
+| Pages return 404 after adding response headers        | A header value has a non-ASCII character                | Keep header values ASCII                                         |
 
 ## Vercel-specific features: what to replace
 
@@ -434,10 +447,10 @@ the limit. Note that a client with several egress IPs is counted per IP.
 ## Known gaps to plan for
 
 - No automatic preview URL per branch.
-- No Redis in the walkthrough: one replica, local cache fallback.
+- No Redis in the migration: one replica, local cache fallback.
 - Vercel-managed features (Edge/Serverless Functions, ISR and its cache,
   Cron Jobs, Image Optimization, Analytics, Web Vitals) have no direct
-  equivalent in the walkthrough. Check each one your app uses. See
+  equivalent in the migration. Check each one your app uses. See
   "Vercel-specific features: what to replace" for the ones that came up in a
   real migration. ISR, Analytics and Web Vitals were **not** covered.
 - Workload locations are limited to the `us-*` values for now, so users in

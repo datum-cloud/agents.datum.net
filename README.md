@@ -62,7 +62,19 @@ The GitHub Actions pipeline (`.github/workflows/ci.yml`) runs on every PR and pu
 2. **Lint & Format** — `npm run lint && npm run format:check` (parallel with Typecheck)
 3. **Type Check** — `npm run typecheck` (parallel with Lint)
 4. **Build** — `npm run build` (only after Lint + Typecheck both pass)
-5. **Status Gate** — final aggregated pass/fail
+5. **Skill Index** — `npm run skills:check`: every URL in the skill index returns 200 and matches its digest
+6. **Status Gate** — final aggregated pass/fail
+
+## Skill index
+
+`public/.well-known/agent-skills/index.json` is generated from the [Datum Claude Code plugin marketplace](https://github.com/datum-cloud/claude-code-plugins). Don't edit it by hand. Each URL is pinned to a commit, so it keeps working when a skill moves.
+
+```bash
+npm run skills:generate   # rewrite the index from the marketplace
+npm run skills:drift      # fail if the index is behind the marketplace
+```
+
+The [Skill Index](.github/workflows/skill-index.yml) workflow runs the drift check every week. When it fails, run `npm run skills:generate` and open a PR. Set `GITHUB_TOKEN` to raise the GitHub API rate limit.
 
 The Kubernetes publish jobs moved out of `ci.yml` into a manual-only workflow ([`publish-kubernetes.yml`](.github/workflows/publish-kubernetes.yml)). Releases go through [release-please](.github/workflows/release-please.yml): merging its release PR tags the version and deploys the container image to Datum Compute (general-purpose runtime). See [`docs/datum-compute.md`](docs/datum-compute.md).
 
