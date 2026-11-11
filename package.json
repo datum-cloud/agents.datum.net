@@ -21,7 +21,7 @@
     "skills:drift": "node bin/skill-index.mjs drift"
   },
   "dependencies": {
-    "@datum-cloud/datum-ui": "^3.4.0",
+    "@datum-cloud/datum-ui": "^3.8.0",
     "@react-router/fs-routes": "^8.0.0",
     "@tailwindcss/typography": "^0.5.19",
     "date-fns": "^4.1.0",
@@ -29,7 +29,7 @@
     "hono": "^4.12.26",
     "isbot": "^5",
     "lucide-react": "^0.577.0",
-    "motion": "^14.0.0",
+    "motion": "^13.5.1",
     "react": "^19.2.5",
     "react-dom": "^19.2.5",
     "react-markdown": "^10.1.0",
