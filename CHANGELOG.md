@@ -1,5 +1,19 @@
 # Changelog
 
+## [0.2.12](https://github.com/datum-cloud/agents.datum.net/compare/v0.2.11...v0.2.12) (2026-11-11)
+
+
+### Features
+
+* add agent setup prompt at /setup/prompt.md ([1266e94](https://github.com/datum-cloud/agents.datum.net/commit/1266e9430fb2a2bab565b3162b92296c1448e039))
+* install skills from the Datum plugin marketplace ([3da783d](https://github.com/datum-cloud/agents.datum.net/commit/3da783d8d31e2ccc1d8772c2bdc03374ab71bc79))
+* set up the Claude Code plugin marketplace for Claude Code users ([83555f3](https://github.com/datum-cloud/agents.datum.net/commit/83555f3ed4d311a12ddcc8872628df6cea519ed2))
+
+
+### Bug Fixes
+
+* **deps:** override @hono/node-server to a patched version ([c7edf53](https://github.com/datum-cloud/agents.datum.net/commit/c7edf53207dc57aabfd79ac08aa511dd229d4276))
+
 ## [0.2.11](https://github.com/datum-cloud/agents.datum.net/compare/v0.2.10...v0.2.11) (2026-11-07)
 
 
