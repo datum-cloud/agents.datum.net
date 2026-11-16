@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.3.1](https://github.com/datum-cloud/agents.datum.net/compare/v0.3.0...v0.3.1) (2026-11-16)
+
+
+### Bug Fixes
+
+* align release-please manifest with latest tag v0.3.0 ([def888f](https://github.com/datum-cloud/agents.datum.net/commit/def888f4dce0dab6c242dc75c10d5e74f56d8d69))
+* align release-please manifest with latest tag v0.3.0 ([db174cb](https://github.com/datum-cloud/agents.datum.net/commit/db174cbf4b23f11ef0c519c5f430426e90fcf7ed))
+* **skills:** regenerate agent skill index to match the marketplace ([db99395](https://github.com/datum-cloud/agents.datum.net/commit/db9939591158164d52f6af191225568f546bea10))
+
 ## [0.2.11](https://github.com/datum-cloud/agents.datum.net/compare/v0.2.10...v0.2.11) (2026-11-07)
 
 
