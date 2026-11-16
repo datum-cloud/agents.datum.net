@@ -311,7 +311,10 @@ export const SECTIONS: readonly SectionData[] = [
           ['DNS', '$0.60 per million requests after the first 500K'],
           ['ALB', '$1.00 per million requests'],
           ['GSLB (soon)', '$0.60 per million requests'],
-          ['Compute', '$0.0504 per vCPU-hour, $0.0162 per GiB-memory-hour'],
+          [
+            'Compute',
+            '$0.0504 per vCPU-hour ($0.000014/second), $0.0162 per GiB-memory-hour ($0.0000045/second)',
+          ],
           ['Object Storage (soon)', 'Standard $0.0085/GB-month; Performance $0.024/GB-month'],
           ['Tunnels', '$0.01 per endpoint-hour'],
         ],
@@ -334,6 +337,27 @@ export const SECTIONS: readonly SectionData[] = [
           'AI Assistant (Patch)',
           'Domains',
           'Desktop Apps',
+        ],
+      },
+      {
+        kind: 'p',
+        text: '**Common questions**',
+      },
+      {
+        kind: 'rows',
+        rows: [
+          {
+            label: 'Is Datum really free right now?',
+            text: 'Yes. During public beta you get the full platform at no cost. A credit card is required at signup to help prevent fraud.',
+          },
+          {
+            label: 'Will I be charged automatically when beta ends?',
+            text: 'No. You are notified well in advance and get a grace period to review rates and decide before any billing begins.',
+          },
+          {
+            label: 'Do you charge for support or seats?',
+            text: 'No. There is no per-seat or per-user licensing. Pricing is usage-based only, so invite your whole team.',
+          },
         ],
       },
       {

@@ -27,7 +27,7 @@ Usage-based, no seat fees. Datum Cloud is free until billing begins February 1st
 
 - Galactic VPC egress to the public internet: first 200 GB free, then $0.05/GB (to 10 TB), $0.04/GB (10–150 TB), $0.03/GB (150–500 TB); 500 TB+ contact sales. Ingress and same-region internal transfer are free; cross-region is $0.03/GB.
 - DNS $0.60/M requests after the first 500K; ALB $1.00/M requests; GSLB (soon) $0.60/M requests.
-- Compute $0.0504/vCPU-hour and $0.0162/GiB-memory-hour; Tunnels $0.01/endpoint-hour; Object Storage (soon) $0.0085/GB-month standard, $0.024/GB-month performance.
+- Compute $0.0504/vCPU-hour ($0.000014/s) and $0.0162/GiB-memory-hour ($0.0000045/s); Tunnels $0.01/endpoint-hour; Object Storage (soon) $0.0085/GB-month standard, $0.024/GB-month performance.
 - Always free: datumctl, permissions and team invites, Secrets, Metrics Export, Audit & Activity Logs, SSO, Service Accounts, Datum MCP, AI Assistant (Patch), Domains, Desktop Apps.
 
 For a demo, [reach out](https://www.datum.net/contact/).
