@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.3.2](https://github.com/datum-cloud/agents.datum.net/compare/v0.3.1...v0.3.2) (2026-11-16)
+
+
+### Features
+
+* drop datum-mcp from the agent setup prompt ([5cbd0ff](https://github.com/datum-cloud/agents.datum.net/commit/5cbd0ffe4b187ddc779432508ccd9ab5e95cdeac))
+* drop datum-mcp from the agent setup prompt ([786c09b](https://github.com/datum-cloud/agents.datum.net/commit/786c09b47df68d8266ce0a31d09fbed4565ce828))
+
 ## [0.3.1](https://github.com/datum-cloud/agents.datum.net/compare/v0.3.0...v0.3.1) (2026-11-16)
 
 
