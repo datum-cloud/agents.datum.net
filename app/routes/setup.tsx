@@ -16,7 +16,7 @@ export const meta: MetaFunction = ({ matches }) => {
     ...buildMeta({
       title: 'Datum — Set up your agent',
       description:
-        'One prompt that sets up a coding agent for Datum Cloud: datumctl and its plugins, the Datum MCP and Docs MCP servers, Datum skills, and sign-in.',
+        'One prompt that sets up a coding agent for Datum Cloud: datumctl and its plugins, the Docs MCP server, Datum skills, and sign-in.',
       path: '/setup',
       type: 'article',
     }),
