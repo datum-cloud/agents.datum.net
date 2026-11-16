@@ -36,7 +36,7 @@ For a demo, [reach out](https://www.datum.net/contact/).
 - Hyperscale-style networking, private-by-default agentic workloads, edge workloads, and GPU/CPU capacity (Dedicated Cloud) for inference clouds, sandboxes, and frontier labs. See https://www.datum.net/use-cases
 
 ## Roadmap
-- [Public changelog](https://www.datum.net/changelog/): meaningful platform improvements.
+- [Public changelog](https://www.datum.net/changelog): meaningful platform improvements. Markdown version for agents: https://www.datum.net/changelog.md
 - Next: Galactic VPC, Connectors, GSLB, Edge Apps, Object Storage, Interconnects (AWS/GCP).
 
 ## Optional

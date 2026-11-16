@@ -446,7 +446,7 @@ export const SECTIONS: readonly SectionData[] = [
         rows: [
           {
             label: 'Changelog',
-            text: 'A list of changes that our software engineers have made to Datum [https://www.datum.net/changelog/](https://www.datum.net/changelog/)',
+            text: 'A list of changes that our software engineers have made to Datum: [datum.net/changelog](https://www.datum.net/changelog) ([markdown](https://www.datum.net/changelog.md))',
           },
           {
             label: 'Status',
